@@ -29,7 +29,6 @@ class CommentType extends AbstractType
                 'required' => false
             ]);
 
-        $builder->get('message')
-            ->addModelTransformer($this->xssTransformer);
+        //$builder->get('message')->addModelTransformer($this->xssTransformer);
     }
 }
