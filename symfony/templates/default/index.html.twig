@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-dashboard{% endblock %}
+
+{% block body %}
+  <section class="dashboard-wrap">
+    <div class="row row-dashboard">
+      <div class="col-sm-6">
+        <div class="dashboard-block">
+          <div class="dashboard-img" style="background-image:url({{ asset('img/dashboard/rmp.jpg') }})"> </div>
+          <div class="dashboard-content">
+            <!-- Title -->
+            <div class="dashboard-title-block">
+              <div class="">
+                <h2 class="dashboard-title">{{ 'rmp.dashboard.title' | trans }}</h2>
+                <ul class="dashboard-list list-unstyled">
+                  <li>{{ stats.rmpStats.rmpName }}</li>
+                  <li>{{ 'last_change' | trans }} : {{ stats.rmpStats.lastDateUpdated|date('m/d/Y') }} - {{ stats.rmpStats.lastDateUpdated|date('g:i a') }}</li>
+                </ul>
+              </div>
+              <a href="#" class="dashboard-link">{{ 'rmp.dashboard.link' | trans }}</a>
+            </div>
+
+            <!-- Info -->
+            <div class="dashboard-info">
+              <div class="row">
+                {% if app.user.isBuMember or app.user.isBuHedgingCommittee %}
+                  <div class="col-5">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_1' | trans }}<i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.status_rmp' | trans }}"></i></div>
+                    <div class="dashboard-info-text">{{  stats.rmpStats.status }}</div>
+                  </div>
+                  <div class="col">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_4' | trans }}</div>
+                    <div class="dashboard-info-text">{{  stats.rmpStats.totalPlanned|number_format(2, ',', ' ') }} MT</div>
+                  </div>
+                  <div class="col">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_2' | trans }}</div>
+                    <div class="dashboard-info-text">{{ stats.rmpStats.totalRealized|number_format(2, ',', ' ') }} MT</div>
+                  </div>
+                  <div class="col">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_3' | trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.ratio_rmp' | trans }}"></i></div>
+                    <div class="dashboard-info-text">{{ stats.rmpStats.totalRealizedPercent|number_format(2, ',', ' ') }} %</div>
+                  </div>
+                {% else %}
+                  <div class="col-5">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_5' | trans }}</div>
+                    <div class="dashboard-info-text">{{  stats.rmpStats.pendingApprovalRiskController }}</div>
+                  </div>
+                  <div class="col-5">
+                    <div class="dashboard-info-title">{{ 'rmp.dashboard.info_label_6' | trans }}</div>
+                    <div class="dashboard-info-text">{{  stats.rmpStats.pendingApprovalBoardMember }}</div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Actions -->
+            {% if is_granted('rmp_view') %}
+            <div class="dashboard-actions">
+              <div class="row">
+                {% if is_granted('ROLE_BU_HEDGING_COMMITTEE') %}
+                  <div class="col-6">
+                    <a href="{% if currentRmp is not null %}{{ path('rmp_view', {'rmp': currentRmp.id}) }}{% endif %}" class="btn btn-primary btn-full">{{ 'rmp.dashboard.btn_new' | trans }}</a>
+                  </div>
+                {% endif %}
+                <div class="col-6">
+                  <a href="{{ path('rmp_list') }}" class="btn btn-primary btn-full">{{ 'rmp.dashboard.btn_view' | trans }}</a>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="dashboard-block">
+          <div class="dashboard-img" style="background-image:url({{ asset('img/dashboard/hedge_module.jpg') }})"> </div>
+          <div class="dashboard-content">
+            <!-- Title -->
+            <div class="dashboard-title-block">
+              <div class="">
+                <h2 class="dashboard-title">{{ 'hedge.dashboard.title' | trans }}</h2>
+                <ul class="dashboard-list dashboard-alone-list list-unstyled">
+                  <li>{{ 'last_change' | trans }} : {% if stats.hedgeStats.lastDateUpdated is defined %}{{ stats.hedgeStats.lastDateUpdated|date('m/d/Y') }} - {{ stats.hedgeStats.lastDateUpdated|date('g:i a') }}{% endif %}</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="dashboard-info">
+              <div class="row">
+                <div class="col">
+                  <div class="dashboard-info-title">{{ 'hedge.dashboard.info_label_1' | trans }}</div>
+                  <div class="dashboard-info-text">{{ stats.hedgeStats.pendingApprovalRiskController  }}</div>
+                </div>
+                <div class="col">
+                  <div class="dashboard-info-title">{{ 'hedge.dashboard.info_label_3' | trans }}</div>
+                  <div class="dashboard-info-text">{{ stats.hedgeStats.pendingApprovalBoardMember  }}</div>
+                </div>
+                <div class="col">
+                  <div class="dashboard-info-title">{{ 'hedge.dashboard.info_label_2' | trans }}</div>
+                  <div class="dashboard-info-text">{{ stats.hedgeStats.pendingExecution  }}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="dashboard-actions">
+              <div class="row">
+                <div class="col-6 {% if not is_granted('hedge_create') %}d-none{% endif %}">
+                  <a href="{{ path('hedge_create') }}" class="btn btn-primary btn-full">{{ 'hedge.dashboard.btn_new' | trans }}</a>
+                </div>
+                <div class="col-6">
+                  <a href="{{ path('hedge_list') }}" class="btn btn-primary btn-full">{{ 'hedge.dashboard.btn_view' | trans }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="dashboard-block">
+          <div class="dashboard-img" style="background-image:url({{ asset('img/dashboard/hedging_tools.jpg') }})"> </div>
+          <div class="dashboard-content">
+            <!-- Title -->
+            <div class="dashboard-title-block">
+              <div class="">
+                <h2 class="dashboard-title dashboard-width-title">{{ 'pricer.title' | trans }}</h2>
+                <ul class="dashboard-list dashboard-alone-list list-unstyled">
+                  <li>{{ 'last_update' | trans }} : {% if stats.pricerStats.lastDateUpdated is defined %}{{ stats.pricerStats.lastDateUpdated|date('m/d/Y') }} - {{ stats.pricerStats.lastDateUpdated|date('g:i a') }}{% endif %}</li>
+                </ul>
+              </div>
+            </div>
+
+              <!-- Info -->
+              <form class="dashboard-info dashboard-info-pricer" id="form-pricer-infos">
+                {% if is_granted('ROLE_TRADER') %}
+                <a href="javascript:void(0)" class="link-edit-pricer"><i class="icon-pen-alt"></i><span class="sr-only">{{ 'edit' | trans }}</span></a>
+                {% endif %}
+                <div class="row">
+                  {% for fieldCode, field in stats.pricerStats.fields %}
+                    <div class="col">
+                      <div class="dashboard-info-title">{% if field.fieldInfos.label is defined %}{{ field.fieldInfos.label}}{% endif %}</div>
+                      <div class="form-group">
+                        {{ form_widget(field.form.label) }}
+                      </div>
+                      <div class="dashboard-info-text">{% if field.fieldInfos.value is defined %}{{ field.fieldInfos.value }}{% endif %}</div>
+                      <div class="form-group">
+                          {{ form_widget(field.form.value) }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="actions-edit-pricer">
+                  <button type="submit" id="submit-pricer-infos" class="btn btn-primary">{{ 'save' | trans }}</button>
+                </div>
+              </form>
+
+            <!-- Actions -->
+            <div class="dashboard-actions">
+              <div class="row">
+                <div class="col-6">
+                  <a href="mailto:{{ pricingEmail }}" class="btn btn-primary btn-full">{{ 'pricer.dashboard.btn_mail' | trans }}</a>
+                </div>
+                <div class="col-6">
+                  <a href="{{ path('pricer') }}" class="btn btn-primary btn-full">{{ 'pricer.dashboard.btn_view' | trans }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="dashboard-block">
+          <div class="dashboard-img" style="background-image:url({{ asset('img/dashboard/analysis_moduler.jpg') }})"> </div>
+          <div class="dashboard-content dashboard-height-content">
+            <!-- Title -->
+            <div class="dashboard-title-block">
+              <div class="">
+                <h2 class="dashboard-title">{{ 'analysis.title' | trans }}</h2>
+                <ul class="dashboard-list dashboard-alone-list list-unstyled">
+                  <li>{{ 'last_update' | trans }} : MM / DD / YY</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="dashboard-info">
+              <div class="dashboard-text">{{ 'soon_available' | trans }}</div>
+            </div>
+
+            <!-- Actions -->
+            {#<div class="dashboard-actions">#}
+              {#<div class="text-center">#}
+                {#<a href="{{ path('analysis') }}" class="btn btn-primary btn-full">{{ 'analysis.btn' | trans }}</a>#}
+              {#</div>#}
+            {#</div>#}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+{% endblock %}

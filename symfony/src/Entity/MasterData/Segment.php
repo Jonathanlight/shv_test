@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Entity\MasterData;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\SegmentRepository")
+ */
+class Segment
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $used = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position = 0;
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Segment
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     *
+     * @return Segment
+     */
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isUsed(): ?bool
+    {
+        return $this->used;
+    }
+
+    /**
+     * @param bool $used
+     *
+     * @return Segment
+     */
+    public function setUsed(bool $used): self
+    {
+        $this->used = $used;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     *
+     * @return Segment
+     */
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return ''.$this->name;
+    }
+}

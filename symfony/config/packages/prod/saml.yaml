@@ -1,0 +1,32 @@
+parameters:
+    saml.current_site_url: '%env(SAML_SITE_URL)%'
+    saml.idp.entity_id: '%env(SAML_IDP_IDENTITY_ID)%'
+    saml.idp.single_sign_on_service.url: '%env(SAML_IDP_LOGIN_URL)%'
+    saml.idp.single_sign_on_service.binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+    saml.idp.single_logout_service.url: '%env(SAML_IDP_LOGOUT_URL)%'
+    saml.idp.single_logout_service.binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+    saml.idp.x509cert: '%env(SAML_IDP_X509)%'
+    saml.sp.assertion_consumer_service.binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
+    saml.sp.single_logout_service.binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+
+hslavich_onelogin_saml:
+    # Basic settings
+    idp:
+        entityId: '%saml.idp.entity_id%'
+        singleSignOnService:
+            url: '%saml.idp.single_sign_on_service.url%'
+            binding: '%saml.idp.single_sign_on_service.binding%'
+        singleLogoutService:
+            url: '%saml.idp.single_logout_service.url%'
+            binding: '%saml.idp.single_logout_service.binding%'
+        x509cert: '%saml.idp.x509cert%'
+    sp:
+        entityId: '%saml.current_site_url%'
+        assertionConsumerService:
+            url: '%saml.current_site_url%/saml/acs'
+            binding: '%saml.sp.assertion_consumer_service.binding%'
+        singleLogoutService:
+            url: '%saml.current_site_url%/saml/logout.htmld'
+            binding: '%saml.sp.single_logout_service.binding%'
+    security:
+        requestedAuthnContext: false

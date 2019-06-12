@@ -1,0 +1,152 @@
+App\Entity\MasterData\Product:
+    product1:
+        name: 'C3 ARGUS CIF ARA'
+        longName: 'PROPANE ARGUS CIF ARA LARGE'
+        code: 'PARCIFARAL'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime())>'
+        commodity: '@propane'
+        active: 1
+    product2:
+        name: 'C3 ANSI'
+        longName: 'PROPANE - ARGUS NORTH SEA INDEX (ANSI)'
+        code: 'PPLBP'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product3:
+        name: 'C3 PLATTS FOB SG'
+        longName: 'PROPANE PLATTS FOB SEAGOING'
+        code: 'PPLFOBSG'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product4:
+        name: 'C3 CP'
+        longName: 'PROPANE - SAUDI ARAMCO POSTED PRICE (CP)'
+        code: 'PPLSA'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product5:
+        name: 'C3 ARGUS FEI'
+        longName: 'PROPANE ARGUS FAR EAST INDEX (AFEI)'
+        code: 'PARCFRFEAST'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product6:
+        name: 'C3 PLATTS FOB ARA'
+        longName: 'PROPANE PLATTS FOB ARA'
+        code: 'PPLFOBARA'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product7:
+        name: 'C3 SONATRACH'
+        longName: 'PROPANE - SONATRACH POSTED PRICE'
+        code: 'PPLSH'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@propane'
+        active: 1
+    product8:
+        name: 'C4 ARGUS CIF ARA'
+        longName: 'BUTANE ARGUS CIF ARA LARGE'
+        code: 'BARCIFARAL'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product9:
+        name: 'C4 ANSI'
+        longName: 'BUTANE - ARGUS NORTH SEA INDEX (ANSI)'
+        code: 'BPLBP'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product10:
+        name: 'C4 PLATTS FOB SG'
+        longName: 'BUTANE PLATTS FOB SEAGOING'
+        code: 'BPLFOBSG'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product11:
+        name: 'C4 CP'
+        longName: 'BUTANE SAUDI ARAMCO POSTED PRICE (CP)'
+        code: 'BPLSA'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product12:
+        name: 'C4 ARGUS FEI'
+        longName: 'BUTANE ARGUS FAR EAST INDEX (AFEI)'
+        code: 'BARCFRFEAST'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product13:
+        name: 'C4 SONATRACH'
+        longName: 'BUTANE - SONATRACH POSTED PRICE'
+        code: 'BPLSH'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Posted'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@butane'
+        active: 1
+    product14:
+        name: 'NAPHTHA NWE'
+        longName: 'NAPHTHA PLATTS CIF NWE'
+        code: 'NPLCIFNWE'
+        uom: '@mt'
+        currency: '@usd'
+        pricingType: 'Full Month'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@naphta'
+        active: 1
+    product15:
+        name: 'ICIS NAT GAS PEG NORD MA'
+        longName: 'NATURAL GAS ICIS PEG NORD MONTH AHEAD'
+        code: 'NGICISPEGNORDMA'
+        uom: '@mwhr'
+        currency: '@eur'
+        pricingType: 'MA'
+        fxQuote: 'EUR-USD'
+        updatedAt: '<(new DateTime(""))>'
+        commodity: '@natgas'
+        active: 1

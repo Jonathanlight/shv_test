@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-analysis{% endblock %}
+
+{% block body %}
+  <div class="default-title-block">
+    <h1 class="default-title">{{ 'hedging_tools.title' | trans }}</h1>
+    <div class="switch-block">
+      <a href="javascript:void(0)" class="btn-switch">
+        <span class="text-buy">{{ 'hedging_tools.buy' | trans }}</span>
+        <span class="text-sell">{{ 'hedging_tools.sell' | trans }}</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tables -->
+  <div class="table-view-section">
+    <!-- Table Buy -->
+    <table class="table table-default table-buy-sell">
+      <thead>
+        <tr>
+          <th>{{ 'table.risk' | trans }}</th>
+          <th>{{ 'table.hedging_tool_name' | trans }}</th>
+          <th>{{ 'table.technical_details' | trans }}</th>
+          <th class="th-modal">{{ 'table.chart' | trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for hedgingTool in buyHedgingTools %}
+          <tr>
+            <td>{{ riskLevelLabels[hedgingTool.riskLevel] }} {% if hedgingTool.isSpecialStorageTools %}/ {{ riskLevelLabels[constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')]  }}{% endif %}</td>
+            <td>{{ hedgingTool.name }}</td>
+            <td>{{ hedgingTool.getOperationsAsArray|join(' and ') }}</td>
+            <td>
+              <button type="button" class="btn btn-link-table btn-hedging-tool-modal" data-toggle="modal" data-chart-image-url="{{ url('api_get_hedging_tool_chart_image_url', {'hedgingTool': hedgingTool.id}) }}" data-target="#modalChart">
+                <i class="icon-chart" data-toggle="tooltip" title="{{ 'see_the_graph' | trans }}" data-placement="top"></i>
+              </button>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Table Sell -->
+    <table class="table table-default table-buy-sell table-hide">
+      <thead>
+        <tr>
+          <th>{{ 'table.risk' | trans }}</th>
+          <th>{{ 'table.hedging_tool_name' | trans }}</th>
+          <th>{{ 'table.technical_details' | trans }}</th>
+          <th class="th-modal">{{ 'table.chart' | trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for hedgingTool in sellHedgingTools %}
+          <tr>
+            <td>{{ riskLevelLabels[hedgingTool.riskLevel] }} {% if hedgingTool.isSpecialStorageTools %}/ {{ riskLevelLabels[constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')]  }}{% endif %}</td>
+            <td>{{ hedgingTool.name }}</td>
+            <td>{{ hedgingTool.getOperationsAsArray|join(' and ') }}</td>
+            <td>
+              <button type="button" class="btn btn-link-table btn-hedging-tool-modal" data-toggle="modal" data-chart-image-url="{{ url('api_get_hedging_tool_chart_image_url', {'hedgingTool': hedgingTool.id}) }}" data-target="#modalChart">
+                <i class="icon-chart" data-toggle="tooltip" title="{{ 'see_the_graph' | trans }}" data-placement="top"></i>
+              </button>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

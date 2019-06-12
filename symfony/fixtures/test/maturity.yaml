@@ -1,0 +1,97 @@
+App\Entity\MasterData\Maturity:
+    maturity-sep-2018:
+        name: 'sep-18'
+        day: 1
+        month: 9
+        year: 2018
+        active: 1
+    maturity-oct-2018:
+        name: 'oct-18'
+        day: 1
+        month: 10
+        year: 2018
+        active: 1
+    maturity-nov-2018:
+        name: 'nov-18'
+        day: 1
+        month: 11
+        year: 2018
+        active: 1
+    maturity-dec-2018:
+        name: 'dec-18'
+        day: 1
+        month: 12
+        year: 2018
+        active: 1
+    maturity-jan-2019:
+        name: 'jan-19'
+        day: 1
+        month: 1
+        year: 2019
+        active: 1
+    maturity-feb-2019:
+        name: 'feb-19'
+        day: 1
+        month: 2
+        year: 2019
+        active: 1
+    maturity-mar-2019:
+        name: 'mar-19'
+        day: 1
+        month: 3
+        year: 2019
+        active: 1
+    maturity-apr-2019:
+        name: 'apr-19'
+        day: 1
+        month: 4
+        year: 2019
+        active: 1
+    maturity-may-2019:
+        name: 'may-19'
+        day: 1
+        month: 5
+        year: 2019
+        active: 1
+    maturity-jun-2019:
+        name: 'jun-19'
+        day: 1
+        month: 6
+        year: 2019
+        active: 1
+    maturity-jul-2019:
+        name: 'jul-19'
+        day: 1
+        month: 7
+        year: 2019
+        active: 1
+    maturity-aug-2019:
+        name: 'aug-19'
+        day: 1
+        month: 8
+        year: 2019
+        active: 1
+    maturity-sep-2019:
+        name: 'sep-19'
+        day: 1
+        month: 9
+        year: 2019
+        active: 1
+    maturity-oct-2019:
+        name: 'oct-19'
+        day: 1
+        month: 10
+        year: 2019
+        active: 1
+    maturity-nov-2019:
+        name: 'nov-19'
+        day: 1
+        month: 11
+        year: 2019
+        active: 1
+    maturity-dec-2019:
+        name: 'dec-19'
+        day: 1
+        month: 12
+        year: 2019
+        active: 1

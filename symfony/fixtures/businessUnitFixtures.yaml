@@ -1,0 +1,121 @@
+App\Entity\MasterData\BusinessUnit:
+    bu1:
+        fullName: 'CALOR GAS'
+        listName: 'CALOR GB'
+        counterpartCode: 'CALOR GAS'
+        active: 1
+    bu2:
+        fullName: 'C.G.P PRIMAGAZ'
+        listName: 'Pz FRANCE'
+        counterpartCode: 'PRZ'
+        active: 1
+    bu3:
+        fullName: 'CALOR GAS IRELAND'
+        listName: 'CALOR NORTH IRELAND'
+        counterpartCode: 'CALOR GAS IRELAND'
+        active: 1
+    bu4:
+        fullName: 'CALOR TEORANTA'
+        listName: 'CALOR TEORANTA'
+        counterpartCode: 'CALOR TEORANTA'
+        active: 1
+    bu5:
+        fullName: 'SHV ENERGY PRIVATE Ltd'
+        listName: 'SHV INDIA ENERGY PRIVATE'
+        counterpartCode: 'SHV ENERGY PRIVATE'
+        active: 1
+    bu6:
+        fullName: 'SHV LPG INDIA PRIVATE'
+        listName: 'SHV INDIA TUTICORIN'
+        counterpartCode: 'SHV LPG TUTICORIN'
+        active: 1
+    bu7:
+        fullName: 'GASPOL S.A.'
+        listName: 'GASPOL'
+        counterpartCode: 'GASPOL'
+        active: 1
+    bu8:
+        fullName: 'PRIMAGAZ-HUNGARIA RT.'
+        listName: 'Pz HUNGARY'
+        counterpartCode: 'PRZ HUNGARY'
+        active: 1
+    bu9:
+        fullName: 'PRIMAGAZ NEDERLAND B.V.'
+        listName: 'Pz NEDERLAND'
+        counterpartCode: 'PRZ NEDERLAND'
+        active: 1
+    bu10:
+        fullName: 'PRIMAGAZ ENERGIA SAU'
+        listName: 'Pz SPAIN'
+        counterpartCode: 'PRZ ESPAGNE'
+        active: 1
+    bu11:
+        fullName: 'PRIMAGAS AUSTRIA'
+        listName: 'Pz AUSTRIA'
+        counterpartCode: 'PRZ AUSTRIA'
+        active: 1
+    bu12:
+        fullName: 'PRIMAGAS BELGIUM NV'
+        listName: 'Pz BELGIUM'
+        counterpartCode: 'PRZ BELGIUM'
+        active: 1
+    bu13:
+        fullName: 'PRZ DANMARK A/S'
+        listName: 'Pz DANMARK'
+        counterpartCode: 'PRZ DANMARK'
+        active: 1
+    bu14:
+        fullName: 'PRIMAFAZ NORGE A/S'
+        listName: 'Pz NORWAY'
+        counterpartCode: 'PRZ NORWAY'
+        active: 1
+    bu15:
+        fullName: 'PRIMAGAZ SVERIGE AB'
+        listName: 'Pz SWEDEN'
+        counterpartCode: 'PRZ SWEDEN'
+        active: 1
+    bu16:
+        fullName: 'IPRAGAZ'
+        listName: 'IPRAGAZ'
+        counterpartCode: 'IPRAGAZ'
+        active: 1
+    bu17:
+        fullName: 'LIQUIGAS SPA'
+        listName: 'LIQUIGAS'
+        counterpartCode: 'LIQ'
+        active: 1
+    bu18:
+        fullName: 'LIQUIGAS MALTA LTD'
+        listName: 'LIQUIGAS MALTA'
+        counterpartCode: 'LIQ MALTA'
+        active: 1
+    bu19:
+        fullName: 'PRIMAGAS S.R.O'
+        listName: 'Pz Czk REP'
+        counterpartCode: 'PRIMAPLYN'
+        active: 1
+    bu20:
+        fullName: 'BUTAN PLIN D.D.'
+        listName: 'BUTAN PLIN'
+        counterpartCode: 'BUTAN PLIN'
+        active: 1
+    bu21:
+        fullName: 'SHV ENERGY N.V.'
+        listName: 'SHV CHINA'
+        counterpartCode: 'SHV GAS HOLDING'
+        active: 1
+    bu22:
+        fullName: 'PRIMAGAZ CENTRAL EUROPE GMBH'
+        listName: 'PZT VIENNE'
+        counterpartCode: 'PZT VIENNE'
+        active: 1
+    bu23:
+        fullName: 'WGT'
+        listName: 'WGT'
+        counterpartCode: 'WGT'
+        active: 1
+    bu24:
+        fullName: 'PRIMAGAS ENERGIE GMBH & CO. KG'
+        listName: 'Pz GERMANY'
+        counterpartCode: 'PRZ GERMANY'
+        active: 1

@@ -1,0 +1,21 @@
+App\Entity\MasterData\PriceRiskClassification:
+    priceRiskClassification1:
+        name: 'Fixed Price'
+        code: 'FP'
+        active: 1
+    priceRiskClassification2:
+        name: 'Capped Price'
+        code: 'CP'
+        active: 1
+    priceRiskClassification3:
+        name: 'Stable Price'
+        code: 'SP'
+        active: 1
+    priceRiskClassification4:
+        name: 'Differential Price'
+        code: 'DP'
+        active: 1
+    priceRiskClassification5:
+        name: 'Other'
+        code: 'OT'
+        active: 1

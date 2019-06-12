@@ -1,0 +1,59 @@
+<aside class="aside-alerts-wrap">
+  <a href="javascript:void(0)" class="btn-alert"><i class="icon-bell"></i></a>
+
+  <!-- Tab Alerts -->
+  <ul class="tab-alerts-nav list-inline">
+    <li class="list-inline-item">
+      <a href="javascript:void(0)" class="tab-hedge-alerts active">{{ 'alerts.hedge.title' | trans }}{% if hedgeAlertsNotViewedCount %}<span class="number-alerts hedge">({{ hedgeAlertsNotViewedCount }})</span>{% endif %}</a>
+    </li>
+    {% if is_granted('alert_rmp') %}
+      <li class="list-inline-item">
+        <a href="javascript:void(0)"  class="tab-rmp-alerts">{{ 'alerts.rmp.title' | trans }}{% if rmpAlertsNotViewedCount %}<span class="number-alerts rmp">({{ rmpAlertsNotViewedCount }})</span>{% endif %}</a>
+      </li>
+    {% endif %}
+  </ul>
+
+  <!-- List -->
+  <ul class="list-alerts list-unstyled hedge-alerts">
+    {% for hedgeAlertUser in hedgeAlertsUser%}
+      <li class="alert {{ not hedgeAlertUser.isViewed ? 'not-viewed' : ''}} {{ not hedgeAlertUser.isRead ? 'unread' : ''}} {% if is_granted('hedge_edit', hedgeAlertUser.alert.parent) %}alert-clickable{% endif %}">
+        <a href="javascript:void(0)" data-url="{{ path('hedge_edit', {'hedge': hedgeAlertUser.alert.parent.id}) }}" class="alert-block"
+           data-bu-id="{{ hedgeAlertUser.alert.parent.rmp.businessUnit.id }}" data-id="{{ hedgeAlertUser.id }}" data-type="hedge">
+          <div class="alert-date">{{ hedgeAlertUser.alert.timestamp|date('m/d/Y') }} - {{ hedgeAlertUser.alert.timestamp|date('g:i a') }}</div>
+          <div class="alert-text">{{ hedgeAlertsLabels[hedgeAlertUser.alert.type]|trans({'%hedgeId%': hedgeAlertUser.alert.parent.id, '%buName%': hedgeAlertUser.alert.parent.rmp.businessUnit, '%hedgeStatus%': hedgeStatusLabels[hedgeAlertUser.alert.parent.status]|trans}) }}</div>
+          {% if hedgeAlertUser.alert.additionalMessage %}
+            <div class="alert-text additional-message {% if hedgeAlertUser.alert.type != constant('App\\Entity\\HedgeAlert::TYPE_COMMENT') %}italic{% endif %}">
+                {{ hedgeAlertUser.alert.additionalMessage|striptags|length > 60 ? hedgeAlertUser.alert.additionalMessage|slice(0,60)|raw : hedgeAlertUser.alert.additionalMessage|raw }}
+                {{ hedgeAlertUser.alert.additionalMessage|striptags|length > 60 ? '...' : ''}}
+            </div>
+          {% endif %}
+          {% if is_granted('hedge_edit', hedgeAlertUser.alert.parent) %}
+            <div class="btn btn-secondary">{{ 'alerts.hedge.button'|trans }}</div>
+          {% endif %}
+        </a>
+        <a href="javascript:void(0)" class="alert-delete"><i class="zmdi zmdi-close"></i></a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% if is_granted('alert_rmp') %}
+    <ul class="list-alerts list-unstyled rmp-alerts d-none">
+      {% for rmpAlertUser in rmpAlertsUser %}
+        <li class="alert {{ not rmpAlertUser.isViewed ? 'not-viewed' : ''}} {{ not rmpAlertUser.isRead ? 'unread' : ''}} {% if is_granted('rmp_view', rmpAlertUser.alert.parent) %}alert-clickable{% endif %}">
+          <a href="javascript:void(0)" data-url="{{ path('rmp_view', {'rmp': rmpAlertUser.alert.parent.id}) }}" class="alert-block"
+             data-bu-id="{{ rmpAlertUser.alert.parent.businessUnit.id }}" data-id="{{ rmpAlertUser.id }}" data-type="rmp">
+            <div class="alert-date">{{ rmpAlertUser.alert.timestamp|date('m/d/Y') }} - {{ rmpAlertUser.alert.timestamp|date('g:i a') }}</div>
+            <div class="alert-text">{{ rmpAlertsLabels[rmpAlertUser.alert.type]|trans({'%rmpName%': rmpAlertUser.alert.parent.name, '%validityPeriod%': rmpAlertUser.alert.parent.validityPeriod}) }}</div>
+            {% if rmpAlertUser.alert.additionalMessage %}
+              <div class="alert-text additional-message {% if rmpAlertUser.alert.type != constant('App\\Entity\\RmpAlert::TYPE_COMMENT') %}italic{% endif %}">
+                  {{ rmpAlertUser.alert.additionalMessage|striptags|length > 60 ? rmpAlertUser.alert.additionalMessage|slice(0,60)|raw : rmpAlertUser.alert.additionalMessage|raw }}
+                  {{ rmpAlertUser.alert.additionalMessage|striptags|length > 60 ? '...' : ''}}
+              </div>
+            {% endif %}
+            <div class="btn btn-secondary">{{ 'alerts.rmp.button'|trans }}</div>
+          </a>
+          <a href="javascript:void(0)" class="alert-delete"><i class="zmdi zmdi-close"></i></a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</aside>

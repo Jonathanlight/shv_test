@@ -1,0 +1,7 @@
+<ul>
+    {% for rmps in rmpsRemindable %}
+        {% for rmp in rmps %}
+            <li><a href="{{ rmp.url }}">{{ rmp.url }}</a></li>
+        {% endfor %}
+    {% endfor %}
+</ul>

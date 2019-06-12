@@ -1,0 +1,65 @@
+App\Entity\MasterData\ConversionTable:
+  ct1:
+    commodity: '@propane'
+    uom: '@mwhr'
+    value: '0,0806142034325726'
+  ct2:
+    commodity: '@propane'
+    uom: '@mt'
+    value: '1'
+  ct3:
+    commodity: '@propane'
+    uom: '@bbl'
+    value: '0,0806142034325726'
+  ct4:
+    commodity: '@propane'
+    uom: '@gal'
+    value: '0,00191938579601363'
+  ct5:
+    commodity: '@butane'
+    uom: '@mwhr'
+    value: '0,0928176794673098'
+  ct6:
+    commodity: '@butane'
+    uom: '@mt'
+    value: '1'
+  ct7:
+    commodity: '@butane'
+    uom: '@bbl'
+    value: '0,0928176794673098'
+  ct8:
+    commodity: '@butane'
+    uom: '@gal'
+    value: '0,00220994474922166'
+  ct9:
+    commodity: '@naphta'
+    uom: '@mwhr'
+    value: '0,118618065349006'
+  ct10:
+    commodity: '@naphta'
+    uom: '@mt'
+    value: '1'
+  ct11:
+    commodity: '@naphta'
+    uom: '@bbl'
+    value: '0,118618065349006'
+  ct12:
+    commodity: '@naphta'
+    uom: '@gal'
+    value: '0,00282423965116682'
+  ct13:
+    commodity: '@natgas'
+    uom: '@mwhr'
+    value: '0,0666666666666667'
+  ct14:
+    commodity: '@natgas'
+    uom: '@mt'
+    value: '1'
+  ct15:
+    commodity: '@natgas'
+    uom: '@bbl'
+    value: '0,0666666666666667'
+  ct16:
+    commodity: '@natgas'
+    uom: '@gal'
+    value: '0,00158730158730159'

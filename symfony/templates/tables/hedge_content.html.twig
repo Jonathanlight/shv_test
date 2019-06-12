@@ -1,0 +1,34 @@
+{% if results|length > 0 %}
+    {% for hedge in results %}
+        <tr class="tr-link hedge-line" onclick="window.location='{{ path('hedge_edit', {hedge: hedge.id}) }}'">
+            <td>{{ hedge.rmp.businessUnit }}</td>
+            <td>{{ hedge.code }}</td>
+            <td>{{ hedge.subSegment.segment }}</td>
+            <td>{{ hedge.subSegment }}</td>
+            <td>{{ hedge.product1 }} {{ hedge.product2 ? '/' ~ hedge.product2 : '' }}</td>
+            <td>{{ operationsTypesLabels[hedge.hedgingTool.operationType] }} {{ hedge.hedgingTool.name }}</td>
+            <td>{{ hedge.firstMaturity }}</td>
+            <td>{{ hedge.lastMaturity }}</td>
+            <td>{{ uomConvert(hedge.getTotalVolume, hedge.product1.commodity, hedge.uom, referenceUom) }}</td>
+            <td class="td-shovel {% if (hedge.isPendingApproval or hedge.isPendingExecution) %}td-shovel-icon text-left{% endif %}">
+                {{ hedge.getStatusLabel | trans }}
+                {% if hedge.isPartiallyRealized %}
+                    <div class="status-info">{{ 'hedge.status.partially_realized'|trans }}</div>
+                {% endif %}
+                {% if hedge.isExtraApproval %}
+                    <div class="status-info">{{ 'hedge.status.extra_approval'|trans }}</div>
+                {% endif %}
+                {% if hedge.isImported %}
+                    <div class="status-info">{{ 'hedge.imported'|trans }}</div>
+                {% endif %}
+                {% if (hedge.isPendingApproval or hedge.isPendingExecution) %}
+                    <i class="icon-shovel-red" data-toggle="tooltip" title="{{ 'status.in_progress' | trans }}" data-placement="top"></i>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="10">{{ 'table.empty' | trans }}</td>
+    </tr>
+{% endif %}

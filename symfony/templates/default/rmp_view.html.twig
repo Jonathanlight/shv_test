@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-default-dashboard{% endblock %}
+
+{% block body %}
+<div class="default-dashboard-wrap">
+  <!-- Title -->
+  <div class="default-dashboard-title-section">
+    <h2 class="default-dashboard-title">{{ 'rmp.list.title' | trans }}</h2>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav-view-status">
+    <ul class="list-inline">
+      <li class="list-inline-item active"><a href="">{{ 'nav.all' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.draft' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.pending_approval' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.temporary' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.approved' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.archived' | trans }}</a></li>
+    </ul>
+  </nav>
+
+  <!-- Action Filter Form -->
+  <div class="actions-filter-block">
+    <a href="javascript:void(0)" class="btn btn-primary btn-circle btn-filter"><i class="icon-loupe"></i><span class="sr-only">{{ 'filter' | trans }}</span></a>
+    <a href="javascript:void(0)" class="btn btn-primary-outline btn-filter btn-filter-close">{{ 'filter' | trans }} <i class="icon-closeOne"></i></a>
+  </div>
+
+
+  <!-- Form -->
+  <form action="" class="form-filter-view">
+    <div class="form-filter-title-block">
+      <h3 class="form-filter-title">{{ 'filters' | trans }}</h3>
+      <div class="form-filter-action">
+        <button type="reset" class="btn btn-link btn-reset" data-toggle="tooltip" data-placement="top" title="{{ 'reset' | trans }}">
+          <i class="icon-reset"></i>
+          <span class="sr-only">{{ 'reset' | trans }}</span>
+        </button>
+        <a href="javascript:void(0)" class="btn btn-link btn-filter" data-toggle="tooltip" data-placement="top" title="{{ 'close' | trans }}">
+          <i class="zmdi zmdi-close"></i>
+          <span class="sr-only">{{ 'close' | trans }}</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="control-label">{{ 'rmp.bu_name' | trans }}</label>
+          <div class="form-select">
+            <select name="" id="" class="form-control select-multiple" multiple>
+              <option value="sds">Test</option>
+              <option value="sdsd">sds</option>
+              <option value="sdsd">sdssds</option>
+              <option value="sdsd">sdss</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="control-label">{{ 'rmp.bu_name' | trans }}</label>
+          <div class="form-select">
+            <select name="" id="" class="form-control">
+              <option value="">Test</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="control-label">{{ 'rmp.bu_name' | trans }}</label>
+          <div class="form-select">
+            <select name="" id="" class="form-control">
+              <option value="">Test</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="control-label">{{ 'rmp.bu_name' | trans }}</label>
+          <div class="form-select">
+            <select name="" id="" class="form-control">
+              <option value="">Test</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Table -->
+  <div class="table-view-section">
+    <table class="table table-default table-status">
+      <thead>
+        <tr >
+          <th class="sorted">{{ 'table.bu_name' | trans }}</th>
+          <th class="asc">{{ 'table.rmp_name' | trans }}</th>
+          <th class="desc">{{ 'table.validity_period' | trans }}</th>
+          <th class="sorted">{{ 'table.timestamp' | trans }}</th>
+          <th>{{ 'table.statuts' | trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.rmp_view_status' | trans }}"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in 0..10 %}
+          <tr onclick="window.location='{{ path('rmp', {'rmp': 1}) }}'" class="tr-link">
+            <td>Lorem ispum</td>
+            <td>Lorem ispum</td>
+            <td>Lorem ispum</td>
+            <td>Lorem ispum</td>
+            <td class="td-shovel">
+              {{ 'table.pending_approval' | trans }}
+              <i class="icon-shovel" data-toggle="tooltip" title="In progress" data-placement="top"></i>
+            </td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="5">{{ 'rmp.empty' | trans }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

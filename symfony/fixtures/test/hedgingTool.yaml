@@ -1,0 +1,198 @@
+App\Entity\MasterData\HedgingTool:
+    swapBuy:
+        name: 'SWAP'
+        code: 'SwapBuy'
+        riskLevel: 1
+        operationType: 1
+        operations: [swaps: 'buy', call: '', put: '']
+        columns: ['swapPrice']
+        active: 1
+    collarBuy:
+        name: 'COLLAR'
+        code: 'COLLARBuy'
+        riskLevel: 1
+        operationType: 1
+        operations: [swaps: '', call: 'buy', put: 'sell']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+    syntheticCallBuy:
+        name: 'SYNTHETIC CALL'
+        code: 'SyntheticCallBuy'
+        riskLevel: 2
+        operationType: 1
+        operations: [swaps: 'buy', call: '', put: 'buy']
+        columns: ['swapPrice', 'putStrike', 'putPremium']
+        active: 1
+    newAgeBuy:
+        name: 'NEW AGE'
+        code: 'NewAgeBuy'
+        riskLevel: 3
+        operationType: 1
+        operations:
+            swaps: ''
+            call: 'buy'
+            put: [put1: 'sell', put2: 'buy']
+        columns: ['callStrike', 'callPremium', 'put1Strike', 'put1Premium', 'put2Strike', 'put2Premium']
+        active: 1
+    callBuy:
+        name: 'CALL'
+        code: 'CALLBuy'
+        riskLevel: 4
+        operationType: 1
+        operations: [swaps: '', call: 'buy', put: '']
+        columns: ['callStrike', 'callPremium']
+        active: 1
+    strangleBuy:
+        name: 'STRANGLE'
+        code: 'StrangleBuy'
+        riskLevel: 4
+        operationType: 1
+        operations: [swaps: '', call: 'buy', put: 'buy']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+    straddleBuy:
+        name: 'STRADDLE'
+        code: 'StraddleBuy'
+        riskLevel: 4
+        operationType: 1
+        operations: [swaps: '', call: 'buy', put: 'buy']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+    putBuy:
+        name: 'PUT'
+        code: 'PUTBuy'
+        riskLevel: 0
+        operationType: 1
+        operations: [swaps: '', call: '', put: 'buy']
+        columns: ['putStrike', 'putPremium']
+        active: 1
+    syntheticPutBuy:
+        name: 'SYNTHETIC PUT'
+        code: 'SyntheticPutBuy'
+        riskLevel: 0
+        operationType: 1
+        operations: [swaps: 'sell', call: 'buy', put: '']
+        columns: ['swapPrice', 'callStrike', 'callPremium']
+        active: 1
+    spreadBuy:
+        name: 'SPREAD'
+        code: 'SPREADBuy'
+        riskLevel: 1
+        operationType: 1
+        operations:
+            swaps: [swap1: 'buy', swap2: 'sell']
+            call: ''
+            put: ''
+        columns: ['swap1Price', 'swap2Price']
+        active: 1
+    reverseNewAgeBuy:
+        name: 'REVERSE NEW AGE'
+        code: 'ReverseNewAgeBuy'
+        riskLevel: 0
+        operationType: 1
+        operations:
+            swaps: ''
+            call: [call1: 'sell', call2: 'buy']
+            put: 'sell'
+        columns: ['call1Strike', 'call1Premium', 'call2Strike', 'call2Premium', 'putStrike', 'putPremium']
+        active: 1
+    swapSell:
+        name: 'SWAP'
+        code: 'SwapSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: 'sell', call: '', put: '']
+        columns: ['swapPrice']
+        active: 1
+        specialStorageTools: 1
+    collarSell:
+        name: 'COLLAR'
+        code: 'COLLARSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: '', call: 'sell', put: 'buy']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+        specialStorageTools: 1
+    syntheticCallSell:
+        name: 'SYNTHETIC CALL'
+        code: 'SyntheticCallSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: 'sell', call: '', put: 'sell']
+        columns: ['swapPrice', 'putStrike', 'putPremium']
+        active: 1
+    newAgeSell:
+        name: 'NEW AGE'
+        code: 'NewAgeSell'
+        riskLevel: 1
+        operationType: 2
+        operations:
+            swaps: ''
+            call: 'sell'
+            put: [put1: 'buy', put2: 'sell']
+        columns: ['callStrike', 'callPremium', 'put1Strike', 'put1Premium', 'put2Strike', 'put2Premium']
+        active: 1
+    callSell:
+        name: 'CALL'
+        code: 'CALLSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: '', call: 'sell', put: '']
+        columns: ['callStrike', 'callPremium']
+        active: 1
+        specialStorageTools: 1
+    strangleSell:
+        name: 'STRANGLE'
+        code: 'StrangleSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: '', call: 'sell', put: 'sell']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+    straddleSell:
+        name: 'STRADDLE'
+        code: 'StraddleSell'
+        riskLevel: 1
+        operationType: 2
+        operations: [swaps: '', call: 'sell', put: 'sell']
+        columns: ['callStrike', 'callPremium', 'putStrike', 'putPremium']
+        active: 1
+    putSell:
+        name: 'PUT'
+        code: 'PUTSell'
+        riskLevel: 0
+        operationType: 2
+        operations: [swaps: '', call: '', put: 'sell']
+        columns: ['putStrike', 'putPremium']
+        active: 1
+    syntheticPutSell:
+        name: 'SYNTHETIC PUT'
+        code: 'SyntheticPutSell'
+        riskLevel: 0
+        operationType: 2
+        operations: [swaps: 'buy', call: 'sell', put: '']
+        columns: ['swapPrice', 'callStrike', 'callPremium']
+        active: 1
+    spreadSell:
+        name: 'SPREAD'
+        code: 'SPREADSell'
+        riskLevel: 1
+        operationType: 2
+        operations:
+            swaps: [swap1: 'sell', swap2: 'buy']
+            call: ''
+            put: ''
+        columns: ['swap1Price', 'swap2Price']
+        active: 1
+    reverseNewAgeSell:
+        name: 'REVERSE NEW AGE'
+        code: 'ReverseNewAgeSell'
+        riskLevel: 0
+        operationType: 2
+        operations:
+            swaps: ''
+            call: [call1: 'buy', call2: 'sell']
+            put: 'buy'
+        columns: ['call1Strike', 'call1Premium', 'call2Strike', 'call2Premium', 'putStrike', 'putPremium']
+        active: 1

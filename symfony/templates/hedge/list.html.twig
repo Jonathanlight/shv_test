@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-default-dashboard page-hedges-list{% endblock %}
+
+{% block body %}
+<div class="default-dashboard-wrap">
+  <!-- Title -->
+  <div class="default-dashboard-title-section">
+    <h1 class="default-dashboard-title">{{ 'hedge.list.title'|trans }}</h1>
+    <a href="{{ path('hedge_create') }}" class="btn btn-primary {% if not (is_granted('hedge_create')) %}d-none{% endif %}">{{ 'hedge.list.new'|trans }}</a>
+  </div>
+
+    <!-- Nav -->
+    <nav class="nav-view-status">
+      <ul class="list-inline">
+        <li class="list-inline-item {{ filters is null or filters.filters['e.status'][0] == '' or filters.filters['e.status'][0] == -10 ? 'active' : ''}}" data-status="{{ constant('App\\Entity\\Hedge::STATUS_ALL') }}" data-flags="true"><a href="javascript:void(0)">{{ 'nav.all' | trans }}</a></li>
+        {% for key, hedgeStatus in hedgeStatuses %}
+            <li class="list-inline-item {{ filters is not null and filters.filters['e.status'][0] != '' and filters.filters['e.status'][0] ==  key ? 'active' : ''}}"
+                data-status="{{ key }}" {% if key == constant('App\\Entity\\Hedge::STATUS_PENDING_EXECUTION') or key == constant('App\\Entity\\Hedge::STATUS_REALIZED') %}data-flags="true"{% endif %}><a href="javascript:void(0)">{{ hedgeStatus | trans }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Action Filter Form -->
+    <div class="actions-filter-block">
+      <a href="javascript:void(0)" class="btn btn-primary btn-circle btn-filter"><i class="icon-loupe"></i><span class="sr-only">{{ 'filter' | trans }}</span></a>
+      <a href="javascript:void(0)" class="btn btn-primary-outline btn-filter btn-filter-close">{{ 'filter' | trans }} <i class="icon-closeOne"></i></a>
+    </div>
+
+
+    <!-- Form -->
+    <form id="hedges-filters" class="form-filter-view">
+      <div class="form-filter-title-block">
+        <h3 class="form-filter-title">{{ 'filters' | trans }}</h3>
+        <div class="form-filter-action">
+          <button type="reset" class="btn btn-link btn-reset" data-toggle="tooltip" data-placement="top" title="{{ 'reset' | trans }}">
+            <i class="icon-reset"></i>
+            <span class="sr-only">{{ 'reset' | trans }}</span>
+          </button>
+          <a href="javascript:void(0)" class="btn btn-link btn-filter" data-toggle="tooltip" data-placement="top" title="{{ 'close' | trans }}">
+            <i class="zmdi zmdi-close"></i>
+            <span class="sr-only">{{ 'close' | trans }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.hedge_id' | trans }}</label>
+            <input name="e.code" class="form-control" data-filtered-value="{{ filters is not null and filters.filters['e.code'] is defined ? filters.filters['e.code']|join(',') : '' }}"/>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.market_segmentation' | trans }}</label>
+            <div class="form-select">
+              <select name="subSegment.segment" class="form-control select-multiple" multiple  data-filtered-value="{{ filters is not null and filters.filters['subSegment.segment'] is defined ? filters.filters['subSegment.segment']|join(',') : '' }}">
+                  {% for segment in segments %}
+                    <option value="{{ segment.id }}">{{ segment.name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.market_sub_segmentation' | trans }}</label>
+            <div class="form-select">
+              <select name="e.subSegment" class="form-control select-multiple" multiple data-filtered-value="{{ filters is not null and filters.filters['e.subSegment'] is defined ? filters.filters['e.subSegment']|join(',') : '' }}">
+                  {% for subSegment in subSegments %}
+                    <option value="{{ subSegment.id }}">{{ subSegment.name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.benchmark' | trans }}</label>
+            <div class="form-select">
+              <select name="e.product" class="form-control select-multiple" multiple data-filtered-value="{{ filters is not null and filters.filters['e.product'] is defined ? filters.filters['e.product']|join(',') : '' }}">
+                  {% for product in products %}
+                    <option value="{{ product.id }}">{{ product.name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.hedging_tool' | trans }}</label>
+            <div class="form-select">
+              <select name="e.hedgingTool" class="form-control select-multiple" multiple data-filtered-value="{{ filters is not null and filters.filters['e.hedgingTool'] is defined ? filters.filters['e.hedgingTool']|join(',') : '' }}">
+                  {% for hedgingTool in hedgingTools %}
+                    <option value="{{ hedgingTool.id }}">{{ operationsTypesLabels[hedgingTool.operationType] }} {{ hedgingTool.name }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.maturity_from' | trans }}</label>
+            <input name="maturity_from" id="" class="form-control form-datepicker"  data-filtered-value="{{ filters is not null and filters.filters['maturity_from'] is defined ? filters.filters['maturity_from']|join(',') : '' }}" />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.maturity_to' | trans }}</label>
+            <input name="maturity_to" class="form-control form-datepicker" data-filtered-value="{{ filters is not null and filters.filters['maturity_to'] is defined ? filters.filters['maturity_to']|join(',') : '' }}" />
+          </div>
+        </div>
+        <div class="col-3 {% if (is_granted('ROLE_BU_MEMBER') or is_granted('ROLE_BU_HEDGING_COMMITTEE')) %}d-none{% endif %}">
+          <div class="form-group">
+            <label for="" class="control-label">{{ 'table.bu' | trans }}</label>
+            <div class="form-select">
+              <select id="rmp-business-unit" name="rmp.businessUnit" class="form-control select-multiple" multiple {% if selectedBusinessUnit is not null %}data-selected-bu="{{ selectedBusinessUnit.id }}"{% endif %} data-filtered-value="{{ filters is not null and filters.filters['rmp.businessUnit'] is defined ? filters.filters['rmp.businessUnit']|join(',') : '' }}">
+                  {% for businessUnit in businessUnits %}
+                    {% if not selectedBusinessUnit or (selectedBusinessUnit and businessUnit.id == selectedBusinessUnit.id) %}
+                      <option value="{{ businessUnit.id }}">{{ businessUnit.fullName }}</option>
+                    {% endif %}
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group flags-filter">
+            <label for="" class="control-label">{{ 'table.flags' | trans }}</label>
+            <div class="form-select">
+              <select id="" name="flags" class="form-control select-multiple" multiple data-filtered-value="{{ filters is not null and filters.filters['flags'] is defined ? filters.filters['flags']|join(',') : '' }}">
+                  {% for key,flagLabel in flagLabels %}
+                    <option value="{{ key }}">{{ flagLabel|trans}}</option>
+                  {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="form-group">
+            <input type="hidden" name="e.status" data-filtered-value="{{ filters is not null and filters.filters['e.status'] is defined ? filters.filters['e.status']|join(',') : '' }}"/>
+          </div>
+        </div>
+        <div class="col-3 offset-md-9">
+          <div class="actions-filter">
+            <button type="submit" class="btn btn-primary btn-full">Filter</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Table -->
+    <div class="table-view-section">
+      <table id="hedges-list" class="table table-default table-status"
+             data-toggle="knxTable"
+             data-entity="Hedge"
+             data-url="{{ path('api_sort_table') }}"
+             data-route="{{ route }}"
+             data-filters-id="hedges-filters"
+             data-pagination-id="hedges-pagination">
+        <thead>
+        <tr>
+          <th class="sortable sorted" data-field="businessUnit.fullName">{{ 'table.bu' | trans }}</th>
+          <th class="sortable asc" data-field="e.code">{{ 'table.hedge_id'|trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.hedge_id' | trans }}"></i></th>
+          <th class="sortable sorted" data-field="segment.name">{{ 'table.market_segmentation'|trans }}</th>
+          <th class="sortable sorted" data-field="subSegment.name">{{ 'table.market_sub_segmentation'|trans }}</th>
+          <th>{{ 'table.benchmark' | trans | raw }}</th>
+          <th class="sortable sorted" data-field="hedgingTool.name">{{ 'table.buy_sell_hedging_tool' | trans | raw }}</th>
+          <th class="sortable sorted" data-field="firstMaturity.date">{{ 'table.first_maturity'|trans }}</th>
+          <th class="sortable sorted" data-field="lastMaturity.date">{{ 'table.last_maturity'|trans }}</th>
+          <th class="sortable sorted" data-field="e.totalVolume">{{ 'table.total_volume'|trans }} (MT)</th>
+          <th>{{ 'table.status' | trans | raw }}</th>
+        </tr>
+        </thead>
+        <tbody class="table-default-content">
+        </tbody>
+      </table>
+      <div id="hedges-pagination"></div>
+    </div>
+  </div>
+{% endblock %}

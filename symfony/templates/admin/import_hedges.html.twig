@@ -1,0 +1,34 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+
+{% block sonata_admin_content %}
+   {% if errors|length %}
+       <div class="alert alert-danger" role="alert">
+           {% for lineNumber, lineErrors in errors %}
+               {% for error in lineErrors %}
+                   <p>{{ error }}</p>
+               {% endfor %}
+           {% endfor %}
+       </div>
+   {% endif %}
+   {{ form_start(form) }}
+    <div class="form-section">
+        <div class="row-form">
+            <!-- Form -->
+            <div class="col-form">
+                <div class="form-default">
+                    <div class="row row-mb">
+                        <div class="col-sm-6">
+                            {{ form_row(form.file) }}
+                        </div>
+                    </div>
+                    <div class="row row-mb">
+                        <div class="col-sm-6">
+                            {{ form_row(form.submit) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   {{ form_end(form) }}
+{% endblock %}

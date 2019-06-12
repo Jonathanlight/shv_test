@@ -1,0 +1,15 @@
+<!-- Modal -->
+<div class="modal fade" id="modalComment{% if rmpSubSegmentId is defined %}{{ rmpSubSegmentId }}{% endif %}" tabindex="-1" role="dialog" aria-labelledby="modalCommentLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-comment">
+                <h5 class="modal-title" id="modalCommentLabel">{{ 'comment.title' | trans }}  <span class="modal-sub-segment-name"></span></h5>
+                <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                    <i class="icon-closeOne"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

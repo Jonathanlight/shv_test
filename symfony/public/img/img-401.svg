@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="541px" height="155px" viewBox="0 0 541 155" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>img-401</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Sofia" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="401_design@2x" transform="translate(-493.000000, -298.000000)">
+            <g id="img-401" transform="translate(493.000000, 261.000000)">
+                <path d="M108.090082,169.090082 C107.660379,149.488518 107.660379,113.45849 108.090082,61 C48.3935782,61 -1.42108547e-13,109.393578 -1.42108547e-13,169.090082 C61.2876842,168.924766 97.3177116,168.924766 108.090082,169.090082 Z" id="Oval-7" fill="#2EC4B6" fill-rule="evenodd" transform="translate(54.045041, 115.045041) rotate(-270.000000) translate(-54.045041, -115.045041) "></path>
+                <path d="M328.606452,142 L515.4093,142" id="Line-3" stroke="#2EC4B6" stroke-width="2" stroke-linecap="square"></path>
+                <text id="401" font-family="Roboto-Black, Roboto" font-size="182" font-weight="700" letter-spacing="10.44262" fill="#EBE6DD">
+                    <tspan x="69" y="169">40</tspan>
+                    <tspan x="300.678209" y="169" letter-spacing="11.73184">1</tspan>
+                </text>
+                <path d="M352.606452,132 L539.4093,132" id="Line-3" stroke="#CF2E24" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M532.953932,169.476966 C532.953932,128.896758 500.057174,96 459.476966,96 C418.896758,96 386,128.896758 386,169.476966 C476.708504,168.944424 516.365594,169.511547 532.953932,169.476966 Z" id="Oval-6" fill="#CF2E24" fill-rule="evenodd" transform="translate(459.476966, 132.739250) rotate(-113.000000) translate(-459.476966, -132.739250) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

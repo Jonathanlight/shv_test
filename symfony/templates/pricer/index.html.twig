@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-pricer{% endblock %}
+
+{% block body %}
+    <div class="default-title-block">
+        <h1 class="default-title">{{ 'pricer.title' | trans }}</h1>
+    </div>
+
+    {% if is_granted('ROLE_TRADER') %}
+    <!-- Dropzone -->
+    <section class="section-sm">
+        {{ form_start(form, {attr: {novalidate: 'novalidate', class: 'dropzone', id: 'files-dropzone', action: '/pricer',}}) }}
+        <div class="dz-message" data-dz-message>
+            <i class='icon icon-upload'></i><strong>{{ 'pricer.upload.label'|trans }}</strong><br><span class='text-dropzone'>{{ 'pricer.upload.label_action'|trans }}<span>
+        </div>
+        {{ form_end(form) }}
+    </section>
+    {% endif %}
+
+    <!-- Table -->
+    <div class="pricer-files-section">
+        <h3 class="pricer-files-title">{{ 'pricer.historic_download' | trans }} <i class="zmdi zmdi-info-outline" data-toggle="tooltip-alt" data-placement="top" title="{{ 'pricer.help' | trans  }}"  data-container="body"></i></h3>
+
+        <!-- Table -->
+        <table class="table table-default table-files">
+            <thead>
+            <tr>
+                <th>File name</th>
+                <th>{{ 'table.date' | trans }}</th>
+                <th>{{ 'table.action' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pricer_file in pricer_files|reverse(true) %}
+                <tr>
+                    <td>{{ pricer_file.filename }}</td>
+                    <td>{{ pricer_file.createdAt | date('m/d/y H:i:s') }}</td>
+                    <td>
+                        <a href="{{ url('pricer_download', {'pricer': pricer_file.id }) }}" class="btn btn-link-table"><i class="icon-download" data-toggle="tooltip" title="{{ 'download_file' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'download' | trans }}</span></a>
+                        {% if is_granted('ROLE_TRADER') %}
+                        <a href="#" data-pricer-file-id="{{ pricer_file.id  }}" class="btn btn-link-table btn-pricer-delete-file"><i class="icon-trash" data-toggle="tooltip" title="{{ 'delete_file' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'delete' | trans }}</span></a>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% else %}
+                <tr>
+                    <td colspan="3">{{ 'pricer.empty' | trans }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

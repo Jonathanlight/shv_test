@@ -1,0 +1,605 @@
+app:
+  title: CYLIPOL
+  message_mobile: You can only see the website on laptop and deskop.
+  admin:
+    label:
+      admin_roles: Admin role
+      role: SHV Role
+    group:
+      masterdata: Master Data
+      user: User
+      translations: Translation
+      cms: CMS
+      logs: Log
+      imports: Imports
+
+error:
+    maturities:
+        sub_segment: You selected maturities that don't match the selected sub segment
+next: Next
+month: Month
+notifications: Notifications
+menu: Menu
+hello: Hello
+send: Send
+edit: Edit
+delete: Delete
+you: You
+cancel: Cancel
+validate: Validate
+save: Save
+execution_request: Execution request
+block: Block
+unblock: Unblock
+filter: Filter
+close: Close
+reset: Reset
+filters: Filters
+see_the_graph: See the graph
+soon_available: Soon available
+last_change: Last change
+last_update: Last update
+download: download
+download_file: Download the file
+delete_file: Delete the file
+create_draft: Create a draft <br> to make an amendment
+send_approval_request: Send approval request
+add_a_sub_segment: Add a sub-segment
+see_more: See more
+see_less: See less
+sign_out: Sign out
+back_office: Back office
+blotter_generation: Blotter generation
+refuse: Refuse
+accept: Accept
+reject: Reject
+approve: Approve
+write_off: Write off
+test_generator_full: Test generator (full)
+test_generator_partial: Test generator (partial)
+print_pdf: Print
+edited_on: 'Edited on %datetime%'
+audit_trail: Audit trail
+
+
+tooltip:
+  ratio_rmp: Ratio Hedge Realized vs. Hedge Plan
+  status_rmp: Approved, Approved temporary, Approved - amendment
+  rmp_view_status: '<ul><li>Pending approval : Pending approval level 1 (Risk control S&RM) </li><li> Temporary: Final Pending approval level 2 (Board) </li><li> Approved: Level 1 (S&RM) & 2 (Board) approved</li><ul>'
+  max_ratio_at_risk: Ratio Hedge vs. Sales
+  max_loss: Fair Hedging loss limit if hedging tool other than N°1
+  retail_price: 'Final Marketing Customer price exposure
+  <ul><li>Fixed Price : Customer fixed price with take or Pay Agreement </li><li> Stable Price: Customer listed price or non-contractually fixed </li><li> Capped Price: Customer max price guaranteed </li><li> Differential Price: Customer indexed on floating quote or month different than supply exposure </li><li> Floating Price: Customer indexed on floating quote </li></ul>'
+  n_1: 'Unlimited risk without bottom loss, the most risky class <ul><li> Swap : Hedging tool that fix the index value, mainly used vs. fixed price exposure </li><li> Collar : Hedging tool combination that set a range index value, equivalent to a swap broken between the range</li></ul>'
+  n_2: 'Hedging with potentially high bottom loss <ul><li>Synthetic Call : Hedging tool combination that set a limited hedging loss with upfront small  premium</li></ul>'
+  n_3: 'Hedging with potentially medium bottom loss <ul><li> New Age : Hedging tool combination that set a limited hedging loss with upfront small premium </li></ul>'
+  n_4: 'Hedging with bottom loss limited to initial premium, the most soft class <ul><li> Call : Hegding tool that set a cap protection index value, similar as an insurance protection </li><li> Put : Hedging tool that set a bottom protection index value, similar as an insurance protection, alone used to Storage exposure </li></ul>'
+  sub_segment: Related to RM Policy Retail segment exposure, must be set by S&RM Administrator
+  max_volume: Volume hedging limit
+  hedge_id: Related to hedging request identification
+  detail: Red Up means Hedging request above limits – Green down means Hedging request fit limits
+  blotter: Import BU Hedge to Trading system
+  general_fields: lorem
+  ratio_hedging: lorem ipsum
+  storage_tools: 'Hedging cash-flows to be collected while prices down – various specific hedging tools'
+
+
+status:
+  in_progress: In progress
+
+nav:
+  cylinders: Cylinders
+  bulk: Bulk
+  autogas: Autogas
+  wholesale: Wholesale
+  storage_retail: Storage retail
+  storage_terminal: Storage terminal
+  lng: LNG
+  all: All
+  draft: Draft
+  pending_approval: Pending Approval
+  temporary: Temporary
+  approved: Approved
+  archived: Archived
+
+table:
+  retail_segment: Retail segment
+  sub_segmentation: Sub-segmentation
+  bu: BU
+  bu_name: BU Name
+  hedge_id: Hedge ID
+  market_segmentation: Market segmentation
+  market_sub_segmentation: Market sub-segmentation
+  buy_sell_hedging_tool: Buy/sell <br> hedging tool
+  first_maturity: First maturity
+  last_maturity : Last maturity
+  total_volume: Total volume
+  status: Status
+  pending_approval: Pending approval
+  risk: Risk
+  hedging_tool_name: Hedging Tool name
+  technical_details: Technical details
+  chart: Chart
+  date: Date
+  action: Action
+  rmp_name : RMP name
+  validity_period : Validity period
+  timestamp : Last Update
+  segment: Segment
+  sub_segment: Sub-segment
+  sales_volume: Sales volume
+  retail_price: RMP RISK PRICE <br>CLASSIFICATION
+  max_volume_at_risk: Max. Volume at risk
+  max_ratio_at_risk: Max. ratio at risk
+  maturity_hedge: Maturity hedge
+  maturity_from: Maturity from
+  maturity_to: Maturity to
+  max_loss: Max. loss (in $/MT)
+  max_loss_without_currency: Max. loss
+  currency: Currency
+  comments: Comments
+  benchmark: Benchmark
+  product: Product
+  n_1: N°1 <br> (swap, collar)
+  n_2: N°2 <br> (synthetic call)
+  n_3: N°3 <br> (new age)
+  n_4: N°4 (call, put,<br> straddle, strangle)
+  storage_tools: Storage tools
+  total: Total
+  empty: No record found
+  hedging_tool: Hedging Tool
+  flags: Flags
+
+comment:
+  title: Comments
+  add: Add a comment
+  placeholder: Add your comment...
+
+modal:
+  add_segment:
+    title: Add a new sub segment
+    subtitle: Ratio Hedging Tools Class Risk
+    segment: Segment
+    sub_segment: Sub-segment
+    benchmark: Benchmark
+    product: Product
+    retail_price : Retail price classification
+    uom: UOM
+    sale_volume : Sale volume
+    max_volume : Max. Volume at risk
+    max_ratio : Max. ratio at risk
+    maturity_hedge: Maturity hedge
+    max_loss: Max. loss (in $/MT)
+    n_1: N°1 (swap, collar)
+    n_2: N°2 (synthetic call)
+    n_3: N°3 (new age)
+    n_4: N°4 (call, put, straddle, strangle)
+    storage_tools: Storage tools
+  edit_segment:
+    title: Edit sub segment
+  select:
+    placeholder: Chooce a segment..
+  cancel:
+    title: Are you sure ?
+    text: You won't be able to undo any changes!
+    confirm_delete: Yes, delete it!
+    confirm_cancel: Yes, cancel it!
+    success_delete: Deleted!
+    success_cancel: Canceled!
+    success_pending_cancelation: Your cancelation request has been sent!
+  hedge:
+    execution_request:
+      title: Are you sure ?
+      text_without_waivers: You won't be able to undo any changes!
+      type_sell: You selected type "sell"! You won't be able to undo any changes!
+      text_with_waivers: You are going to request waiver on limits, and you won't be able to undo any changes?
+      confirm_btn_without_waivers: Yes, send an execution request!
+      confirm_btn_with_waivers: Yes, send an Extra Approval request!
+      success_message: Your hedge has been sent for execution.
+      error_blocked: This RMP is currently blocked. You will be able to save the hedge request and send it for execution when the RMP will be available.
+      error_sell_volume: The volume of this hedge exceed the volume allowed for a sell operation.
+    accept:
+      confirm_btn: Approve
+      confirm_message: This hedge has been approved!
+    pending_approval:
+      label: Leave a general comment about your decision (this comment will be added to the comment area and the email sent to the BU).
+      title: Are you sure ?
+      text: You won't be able to undo any changes!
+      confirm_btn: Accept
+      confirm_message: This hedge has been approuved!
+    refuse:
+      label: Leave a general comment about your refusal decision (this comment will be added to the comment area and the email sent to the BU).
+      title: Are you sure ?
+      text: You won't be able to undo any changes!
+      confirm_btn: Reject
+      confirm_message: This hedge has been rejected!
+      comment_placeholder: Leave a general comment about refusal decision (this comment will be added to the comment area and the email sent to the BU)
+    write_off:
+      title: Are you sure ?
+      text: You won't be able to undo any changes!
+      confirm_btn: Write off
+      confirm_message: This hedge has been wrote off!
+    return:
+      title: Are you sure ?
+      text: You're about to leave this page. Your modifications will be lost. Do you want to save them ?
+      confirm_btn: Save
+      confirm_message: This hedge has been saved!
+  comment:
+      title: Are you sure ?
+      text: You won't be able to undo any changes?
+      confirm_btn: Yes, delete it !
+      confirm_message: This comment has been removed!
+  rmp:
+    sub_segment:
+      remove:
+        title: Are you sure ?
+        text: You won't be able to undo any changes!
+        confirm_btn: Yes, delete it!
+        confirm_message: This sub segment has been removed.
+      error: Some mandatory values are missing
+    block:
+      title: Are you sure ?
+      text: Hedge requests on this RMP won't be available anymore!
+      confirm_btn: Yes, block it!
+      confirm_message: This RMP has been blocked!
+    unblock:
+      title: Are you sure ?
+      text: Hedge requests on this RMP will be available!
+      confirm_btn: Yes, unblock it!
+      confirm_message: This RMP has been unblocked!
+    approval:
+      send:
+        title: Are you sure ?
+        text: You won't be able to undo any changes!
+        confirm_btn: Yes, send it!
+        confirm_message: Your approval request has been sent!
+    pending_approval:
+      label: Leave a general comment about your decision (this comment will be added to the email sent to the BU).
+      title: Are you sure ?
+    cancel:
+      title: Are you sure ?
+      text: You won't be able to undo any changes!
+      confirm_btn: Yes, cancel it!
+      confirm_message: Canceled!
+  pricer:
+    upload:
+      success: File upload is completed
+      error: Upload file type is incorrect, use (.xls, .xlsx, .xlsm) instead
+      something_wrong: Something went wrong with file upload
+    delete:
+      success: File has been successfully deleted
+      error: An error occured when deleting file
+      something_wrong: Something went wrong with file deletion
+      confirm_title: Delete file
+      confirm_message: Do you really want to delete this file?
+      confirm_yes: Yes, delete it!
+
+
+dashboard:
+  title: Dashboard
+
+rmp:
+  title: RMP View
+  title_all : Risk management policy
+  back: Back to the RMP view
+  validity_period: Validity period
+  impact_next_rmp: These modifications will be reflected on the next temporary approved RMP
+  currency: Currency
+  dashboard:
+    title: RMP
+    link: RMP hedging follow up
+    info_label_1: Status
+    info_label_2: RMP realized
+    info_label_3: RMP achievement
+    info_label_4: RMP planned
+    info_label_5: Pending approval RC
+    info_label_6: Pending approval BM
+    approved: Approved
+    amendment: Approved - amendment
+    approved_automatically: Approved temporary
+    btn_new: Current RMP
+    btn_view: All RMP
+  history:
+    no_history: There is no old version
+  list:
+    title: Welcome to my RMP
+  bu_name: BU Name
+  info_label_1: RMPolicy
+  info_label_2: RMP ID
+  info_label_3: General comment
+  info_label_4: RM committee
+  info_label_5: Historical
+  nav:
+    key_view: Key View
+    comments: Comments
+    ratio: Ratio Hedging Tools Class Risk
+  default:
+    max_loss: No limit
+    protection_price: At market
+    premium_hedging_tool: At market
+  status:
+    archived: Archived
+    draft: Draft
+    temporary: Temporary
+    approved: Approved
+    pending_approval:
+      risk_controller: Pending Approval RC
+      board_member: Pending Approval BM
+  segment: Segment
+  sub_segment: Sub Segment
+  price_risk_classification: Retail price classification
+  uom: UOM
+  sales_volume: Sale volume
+  maximum_volume: Max. Volume at risk
+  ratio_maximum_volume_sales: Max. ratio at risk
+  maximum_maturities: Maturity hedge
+  maximum_loss: Max. loss (in $/MT)
+  product_category: Product
+  benchmark: Benchmark
+  flags:
+    approved_automatically: Temporary
+    blocked: Blocked
+    amendment: Amendment
+  rmp_sub_segment:
+    select_risk_level: Select risk levels
+    one_to_four: N°1 to N°4
+    storage_tools: Storage tools
+  total:
+    sales_volume: Sales Volume
+    mt: MT
+    max_volume: Max. Volume at Risk
+    pourcentage: '%'
+    number_one: N°1
+    number_other: N°2,3,4
+    storage_tools: Storage tools
+
+pricer:
+  title: Hedging Tools Pricing
+  historic_download: Historic & download
+  help: The history of the back up is on 14 days
+  empty: No file has been uploaded yet
+  dashboard:
+    mail: shaolan@k.com
+    info_label_1: Brent
+    info_label_2: C3 NWE
+    info_label_3: C3 CP
+    info_label_4: C3 US MB
+    btn_mail: Request for pricing
+    btn_view: Go to Hedging Tools Pricing
+  upload:
+    label: Deposit function
+    label_action: Drag & drop or click for upload
+
+analysis:
+  title: Analysis
+  last_update: "Last update"
+  country: Country
+  bu_name: BU Name
+  btn: Lorem ipsum
+  gross_margin_realized : Gross Margin Realized (T Hedging) - Currency per Unit of measure
+  sales_volumes_realized : Sales Volumes Realized - Unit of measure
+  gross_margin_rmp: Gross Margin RMP - same Unit above
+  sales_volumes_rmp: Sales Volumes RMP - same unit abovea
+  select:
+    currency: Currency
+    uom: UOM
+
+hedging_tools:
+  title: Hedging tools
+  buy: Buy
+  sell: Sell
+
+historic:
+  title: Historic
+  datetime: Datetime
+  user: User
+  action: Action
+
+hedge:
+  title: Hedge view
+  form_title: Hedge request
+  back: Back to hedge view
+  see_comments: See comments
+  see_historic: See Audit trail
+  error_sub_segment_deleted: 'This hedge request is now unavailable because the susbsegment "%subSegment%" has been deleted of the RMP rules in progress'
+  error_sub_segment_deleted_trader: 'FYI : The Subsegment "%subSegment%" linked to this hedge request has been deleted of the RMP rules in progress'
+  general_fields: General fields
+  dashboard:
+    title: Hedge
+    info_label_1: Pending approval RC
+    info_label_2: Pending execution
+    info_label_3: Pending approval BM
+    btn_new: Request for Hedging
+    btn_view: Go to HEDGE view
+  list:
+    title: Welcome to my HEDGE
+    new: Request new HEDGE
+  status:
+    canceled: Canceled
+    draft: Draft
+    pending_execution: Pending execution
+    realized: Realized
+    partially_realized: Partially realized
+    extra_approval: Extra approval
+    pending_approval:
+      risk_controller: Pending Approval RC
+      board_member: Pending Approval BM
+  id: Hedge ID
+  order_date: Order Date
+  bu_name: BU Name
+  view:
+    buy: Buy
+    sell: Sell
+  rmp: RMP rules
+  old_rmp: 'Hedge request done with %rmpName%'
+  description: Description
+  hedging_tool: Hedging tool name
+  product_1: Benchmark
+  product_2: Benchmark 2 (Sell)
+  currency: Currency
+  uom: UOM
+  price_risk_classification: Retail Price classification
+  segment: Market Segmentation
+  sub_segment: Market Sub Segmentation
+  first_maturity: First Maturity
+  last_maturity: Last Maturity
+  hedging_tool_class_risk: Hedging tool class Risk
+  class_risk_max: Class risk Max
+  hedging_tool_details: Hedging tool details
+  benchmark: Benchmark
+  rmp_open_limit: RMP open hedging limit
+  rmp_rules: RMP Rules
+  rmp_tools: Hedging tool details
+  maturity: Maturity
+  rmp_open_hedging_limit: Open hedging limit <br>VS RMP
+  total_realize: Total realized
+  hedging_request: Hedging request
+  open_execution: Open Execution
+  total_hedging_request: Total hedge request
+  total_request: Total hedge
+  extra_approval: Extra Approval
+  partially_realized: Partially Realized
+  imported: MIG
+  pending_cancelation: Cancelation request has been made for this hedge
+  hedge_lines:
+    title: Hedge lines
+    error: You have bad values in your hedge lines
+    error_blotter: Please save the hedge before blotter generation.
+    maturity_limit: Maturity <br> Limit
+    month: Month
+    quantity: Quantity
+    quantity_realized: Qty realized
+    protection_price: Protection<br> price
+    max_loss: Max loss
+    premium_hedging_tool: Premium <br>Hedging tool
+    waivers: Waivers
+    swap_price: Swap Price
+    swap1_price: Swap1 Price
+    swap2_price: Swap2 Price
+    call_strike: Call Strike
+    call1_strike: Call1 Strike
+    call2_strike: Call2 Strike
+    call_premium: Call Premium
+    call1_premium: Call1 Premium
+    call2_premium: Call2 Premium
+    put_strike: Put Strike
+    put1_strike: Put1 Strike
+    put2_strike: Put2 Strike
+    put_premium: Put Premium
+    put1_premium: Put1 Premium
+    put2_premium: Put2 Premium
+    strategy: Strategy
+    trades:
+      trading_date: Trading date
+      quantity: Quantity
+      trade_number: Trade number
+      call_strike: Call strike
+      put_strike: Put strike
+      call_premium: Call premium
+      put_premium: Put premium
+      swap_price: Swap price
+  waivers:
+    class_risk: This hedging tool's class risk exceeds the one defined in the RMP
+    maturity: These maturities exceed the maximum defined in the RMP
+    product: This benchmark is not allowed in the current RMP
+
+logs:
+  hedge:
+    type_pending_execution: '%timestamp% - Pending execution request by %user% (%userId%) for Hedge (%hedgeId%)'
+    type_extra_approval: '%timestamp% - Extra approval request by %user% (%userId%) for Hedge (%hedgeId%)'
+    type_approved_risk_controller: '%timestamp% - Extra approval request approved by RC %user% (%userId%) for Hedge (%hedgeId%)'
+    type_rejected_risk_controller: '%timestamp% - Extra approval request rejected by RC %user% (%userId%) for Hedge (%hedgeId%)'
+    type_approved_board_member: '%timestamp% - Extra approval request approved by BM %user% (%userId%) for Hedge (%hedgeId%)'
+    type_rejected_board_member: '%timestamp% - Extra approval request rejected by BM %user% (%userId%) for Hedge (%hedgeId%)'
+    type_blotter_generation: '%timestamp% - Blotter generation by %user% (%userId%) for Hedge (%hedgeId%)'
+    type_partially_realized: '%timestamp% - Hedge (%hedgeId%) has been partially realized'
+    type_write_off: '%timestamp% - Write off action by %user% (%userId%) for Hedge (%hedgeId%)'
+    type_realized: '%timestamp% - Hedge (%hedgeId%) has been realized'
+    type_canceled: '%timestamp% - Hedge (%hedgeId%) has been canceled by %user% (%userId%)'
+    type_cancellation_requested: '%timestamp% - Cancellation requested for Hedge (%hedgeId%) by %user% (%userId%)'
+    type_comment: '%timestamp% - Comment added on Hedge (%hedgeId%) by %user% (%userId%)'
+    type_canceled_automatically: '%timestamp% - Hedge (%hedgeId%) has been canceled automatically because its Subsegment has been deleted'
+    type_import: '%timestamp% - Hedge (%hedgeId%) has been imported.'
+
+  rmp:
+    type_amendment_request: '%timestamp% - Amendment request by %user% (%userId%) for %rmp% (%rmpId%)'
+    type_approved_risk_controller: '%timestamp% - Amendment request approved by RC %user% (%userId%) for %rmp% (%rmpId%)'
+    type_rejected_risk_controller: '%timestamp% - Amendment request rejected by RC %user% (%userId%) for %rmp% (%rmpId%)'
+    type_approved_board_member: '%timestamp% - Amendment request approved by BM %user% (%userId%) for %rmp% (%rmpId%)'
+    type_rejected_board_member: '%timestamp% - Amendment request rejected by BM %user% (%userId%) for %rmp% (%rmpId%)'
+    type_archived: '%timestamp% - RMP %rmp% (%rmpId%) archived'
+    type_blocked: '%timestamp% - RMP %rmp% (%rmpId%) blocked by %user% (%userId%)'
+    type_comment: '%timestamp% - Comment added on RMP (%rmpId%) by %user% (%userId%)'
+
+actions:
+  hedge:
+    type_pending_execution: 'Pending execution'
+    type_extra_approval: 'Extra approval'
+    type_approved_risk_controller: 'Extra approval approved by RC'
+    type_rejected_risk_controller: 'Extra approval rejected by RC'
+    type_approved_board_member: 'Extra approval approved by BM'
+    type_rejected_board_member: 'Extra approval rejected by BM'
+    type_blotter_generation: 'Blotter generation'
+    type_partially_realized: 'Partially realized'
+    type_write_off: 'Wrote off'
+    type_realized: 'Hedge realized'
+    type_canceled: 'Hedge canceled'
+    type_cancellation_requested: 'Cancellation requested'
+    type_import: 'Hedge imported'
+  rmp:
+    type_amendment_request: 'Amendment request'
+    type_approved_risk_controller: 'Amendment request approved by RC'
+    type_rejected_risk_controller: 'Amendment request rejected by RC'
+    type_approved_board_member: 'Amendment request approved by BM'
+    type_rejected_board_member: 'Amendment request rejected by BM'
+    type_archived: 'RMP archived'
+    type_blocked: 'RMP blocked'
+
+alerts:
+  hedge:
+    title: Hedge alerts
+    button: To the Hedge
+    type_pending_execution: 'A new Hedge (%hedgeId%) requires your execution.'
+    type_pending_approval_risk_controller: 'An Extra approval has been requested by %buName% for the Hedge (%hedgeId%) and require your validation.'
+    type_pending_approval_board_member: 'An Extra approval has been requested by %buName% for the Hedge (%hedgeId%) and require your validation'
+    type_rejected_risk_controller: 'Your Extra Approval request for the Hedge (%hedgeId%) has been rejected.'
+    type_rejected_board_member: 'Your Extra Approval request for the Hedge (%hedgeId%) has been rejected.'
+    type_extra_approval_pending_execution: 'Your Extra Approval request for the Hedge (%hedgeId%) has been approved.'
+    type_partially_realized: 'Your Hedge (%hedgeId%) has been partially realized.'
+    type_realized: 'Your Hedge (%hedgeId%) has been realized.'
+    type_cancellation_requested: 'A cancellation has been requested and requires your validation for the Hedge (%hedgeId%).'
+    type_cancelled: 'Your Hedge (%hedgeId%) has been canceled.'
+    type_cancellation_refused: 'Your cancellation for the Hedge (%hedgeId%) has been refused.'
+    type_reminder_risk_controller: 'An Extra Approval has been requested for a Hedge (%hedgeId%) 3 days ago and require your validation.'
+    type_reminder_board_member: 'An Extra Approval has been requested for a Hedge (%hedgeId%) 3 days ago and require your validation.'
+    type_comment: 'A new comment has been added to the Hedge %hedgeId% status %hedgeStatus%'
+    comment_additional: 'by %userName%'
+    type_reminder_trader: 'An Extra approval has been requested 3 days ago by %buName% for the Hedge (%hedgeId%) and require your validation'
+    type_canceled_automatically: 'Your Hedge request (%hedgeId%) has been cancelled automatically due to sub segment deletion on RMP'
+  rmp:
+    title: Rmp alerts
+    button: To the RMP
+    type_pending_approval_risk_controller: 'A new RMP %rmpName% require your validation.'
+    type_pending_approval_board_member: 'A new RMP %rmpName% require your validation.'
+    type_rejected_risk_controller: 'The RMP %rmpName%  validation request has been rejected.'
+    type_rejected_board_member: 'The RMP %rmpName%  validation request has been rejected.'
+    type_amendment_pending_approval_risk_controller: 'An amendment request has been sent for %rmpName% and require your validation.'
+    type_amendment_pending_approval_board_member: 'An amendment request has been sent for %rmpName% and require your validation.'
+    type_approved: 'The RMP %rmpName% has been validated.'
+    type_approved_automatically: 'The RMP %rmpName% is temporary validated. Think to set up the new rules for %validityPeriod%'
+    type_reminder_risk_controller: 'An Amendment has been requested 7 days ago on the %rmpName%.'
+    type_reminder_board_member: 'An Amendment has been requested 7 days ago on the %rmpName%.'
+    type_comment: 'A new comment has been added to the %rmpName%'
+    comment_additional: 'Subsegment %subSegment% by %userName%'
+    type_canceled_automatically: 'Hedge canceled automatically'
+
+import:
+  hedges:
+    error: "Line %lineNumber%: Element '%element%' doesn't exist"
+    bad_format: "Line %lineNumber%: Bad value format for column '%element%'"
+
+trade:
+  status:
+    accepted: "Accepted"
+    verified: "Verified"
+    void: "Void"

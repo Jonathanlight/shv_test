@@ -1,0 +1,22 @@
+App\Entity\MasterData\Segment:
+    segment1:
+        name: 'Cylinders'
+        active: 1
+    segment2:
+        name: 'Bulk'
+        active: 1
+    segment3:
+        name: 'Wholesale'
+        active: 1
+    segment4:
+        name: 'Autogas'
+        active: 1
+    segment5:
+        name: 'Storage Retail'
+        active: 1
+    segment6:
+        name: 'Storage Terminal'
+        active: 1
+    segment7:
+        name: 'Other'
+        active: 1

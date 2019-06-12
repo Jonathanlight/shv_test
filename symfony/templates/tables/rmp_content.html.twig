@@ -1,0 +1,29 @@
+{% if results|length > 0 %}
+    {% for rmp in results %}
+        <tr onclick="window.location='{{ path('rmp_view', {'rmp': rmp.id}) }}'" class="tr-link">
+            <td>{{ rmp.businessUnit }}</td>
+            <td>{{ rmp.name }}</td>
+            <td>{{ rmp.validityPeriod }}</td>
+            <td>{{ rmp.updatedAt is empty ? "" : rmp.updatedAt|date('d/m/Y') }}</td>
+            <td class="td-shovel {% if (rmp.isPendingApproval) %}td-shovel-icon{% endif %}">
+                {{ rmp.getStatusLabel | trans }}
+                {% if rmp.isApprovedAutomatically %}
+                    <div class="status-info">{{ 'rmp.flags.approved_automatically'|trans }}</div>
+                {% endif %}
+                {% if rmp.isBlocked %}
+                    <div class="status-info">{{ 'rmp.flags.blocked'|trans }}</div>
+                {% endif %}
+                {% if rmp.isAmendment %}
+                    <div class="status-info">{{ 'rmp.flags.amendment'|trans }}</div>
+                {% endif %}
+                {% if (rmp.isPendingApproval) %}
+                    <i class="icon-shovel-red" data-toggle="tooltip" title="{{ 'status.in_progress' | trans }}" data-placement="top"></i>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="10">{{ 'table.empty' | trans }}</td>
+    </tr>
+{% endif %}

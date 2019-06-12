@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="modalHistoric" tabindex="-1" role="dialog" aria-labelledby="modalHistoricLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-comment">
+                <h5 class="modal-title" id="modalHistoricLabel">{{ 'historic.title'|trans }}</h5>
+                <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                    <i class="icon-closeOne"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+              <!-- Historic -->
+                <!-- Table -->
+                <table class="table table-default table-alt table-alt-break ">
+                  <thead>
+                    <tr>
+                      <th>{{ 'historic.datetime'|trans}}</th>
+                      <th>{{ 'historic.user'|trans }}</th>
+                      <th>{{ 'historic.action'|trans }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for log in logs %}
+                        {% if log.type != constant('App\\Entity\\HedgeLog::TYPE_COMMENT') %}
+                            <tr >
+                              <td>{{ log.timestamp|date('m/d/Y') }} - {{ log.timestamp|date('g:i a') }}</td>
+                              <td>{{ log.user ? log.user.firstName ~ ' ' ~ log.user.lastName : 'CYLIPOL' }}</td>
+                              <td>
+                                  {{ logsActionsLabels[log.type]|trans }}
+                                  {% if not log.additionalMessage is null %}
+                                    <p class="additional-message">{{ log.additionalMessage|raw }}</p>
+                                  {% endif %}
+                              </td>
+                            </tr>
+                        {% endif %}
+                   {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+App\Entity\MasterData\CustomerSegment:
+    customerSegment{1..10}:
+        name: 'Customer Segment <current()>'
+        code: 'CS<current()>'
+        active: 1

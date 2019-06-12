@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.type in object.typeLogsLabels|keys  %}
+    <div>
+        {{ object.typeLogsLabels[object.type]|trans({'%timestamp%': object.timestamp|date('m/d/Y - g:i a'), '%user%': object.user.FullName ?? "", '%userId%': object.user.id ?? "", '%rmpId%': object.parent.id, '%rmp%': object.parent.name }) }}
+    </div>
+    {% endif %}
+{% endblock %}

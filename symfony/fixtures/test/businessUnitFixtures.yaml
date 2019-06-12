@@ -1,0 +1,6 @@
+App\Entity\MasterData\BusinessUnit:
+    bu1:
+        fullName: 'CALOR GAS'
+        listName: 'CALOR GB'
+        counterpartCode: 'CALOR GAS'
+        active: 1

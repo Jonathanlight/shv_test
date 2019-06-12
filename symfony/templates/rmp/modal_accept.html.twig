@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="modalAccept" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFormLabel">{{ 'modal.rmp.pending_approval.title' | trans }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="icon-closeOne"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-accept-label">{{ 'modal.rmp.pending_approval.label'|trans }}</p>
+                {{ form_start(formComment, {attr: {'class': 'form-modal'}}) }}
+                {{ form_widget(formComment._token) }}
+                {{ form_row(formComment.message) }}
+                <div class="form-actions row">
+                    <div class="col-sm-6">
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-tertiary col-sm-6">{{ 'cancel' | trans }}</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <button type="submit" id="rmp_comment_submit" name="rmp_comment[submit]" class="btn btn-primary btn" value="">{{ 'accept'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(formComment) }}
+            </div>
+        </div>
+    </div>
+</div>

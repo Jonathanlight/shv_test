@@ -1,0 +1,255 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    router.request_context.host: '%env(REQUEST_CONTEXT_HOST)%'
+    router.request_context.scheme: '%env(REQUEST_CONTEXT_SCHEME)%'
+    router.request_context.base_url: '%env(REQUEST_CONTEXT_BASE_URL)%'
+    asset.request_context.base_path: '%env(REQUEST_CONTEXT_BASE_PATH)%'
+    asset.request_context.secure: '%env(REQUEST_CONTEXT_SECURE)%'
+    pricer_files_dir: resources/pricers
+    hedging_tool_files_dir: resources/hedging_tool
+    cxl.url: '%env(CXL_URL)%'
+    cxl.username: '%env(CXL_USERNAME)%'
+    cxl.password: '%env(CXL_PASSWORD)%'
+    cxl.import_file_dir: 'resources/imports/cxl'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    App\Asset\VersionStrategy\GulpBusterVersionStrategy:
+        arguments:
+            - "%kernel.project_dir%/public/busters.json"
+            - "%%s?version=%%s"
+        public: false
+    admin.businessUnit:
+        class: App\Admin\BusinessUnitAdmin
+        arguments: [~, App\Entity\MasterData\BusinessUnit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Business Unit }
+        public: true
+
+    admin.segment:
+        class: App\Admin\SegmentAdmin
+        arguments: [~, App\Entity\MasterData\Segment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Segment }
+        public: true
+
+    admin.customerSegment:
+        class: App\Admin\CustomerSegmentAdmin
+        arguments: [~, App\Entity\MasterData\CustomerSegment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Customer Segment }
+        public: true
+
+    admin.subSegment:
+        class: App\Admin\SubSegmentAdmin
+        arguments: [~, App\Entity\MasterData\SubSegment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Sub Segment }
+        public: true
+
+    admin.priceRiskClassification:
+        class: App\Admin\PriceRiskClassificationAdmin
+        arguments: [~, App\Entity\MasterData\PriceRiskClassification, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Price Risk Classification }
+        public: true
+
+    admin.uom:
+        class: App\Admin\UOMAdmin
+        arguments: [~, App\Entity\MasterData\UOM, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: UOM }
+        public: true
+
+    admin.currency:
+        class: App\Admin\CurrencyAdmin
+        arguments: [~, App\Entity\MasterData\Currency, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Currency }
+        public: true
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User }
+        public: true
+
+    admin.commodity:
+        class: App\Admin\CommodityAdmin
+        arguments: [~, App\Entity\MasterData\Commodity, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Commodity }
+        public: true
+
+    admin.conversionTable:
+        class: App\Admin\ConversionTableAdmin
+        arguments: [~, App\Entity\MasterData\ConversionTable, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Conversion Table }
+        public: true
+
+    admin.hedgingTool:
+        class: App\Admin\HedgingToolAdmin
+        arguments: [~, App\Entity\MasterData\HedgingTool, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Hedging Tool }
+        public: true
+
+    admin.letter:
+        class: App\Admin\LetterAdmin
+        arguments: [~, App\Entity\CMS\Letter, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Letter' }
+        public: true
+
+    admin.hedgeLog:
+        class: App\Admin\HedgeLogAdmin
+        arguments: [~, App\Entity\HedgeLog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Hedge' }
+
+    admin.rmpLog:
+        class: App\Admin\RmpLogAdmin
+        arguments: [~, App\Entity\RMPLog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Rmp' }
+
+    admin.strategy:
+        class: App\Admin\StrategyAdmin
+        arguments: [~, App\Entity\MasterData\Strategy, App\Controller\Admin\StrategyAdminController, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Strategy' }
+
+    admin.product:
+        class: App\Admin\ProductAdmin
+        arguments: [~, App\Entity\MasterData\Product, App\Controller\Admin\ProductAdminController, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Product' }
+
+    admin.importHedges:
+        class: App\Admin\ImportHedgesViewAdmin
+        arguments:
+            - ~
+            - ~
+            - App\Controller\Admin\ImportHedgesViewAdminController
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Import Hedges }
+
+    App\EventListener\UserListener:
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: prePersist }
+
+    App\EventListener\BusinessUnitListener:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    App\EventListener\KernelListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+
+    App\EventListener\HedgeListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist}
+            - { name: doctrine.event_listener, event: postPersist}
+            - { name: doctrine.event_listener, event: preUpdate}
+            - { name: doctrine.event_listener, event: postUpdate}
+
+    App\EventListener\HedgeLineListener:
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }
+
+    App\EventListener\RmpSubSegmentListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+
+    App\EventListener\RmpSubSegmentRiskLevelListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+
+    App\EventListener\SubSegmentListener:
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+
+    App\EventListener\SegmentListener:
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }
+
+    App\EventListener\RmpListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist}
+            - { name: doctrine.event_listener, event: preUpdate}
+            - { name: doctrine.event_listener, event: postUpdate}
+
+    App\EventListener\JsVarsInitializeListener:
+        arguments: ['@App\Service\JsVars', '%kernel.debug%']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    App\Service\JsVars:
+        public: true
+        calls:
+            - [enableTranslator, ['@translator']]
+            - [enableRouter, ['@router']]
+
+    redirect.after.login:
+        class: App\EventListener\AfterLoginRedirect
+        arguments: ['@router']
+
+    saml_user_factory:
+        class: App\Security\UserFactory
+
+    App\Command\MasterData\ImportProductCommand:
+        arguments:
+            $projectPath: '%kernel.project_dir%'
+            $logger: '@monolog.logger.cxl'
+
+    App\Command\MasterData\ImportStrategyCommand:
+        arguments:
+            $projectPath: '%kernel.project_dir%'
+            $logger: '@monolog.logger.cxl'
+
+    App\Command\CollectTradesCommand:
+        arguments:
+            $projectPath: '%kernel.project_dir%'
+            $logger: '@monolog.logger.cxl'
+
+    App\Service\Api\CXLClientService:
+        public: true
+        arguments:
+            $url: '%cxl.url%'
+            $username: '%cxl.username%'
+            $password: '%cxl.password%'
+            $logger: '@monolog.logger.cxl'
+
+    App\Service\TradeManager:
+        public: true
+        arguments:
+            $logger: '@monolog.logger.cxl'

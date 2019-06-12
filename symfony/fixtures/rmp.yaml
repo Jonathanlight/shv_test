@@ -1,0 +1,43 @@
+#App\Entity\RMP:
+#  rmp_20191:
+#    name: 'RM Policy_CALOR GAS_2019'
+#    validityPeriod: '2019'
+#    generalComment: 'RM Policy CALOR GAS_2019'
+#    status: 4
+#    active: 1
+#    businessUnit: '@bu1'
+#  rmp_20201:
+#    name: 'RM Policy_CALOR GAS_2020'
+#    validityPeriod: '2020'
+#    generalComment: 'RM Policy CALOR GAS_2020'
+#    status: 1
+#    active: 1
+#    businessUnit: '@bu1'
+#  rmp_20192:
+#    name: 'RM Policy_GASPOL_2019'
+#    validityPeriod: '2019'
+#    generalComment: 'RM Policy GASPOL_2019'
+#    status: 4
+#    active: 1
+#    businessUnit: '@bu7'
+#  rmp_20202:
+#    name: 'RM Policy_GASPOL_2020'
+#    validityPeriod: '2020'
+#    generalComment: 'RM Policy GASPOL_2020'
+#    status: 1
+#    active: 1
+#    businessUnit: '@bu7'
+#  rmp_20193:
+#    name: 'RM Policy_PRIMAGAZ_2019'
+#    validityPeriod: '2019'
+#    generalComment: 'RM Policy PRZ GERMANY_2019'
+#    status: 1
+#    active: 1
+#    businessUnit: '@bu24'
+#  rmp_20203:
+#    name: 'RM Policy_PRIMAGAZ_2020'
+#    validityPeriod: '2020'
+#    generalComment: 'RM Policy PRZ GERMANY_2020'
+#    status: 1
+#    active: 1
+#    businessUnit: '@bu24'

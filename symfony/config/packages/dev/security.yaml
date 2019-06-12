@@ -1,0 +1,32 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                success_handler: redirect.after.login
+
+            logout:       true
+            anonymous:    true
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 31536000 # 1 year in seconds
+                path:     /
+                always_remember_me: true
+
+    access_control:
+      - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/admin/, role: ROLE_ADMIN }
+      - { path: ^/, role: ROLE_USER }

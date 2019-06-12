@@ -1,0 +1,91 @@
+App\Entity\RmpSubSegment:
+  rmpSubSegment_2019:
+    rmp: '@rmp_2019'
+    subSegment: '@subSegment1'
+    salesVolume: '10000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+  rmpSubSegment_2019_2:
+    rmp: '@rmp_2019'
+    subSegment: '@subSegment2'
+    salesVolume: '1000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+  rmpSubSegment_2020:
+    rmp: '@rmp_2020'
+    subSegment: '@subSegment1'
+    salesVolume: '10000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+  rmpSubSegment_2021:
+    rmp: '@rmp_2021'
+    subSegment: '@subSegment1'
+    salesVolume: '10000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+  rmpSubSegment_2022:
+    rmp: '@rmp_2022'
+    subSegment: '@subSegment1'
+    salesVolume: '10000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+  rmpSubSegment_2019_2_1:
+    rmp: '@rmp_2019_2'
+    subSegment: '@subSegment1'
+    salesVolume: '10000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+    copiedFrom: '@rmpSubSegment_2019'
+  rmpSubSegment_2019_2_2:
+    rmp: '@rmp_2019_2'
+    subSegment: '@subSegment2'
+    salesVolume: '1000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'
+    copiedFrom: '@rmpSubSegment_2019_2'
+  rmpSubSegment_2019_2_3:
+    rmp: '@rmp_2019_2'
+    subSegment: '@subSegment3'
+    salesVolume: '1000'
+    priceRiskClassification: '@priceRiskClassification1'
+    ratioMaximumVolumeSales: '80'
+    maximumMaturities: '5'
+    maximumLoss: '2500'
+    products: ['@product1']
+    productCategory: 'C3'
+    uom: '@mt'

@@ -1,0 +1,93 @@
+<div class="aside-middle-wrap no-print">
+    <a href="{{ path('homepage') }}" class="aside-logo">
+      <img src="{{ asset('img/SHV.svg') }}" alt="SHV GAS" >
+    </a>
+    <a href="javascript:void(0)" class="link-menu-middle">
+        <span class="menu-title">{{ 'menu' | trans }}</span>
+        <div class="menu-logo">
+            <span></span>
+        </div>
+    </a>
+    <ul class="middle-main-nav list-unstyled">
+        <li class="{% if app.request.attributes.get('_route') == 'homepage' %}active{% endif %}">
+            <a href="{{ path('homepage') }}" >
+                <div class="img img-expanded">
+                    <img src="{{ asset('img/icons/icon-menu-00.svg') }}" class="img-black" alt="{{ 'dashboard.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-00-white.svg') }}" class="img-white" alt="{{ 'dashboard.title' | trans }}">
+                </div>
+                <div class="img img-default" data-toggle="tooltip" title="{{ 'dashboard.title' | trans }}" data-placement="right">
+                    <img src="{{ asset('img/icons/icon-menu-00.svg') }}" class="img-black" alt="{{ 'dashboard.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-00-white.svg') }}" class="img-white" alt="{{ 'dashboard.title' | trans }}">
+                </div>
+                <span>{{ 'dashboard.title' | trans }}</span>
+            </a>
+        </li>
+        {% if not is_granted('ROLE_BU_MEMBER') %}
+        <li class="{% if app.request.attributes.get('_route') == 'rmp_list' %}active{% endif %}">
+            <a href="{{ path('rmp_list') }}" >
+                <div class="img img-expanded">
+                    <img src="{{ asset('img/icons/icon-menu-01.svg') }}" class="img-black" alt="{{ 'rmp.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-01-white.svg') }}" class="img-white" alt="{{ 'rmp.title' | trans }}">
+                </div>
+                <div class="img img-default" data-toggle="tooltip" title="{{ 'rmp.title' | trans }}" data-placement="right">
+                    <img src="{{ asset('img/icons/icon-menu-01.svg') }}" class="img-black" alt="{{ 'rmp.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-01-white.svg') }}" class="img-white" alt="{{ 'rmp.title' | trans }}">
+                </div>
+                <span>{{ 'rmp.title' | trans }}</span>
+            </a>
+        </li>
+        {% endif %}
+        <li class="{% if app.request.attributes.get('_route') == 'hedge_list' %}active{% endif %}">
+            <a href="{{ path('hedge_list') }}" >
+                <div class="img img-expanded">
+                    <img src="{{ asset('img/icons/icon-menu-02.svg') }}" class="img-black" alt="{{ 'hedge.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-02-white.svg') }}" class="img-white" alt="{{ 'hedge.title' | trans }}">
+                </div>
+                <div class="img img-default" data-toggle="tooltip" title="{{ 'hedge.title' | trans }}" data-placement="right">
+                    <img src="{{ asset('img/icons/icon-menu-02.svg') }}" class="img-black" alt="{{ 'hedge.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-02-white.svg') }}" class="img-white" alt="{{ 'hedge.title' | trans }}">
+                </div>
+                <span>{{ 'hedge.title' | trans }}</span>
+            </a>
+        </li>
+        <li class="{% if app.request.attributes.get('_route') == 'pricer' %}active{% endif %}">
+            <a href="{{ path('pricer') }}">
+                <div class="img img-expanded">
+                    <img src="{{ asset('img/icons/icon-menu-03.svg') }}" class="img-black" alt="{{ 'pricer.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-03-white.svg') }}" class="img-white" alt="{{ 'pricer.title' | trans }}">
+                </div>
+                <div class="img img-default" data-toggle="tooltip" title="{{ 'pricer.title' | trans }}" data-placement="right">
+                    <img src="{{ asset('img/icons/icon-menu-03.svg') }}" class="img-black" alt="{{ 'pricer.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-03-white.svg') }}" class="img-white" alt="{{ 'pricer.title' | trans }}">
+                </div>
+                <span>{{ 'pricer.title' | trans }}</span>
+            </a>
+        </li>
+        {#<li class="{% if app.request.attributes.get('_route') == 'analysis' %}active{% endif %}">#}
+            {#<a href="{{ path('analysis') }}">#}
+                {#<div class="img img-expanded">#}
+                    {#<img src="{{ asset('img/icons/icon-menu-04.svg') }}" class="img-black" alt="{{ 'analysis.title' | trans }}">#}
+                    {#<img src="{{ asset('img/icons/icon-menu-04-white.svg') }}" class="img-white" alt="{{ 'analysis.title' | trans }}">#}
+                {#</div>#}
+                {#<div class="img img-default" data-toggle="tooltip" title="{{ 'analysis.title' | trans }}" data-placement="right">#}
+                    {#<img src="{{ asset('img/icons/icon-menu-04.svg') }}" class="img-black" alt="{{ 'analysis.title' | trans }}">#}
+                    {#<img src="{{ asset('img/icons/icon-menu-04-white.svg') }}" class="img-white" alt="{{ 'analysis.title' | trans }}">#}
+                {#</div>#}
+                {#<span>{{ 'analysis.title' | trans }}</span>#}
+            {#</a>#}
+        {#</li>#}
+        <li class="{% if app.request.attributes.get('_route') == 'hedging_tools' %}active{% endif %}">
+            <a href="{{ path('hedging_tools') }}" >
+                <div class="img img-expanded">
+                    <img src="{{ asset('img/icons/icon-menu-05.svg') }}" class="img-black" alt="{{ 'hedging_tools.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-05-white.svg') }}" class="img-white" alt="{{ 'hedging_tools.title' | trans }}">
+                </div>
+                <div class="img img-default" data-toggle="tooltip" title="{{ 'hedging_tools.title' | trans }}" data-placement="right">
+                    <img src="{{ asset('img/icons/icon-menu-05.svg') }}" class="img-black" alt="{{ 'hedging_tools.title' | trans }}">
+                    <img src="{{ asset('img/icons/icon-menu-05-white.svg') }}" class="img-white" alt="{{ 'hedging_tools.title' | trans }}">
+                </div>
+                <span>{{ 'hedging_tools.title' | trans }}</span>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+       {{ object.typeLogsLabels[object.type]|trans({'%timestamp%': object.timestamp|date('m/d/Y - g:i a'), '%user%': object.user.FullName ?? "", '%userId%': object.user.id ?? "", '%hedgeId%': object.parent.id }) }}
+    </div>
+{% endblock %}

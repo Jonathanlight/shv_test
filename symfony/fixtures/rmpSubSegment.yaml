@@ -1,0 +1,23 @@
+#App\Entity\RmpSubSegment:
+#  rmpSubSegment_2018{1..20}:
+#    rmp: '@rmp_2018*'
+#    subSegment: '@subSegment*'
+#    salesVolume: '<numberBetween(10000,100000)>'
+#    priceRiskClassification: '@priceRiskClassification*'
+#    ratioMaximumVolumeSales: '<numberBetween(1, 100)>'
+#    maximumMaturities: '<numberBetween(1, 36)>'
+#    maximumLoss: '<numberBetween(2000, 9000)>'
+#    products: ['@product*', '@product*']
+#    productCategory: 'C3'
+#    uom: '@mt'
+#  rmpSubSegment_2019{1..20}:
+#    rmp: '@rmp_2018*'
+#    subSegment: '@subSegment*'
+#    salesVolume: '<numberBetween(10000,100000)>'
+#    priceRiskClassification: '@priceRiskClassification*'
+#    ratioMaximumVolumeSales: '<numberBetween(1, 100)>'
+#    maximumMaturities: '<numberBetween(1, 36)>'
+#    maximumLoss: '<numberBetween(2000, 9000)>'
+#    products: ['@product*', '@product*']
+#    productCategory: 'C3'
+#    uom: '@mt'

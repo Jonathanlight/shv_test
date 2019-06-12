@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-analysis{% endblock %}
+
+{% block body %}
+  <div class="analysis-head-section">
+    <div class="analysis-title-block">
+      <h1 class="analysis-title">Margin management platform 2018</h1>
+      <div class="analysis-date">{{ 'analysis.last_update' | trans }} DD / MM / YY   -   00:00 pm</div>
+    </div>
+
+    <div class="analysis-info-block">
+      <div class="row">
+        <div class="col">
+          <div class="analysis-info-label">{{ 'analysis.country' | trans }}</div>
+          <div class="analysis-info-text">France</div>
+        </div>
+        <div class="col">
+          <div class="analysis-info-label">{{ 'analysis.bu_name' | trans }}</div>
+          <div class="analysis-info-text">Primagaz France</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="clearfix"></div>
+
+  <!-- Form Select -->
+  <!-- A cacher pour le moment -->
+  <form action="" class="form-select-analysis">
+    <div class="form-group">
+      <div class="form-select">
+        <select name="" id="" class="form-control">
+          <option value="" disabled selected>{{ 'analysis.select.currency' | trans }}</option>
+          <option value="">Test</option>
+          <option value="">Test</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-select">
+        <select name="" id="" class="form-control">
+          <option value="" disabled selected>{{ 'analysis.select.uom' | trans }}</option>
+          <option value="">Test</option>
+          <option value="">Test</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+
+  <!-- Nav -->
+  <nav class="nav-view-status">
+    <ul class="list-inline">
+      <li class="list-inline-item active"><a href="">{{ 'nav.cylinders' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.bulk' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.autogas' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.wholesale' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.storage_retail' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.storage_terminal' | trans }}</a></li>
+      <li class="list-inline-item"><a href="">{{ 'nav.lng' | trans }}</a></li>
+    </ul>
+  </nav>
+
+  <!-- Table -->
+  <form action="">
+    <div class="table-view-section">
+      <div class="table-responsive">
+        <table class="table table-default table-analysis">
+          <thead>
+            <tr>
+              <th class="th-i">{{ 'table.retail_segment' | trans }}</th>
+              <th class=" th-i th-sub">{{ 'table.sub_segmentation' | trans }}</th>
+              {% for i in 1..12 %}
+                <th>nov.-18</th>
+              {% endfor %}
+              <th>{{ 'table.total' | trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in 0..2 %}
+              <tr>
+                <td rowspan="4" class="td-rowspan"><strong>Cylinders 1</strong></td>
+                <td class="text-left td-sub">
+                  <div>{{ 'analysis.gross_margin_realized' | trans }}</div>
+                </td>
+                {% for i in 1..12 %}
+                  <td>
+                    <input type="text" class="form-control">
+                  </td>
+                {% endfor %}
+                <td> </td>
+              </tr>
+              <tr>
+                <td class="text-left td-sub td-white-space-lg">
+                  <div>{{ 'analysis.sales_volumes_realized' | trans }}</div>
+                </td>
+                {% for i in 1..12 %}
+                  <td>
+                    <input type="text" class="form-control">
+                  </td>
+                {% endfor %}
+                <td> </td>
+              </tr>
+              <tr class="tr-green">
+                <td class="text-left td-sub">
+                  {{ 'analysis.gross_margin_rmp' | trans }}
+                </td>
+                {% for i in 1..12 %}
+                  <td>12</td>
+                {% endfor %}
+                <td>20</td>
+              </tr>
+              <tr class="tr-green">
+                <td class="text-left td-sub">
+                  {{ 'analysis.sales_volumes_rmp' | trans }}
+                </td>
+                {% for i in 1..12 %}
+                  <td>20</td>
+                {% endfor %}
+                <td>20</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="table-actions">
+      <button type="submit" class="btn btn-primary">{{ 'save' | trans }}</button>
+    </div>
+  </form>
+
+{% endblock %}

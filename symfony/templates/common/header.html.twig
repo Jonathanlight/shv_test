@@ -1,0 +1,53 @@
+<header class="header-middle-wrap no-print">
+  <div class="header-title">{{ 'app.title' | trans }}</div>
+
+  <!-- Logo -->
+  <a href="{{ path('homepage') }}" class="header-logo">
+    <img src="{{ asset('img/SHV_default.svg') }}" alt="SHV GAS" >
+  </a>
+
+  <!-- Button Alerts -->
+  <a href="javascript:void(0)" class="btn-alert">
+    <i class="icon-bell"></i><span class="sr-only">{{ 'notifications' | trans }}</span>
+    {% if alertsCount %}
+      <span class="number-alerts hedge rmp">{{ alertsCount }}</span>
+    {% endif %}
+  </a>
+
+  <!-- User -->
+  <div class="user-block">
+    <div class="user-id-info">
+      <div class="user-id-welcome"><strong>{{ 'hello' | trans }},</strong>
+        <div class="dropdown">
+          <button class="btn btn-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ app.user.firstName }} {{ app.user.lastName }} <i class="zmdi zmdi-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if dev %}
+              <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">{{ 'sign_out' | trans }}</a>
+            {% else %}
+              <a class="dropdown-item" href="{{ path('saml_logout') }}">{{ 'sign_out' | trans }}</a>
+            {% endif %}
+            {% if app.user.isAdmin %}
+              <a class="dropdown-item" href="{{ path('sonata_admin_dashboard') }}">{{ 'back_office' | trans }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="user-status">{{ app.user.function }}</div>
+    </div>
+  </div>
+
+  <!-- Select -->
+  {% if app.user.isBuHedgingCommittee and app.user.businessUnits|length > 1 %}
+    <div class="form-group form-type-group">
+      <div class="form-select">
+        <select id="header-bu-selector" class="form-control">
+          {% for bu in app.user.businessUnits %}
+          <option value="{{ bu.id }}" {% if selected_business_unit.id == bu.id %}selected{% endif %}>{{ bu.fullName }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+</header>

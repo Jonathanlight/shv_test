@@ -1,0 +1,58 @@
+App\Entity\User:
+    admin:
+        username: 'admin'
+        plainPassword: 'admin'
+        firstName: 'admin'
+        lastName: 'admin'
+        function: 'admin'
+        email: 'admin@admin.fr'
+        enabled: 1
+        roles: ['ROLE_ADMIN']
+        role: 'ROLE_BOARD_MEMBER'
+    boardMember:
+        username: 'shumbert+boardmember@kernix.com'
+        plainPassword: 'kernix'
+        firstName: 'Paul'
+        lastName: 'Dupont'
+        function: 'Board member'
+        email: 'shumbert+boardmember@kernix.com'
+        enabled: 1
+        role: 'ROLE_BOARD_MEMBER'
+    trader:
+        username: 'shumbert+trader@kernix.com'
+        plainPassword: 'kernix'
+        firstName: 'Paul'
+        lastName: 'Dupont'
+        function: 'Trader'
+        email: 'shumbert+trader@kernix.com'
+        enabled: 1
+        role: 'ROLE_TRADER'
+    riskController:
+        username: 'shumbert+riskcontroller@kernix.com'
+        plainPassword: 'kernix'
+        firstName: 'Paul'
+        lastName: 'Dupont'
+        function: 'Risk controller'
+        email: 'shumbert+riskcontroller@kernix.com'
+        enabled: 1
+        role: 'ROLE_RISK_CONTROLLER'
+    buHedgingCommittee:
+        username: 'shumbert+buriskcommittee@kernix.com'
+        plainPassword: 'kernix'
+        firstName: 'Paul'
+        lastName: 'Dupont'
+        function: 'BU Hedging committee'
+        email: 'shumbert+buHedgingCommittee@kernix.com'
+        enabled: 1
+        role: 'ROLE_BU_HEDGING_COMMITTEE'
+        businessUnits: ['@bu1', '@bu7', '@bu24']
+    buMember:
+        username: 'shumbert+bumember@kernix.com'
+        plainPassword: 'kernix'
+        firstName: 'Paul'
+        lastName: 'Dupont'
+        function: 'BU Member'
+        email: 'shumbert+bumember@kernix.com'
+        enabled: 1
+        role: 'ROLE_BU_MEMBER'
+        businessUnits: ['@bu1', '@bu7', '@bu24']

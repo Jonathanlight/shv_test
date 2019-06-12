@@ -1,0 +1,61 @@
+App\Entity\MasterData\UOM:
+    bbl:
+        name: 'Barrels'
+        code: 'BBL'
+        type: 'Volume'
+        active: 1
+    gal:
+        name: 'Gallon'
+        code: 'GAL'
+        type: 'Volume'
+        active: 1
+    l:
+        name: 'Liter'
+        code: 'L'
+        type: 'Volume'
+        active: 1
+    m3:
+        name: 'Cubic Meter'
+        code: 'M3'
+        type: 'Volume'
+        active: 1
+    mb:
+        name: 'Thousand Barrels'
+        code: 'MB'
+        type: 'Volume'
+        active: 1
+    mmbt:
+        name: 'MMBtu'
+        code: 'MMBT'
+        type: 'Volume'
+        active: 1
+    mwhr:
+        name: 'Megawatt Hour'
+        code: 'MWHr'
+        type: 'Volume'
+        active: 1
+    therm:
+        name: 'Therms'
+        code: 'THERM'
+        type: 'Volume'
+        active: 1
+    btu:
+        name: 'British Thermal Unit'
+        code: 'BTU'
+        type: 'Energy'
+        active: 1
+    curr:
+        name: 'Currency'
+        code: 'Curr'
+        type: 'Currency'
+        active: 1
+    m:
+        name: 'Meter'
+        code: 'M'
+        type: 'Length'
+        active: 1
+    mt:
+        name: 'Metric Tonnes'
+        code: 'MT'
+        type: 'Weight'
+        active: 1

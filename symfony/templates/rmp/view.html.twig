@@ -1,0 +1,593 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-shv-rmp{% endblock %}
+
+{% block body %}
+    <div class="rmp-head-section">
+        <div class="row row-info-general">
+            <div class="col-info-general">
+                <div class="row row-info">
+                    <div class="col">
+                        <div class="rmp-title-block">
+                            <h1 class="rmp-title">{{ 'rmp.title_all' | trans }}</h1>
+                            <div class="rmp-status">
+                                <div class="rmp-status-tag">{{ rmp.getStatusLabel|trans  }}</div> -
+
+                                {% if rmp.isApprovedAutomatically %} <span class="text-secondary"> {{ 'rmp.flags.approved_automatically' | trans }} </span> / {% endif %}
+                                {% if rmp.isBlocked %} <span class="text-secondary">{{ 'rmp.flags.blocked' | trans }} </span> / {% endif %}
+                                {% if rmp.isAmendment %}  <span class="text-secondary">{{ 'rmp.flags.amendment' | trans }} </span> / {% endif %}
+                                <span class="rmp-validity-period">{{ rmp.validityPeriod }}</span>
+                            </div><br>
+                            <a href="{{ path('rmp_list', {keepFilters: 'filtered'}) }}" class="rmp-link-back"><i class="zmdi zmdi-long-arrow-left"></i>{{ 'rmp.back' | trans }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-info">
+                    <div class="col-info">
+                        <div class="info-general-block">
+                            <div class="row">
+                                <!-- RM Policy -->
+                                <div class="col-12">
+                                    <div class="info-block">
+                                        <h3 class="info-title">{{ 'rmp.info_label_1' | trans }}</h3>
+                                        <div class="info-text rmp-name">{{ rmp.name }}</div>
+                                    </div>
+                                </div>
+
+                                <!-- RMP ID -->
+                                <div class="col-12">
+                                    <div class="info-block">
+                                        <h3 class="info-title">{{ 'rmp.info_label_2' | trans }}</h3></h3>
+                                        <div class="info-text">{{ rmp.id }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment -->
+                            <div class="info-block info-last-block">
+                                <h3 class="info-title">
+                                    {{ 'rmp.info_label_3' | trans }}</h3>
+                                {% if is_granted('rmp_edit', rmp) %}
+                                <a href="javascript:void(0)" class="link-edit-comment">
+                                    <i class="icon-pen-alt no-print"></i>
+                                    <span class="sr-only">{{ 'edit' | trans }}</h3></span>
+                                </a>
+                                {% endif %}
+                                </h3>
+                                <div class="tag-new"></div>
+                                {% if (rmp.generalComment|striptags|length > 60) %}
+                                    <div class="info-text general-comment-short">{{ rmp.generalComment|slice(0,60)|raw}} ...</div>
+                                {% endif %}
+                                <div class="info-text general-comment-long {% if (rmp.generalComment|striptags|length > 60) %}d-none{% endif %}">{{ rmp.generalComment|striptags('<p>, <a>, <strong>, <em>, <ol>, <ul>, <li>')|raw }}</div>
+                                {% if (rmp.generalComment|striptags|length > 60) %}
+                                    <button type="button" class="btn btn-link btn-see-more-comment">
+                                        <span class="text-more"> {{ 'see_more' | trans }} </span>
+                                        <span class="text-less"> {{ 'see_less' | trans }} </span>
+                                    </button>
+                                {% endif %}
+                                {{ form_start(rmpForm, {attr: {'class': 'form-comment-info'}}) }}
+                                    {{ form_row(rmpForm.generalComment) }}
+                                    <button type="submit" class="btn btn-primary btn-circle">
+                                        <i class="zmdi zmdi-chevron-right"></i>
+                                        <span class="sr-only">{{ 'send' | trans }}</h3></span>
+                                    </button>
+                                {{ form_end(rmpForm) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-committee">
+                        <div class="committee-block">
+                            <h3 class="committee-title">{{ 'rmp.info_label_4' | trans }}</h3>
+                            <ul class="committee-list list-unstyled">
+                                {% for user in businessUnitUsers %}
+                                    <li>
+                                        <span class="committee-name">{{ user.firstName }} {{ user.lastName }}</span>
+                                        <span class="committee-post">{{ user.function }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            {% if businessUnitUsers|length > 3 %}
+                                <button type="button" class="btn btn-link btn-see-more-committe">
+                                    <span class="text-more"> {{ 'see_more' | trans }} </span>
+                                    <span class="text-less"> {{ 'see_less' | trans }} </span>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-data">
+                      <div class="data-block">
+                        <div class="col-primary">
+                          <div class="data-box">
+                            <h3 class="data-title"> {{ 'rmp.total.sales_volume' | trans }}</h3>
+                            <div class="data-number">{{ totalSalesVolume|number_format(0, ',', ' ') }}<sup>{{ 'rmp.total.mt' | trans }}</sup></div>
+                          </div>
+                          <div class="data-box">
+                            <h3 class="data-title"> {{ 'rmp.total.max_volume' | trans }}</h3>
+                            <div class="data-number">{{ totalVolumeAtRisk|number_format(0, ',', ' ') }}<sup>{{ 'rmp.total.mt' | trans }}</sup></div>
+                          </div>
+                        </div>
+                        <div class="col-secondary">
+                          <div class="data-box">
+                            <h3 class="data-title">{{ 'rmp.total.number_one' | trans }}</h3>
+                            <div class="data-number">{{ percent(totalRisk[1], totalVolumeAtRisk) |number_format(0, ',', ' ') }}<sup>{{ 'rmp.total.pourcentage' | trans }}</sup></div>
+                          </div>
+                          <div class="data-box">
+                            <h3 class="data-title">{{ 'rmp.total.number_other' | trans }}</h3>
+                            <div class="data-number">{{ percent(totalRisk[2] + totalRisk[3] + totalRisk[4], totalVolumeAtRisk) |number_format(0, ',', ' ') }}<sup>{{ 'rmp.total.pourcentage' | trans }}</sup></div>
+                          </div>
+                          <div class="data-box">
+                            <h3 class="data-title">{{ 'rmp.total.storage_tools' | trans }}</h3>
+                            <div class="data-number">{{ percent(totalRisk[0], totalVolumeAtRisk) |number_format(0, ',', ' ')  }}<sup>{{ 'rmp.total.pourcentage' | trans }}</sup></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-historical">
+                <form action="" class="form-validity">
+                    <div class="form-group">
+                    {% if is_granted('rmp_edit', rmp) %}
+                        <label for=""></label>
+                        <div class="form-select">
+                            <select id="select-rmp-period" class="form-control" data-rmp-id="{{ rmp.id }}">
+                                {% for validityPeriod in validityPeriodNtoN3 %}
+                                    <option value="{{ validityPeriod }}" {% if rmp.validityPeriod == validityPeriod %}selected{% endif %}>{{ 'rmp.validity_period'|trans }} : {{ validityPeriod }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    </div>
+                </form>
+                <div class="historical-block">
+                    <h2 class="info-general-title">{{ 'rmp.info_label_5' | trans }}</h2>
+                      <ul class="historical-list list-unstyled">
+                        {% if history|length > 0 %}
+                            {% for _rmp  in history %}
+                                <li {% if _rmp.id == rmp.id %} class="link-primary" {% endif %}><a href="{{ path('rmp_view', {rmp: _rmp.id}) }}">{{ _rmp.name }}</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="historical-empty-text">{{ 'rmp.history.no_history'|trans }}</li>
+                        {% endif %}
+                    </ul>
+                    {% if history|length > 4 %}
+                    <button type="button" class="btn btn-link btn-see-more-h btn-full">
+                        <span class="text-more"> {{ 'see_more' | trans }} </span>
+                        <span class="text-less"> {{ 'see_less' | trans }} </span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav-view-status no-print">
+        <ul class="list-inline">
+            {% for key,_segment in segments %}
+                <li class="list-inline-item {% if segment is not null %}{% if segment.id == _segment.id %} active {% endif %}{% elseif (key == 0) %}active{% endif %}
+                    {% if differences.segmentUpdated is defined and _segment.id in differences.segmentUpdated %} tag-new{% endif %}"
+                    data-segment-id="{{ _segment.id }}"
+                    data-pictos-new="{% if differences.segmentsTabInfos is defined and differences.segmentsTabInfos[_segment.id] is defined %}{{ differences.segmentsTabInfos[_segment.id]|join(',') }}{% endif %}"><a href="javascript:void(0)">{{ _segment.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Link add a sub-segment -->
+    {% if is_granted('rmp_edit', rmp) %}
+        <button type="button" data-toggle="modal" data-target="#modalForm" class="btn btn-primary btn-link-add-sub no-print" id="btn-link-add-sub" data-rmp-id="{{ rmp.id }}">{{ 'add_a_sub_segment' | trans }}</button>
+    {% endif %}
+    <!-- / Link add a sub-segment -->
+
+    <div class="table-view-section table-view-rmp-section">
+        <ul class="nav nav-tabs no-print" id="myTab" role="tablist">
+            <li class="nav-item {% if differences.keyViewTab is defined and differences.keyViewTab %}nav-new-item{% endif %} keyViewTab">
+                <a class="nav-link active" id="keyView-tab" data-toggle="tab" href="#keyView" role="tab" aria-controls="keyView" aria-selected="true">{{ 'rmp.nav.key_view' | trans }}
+                  <div class="tag-new"></div>
+                </a>
+            </li>
+            <li class="nav-item {% if differences.commentsTab is defined and differences.commentsTab %}nav-new-item{% endif %} commentsTab">
+                <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">{{ 'rmp.nav.comments' | trans }}
+                  <div class="tag-new"></div>
+                </a>
+            </li>
+            <li class="nav-item {% if differences.hedgingToolsTab is defined and differences.hedgingToolsTab %}nav-new-item{% endif %} hedgingToolsTab">
+                <a class="nav-link" id="ratio-tab" data-toggle="tab" href="#ratio" role="tab" aria-controls="ratio" aria-selected="false">{{ 'rmp.nav.ratio' | trans }}
+                  <div class="tag-new"></div>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="keyView" role="tabpanel" aria-labelledby="keyView-tab">
+                <table class="table table-default table-rmp">
+                    <thead>
+                    <tr>
+                        <th class="column-segment d-none">{{ 'table.segment' | trans }}</th>
+                        <th>{{ 'table.sub_segment' | trans }}</th>
+                        <th></th>
+                        <th>{{ 'table.sales_volume' | trans }} </th>
+                        <th>{{ 'table.retail_price' | trans | raw }}<i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.retail_price' | trans }}"></i></th>
+                        <th>{{ 'table.max_volume_at_risk' | trans }}</th>
+                        <th>{{ 'table.max_ratio_at_risk' | trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.max_ratio_at_risk' | trans }}"></i></th>
+                        <th>{{ 'table.maturity_hedge' | trans }}</th>
+                        <th>{{ 'table.max_loss_without_currency' | trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.max_loss' | trans }}"></i></th>
+                        <th>{{ 'table.currency' | trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if rmpSubSegments|length %}
+                        {% for rmpSubSegment in rmpSubSegments %}
+                            <tr class="{% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentRemoved %}tr-delete{% endif %} {% if rmpSubSegment.current.subSegment.segment.id != segments[0].id %} d-none{% endif %}"
+                                data-segment-id="{{ rmpSubSegment.current.subSegment.segment.id }}">
+                                <td class="text-bold column-segment d-none">
+                                    <div class="text-uppercase">{{ rmpSubSegment.current.subSegment.segment }}</div>
+                                </td>
+                                <td class="text-bold {% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentAdded %}text-new{% endif %}">
+                                    <div class="text-uppercase text-inline">{{ rmpSubSegment.current.subSegment }}</div>
+                                </td>
+                                <td class="text-left td-nowrap">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">YP {{ rmpSubSegment.previous.rmp.validityPeriod }}</div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">YP {{ rmpSubSegment.current.rmp.validityPeriod }}
+                                        {% if rmpSubSegment.previous is not null %}
+                                            <a href="javascript:void(0)" class="link-more"><span class="sr-only">{{ 'see_more' | trans }}</span></a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume is defined and differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{{ rmpSubSegment.previous.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.previous.uom.code }}</sup></div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{{ rmpSubSegment.current.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.current.uom.code }}</sup></div>
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification is defined and differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification %}text-new{% endif %}">
+                                    {{ rmpSubSegment.current.priceRiskClassification }}
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].maximumVolume is defined and differences.rmpSubSegment[rmpSubSegment.current.id].maximumVolume %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{% if rmpSubSegment.previous.maximumVolume|number_format(0, ',', ' ') %}{{ rmpSubSegment.previous.maximumVolume }} <sup class="uom">{{ rmpSubSegment.previous.uom.code }}</sup>{% endif %}</div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{% if rmpSubSegment.current.maximumVolume is not null %}{{ rmpSubSegment.current.maximumVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.current.uom.code }}</sup>{% endif %}</div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].ratioMaximumVolumeSales is defined and differences.rmpSubSegment[rmpSubSegment.current.id].ratioMaximumVolumeSales %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{% if rmpSubSegment.previous.ratioMaximumVolumeSales %}{{ rmpSubSegment.previous.ratioMaximumVolumeSales }}%{% endif %}</div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{% if rmpSubSegment.current.ratioMaximumVolumeSales %}{{ rmpSubSegment.current.ratioMaximumVolumeSales }}%{% endif %}</div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].maximumMaturities is defined and differences.rmpSubSegment[rmpSubSegment.current.id].maximumMaturities %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{% if rmpSubSegment.previous.maximumMaturities %}Next {{ rmpSubSegment.previous.maximumMaturities }} month{% endif %}</div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{% if rmpSubSegment.current.maximumMaturities %}Next {{ rmpSubSegment.current.maximumMaturities }} month{% endif %}</div>
+
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].maximumLoss is defined and differences.rmpSubSegment[rmpSubSegment.current.id].maximumLoss %}text-new{% endif %}">
+                                    {% if rmpSubSegment.current.maximumLoss %}{{ rmpSubSegment.current.maximumLoss|number_format(0, ',', ' ') }} ${% endif %}
+                                </td>
+                                <td class="">
+                                    {% if rmpSubSegment.current.currency %}{{ rmpSubSegment.current.currency }}{% endif %}
+                                </td>
+                                <td class="td-actions td-nowrap">
+                                    <button type="button" class="btn btn-link-table btn-comment-modal" data-toggle="modal" data-target="#modalComment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-comment-alt" data-toggle="tooltip" title="{{ 'comment.add' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'comment.add' | trans }}</span></button>
+                                    {% if is_granted('rmp_edit', rmp) %}
+                                        <button type="button" class="btn btn-link-table btn-edit-sub-segment" data-toggle="modal" data-target="#modalForm" data-rmp-id="{{ rmp.id }}" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-pen" data-toggle="tooltip" title="{{ 'edit' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'edit' | trans }}</span></button>
+                                        <button type="button" class="btn btn-link-table btn-sub-segment btn-remove-sub-segment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="zmdi zmdi-close" data-toggle="tooltip" title="{{ 'delete' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'delete' | trans }}</span></button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% for key,_segment in segments %}
+                            <tr class="tr-total {{ key > 0 ? ' d-none' : '' }}" data-segment-id="{{ _segment.id }}">
+                                <td><strong class="title-total">{{ 'table.total' | trans }}</strong></td>
+                                <td></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].salesVolume|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                <td></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].maxVolumeAtRisk|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="10">{{ 'table.empty' | trans }}</td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                <table class="table table-default table-rmp">
+                    <thead>
+                    <tr>
+                        <th class="column-segment d-none">{{ 'table.segment' | trans }}</th>
+                        <th>{{ 'table.sub_segment' | trans }}</th>
+                        <th></th>
+                        <th>{{ 'table.sales_volume' | trans }}</th>
+                        <th>{{ 'table.retail_price' | trans | raw }}<i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.retail_price' | trans }}"></i></th>
+                        <th class="th-comment">{{ 'table.comments' | trans }}</th>
+                        <th>{{ 'table.benchmark' | trans }}</th>
+                        <th>{{ 'table.product' | trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if rmpSubSegments|length %}
+                        {% for rmpSubSegment in rmpSubSegments %}
+                            <tr class="{% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentRemoved %}tr-delete{% endif %} {% if rmpSubSegment.current.subSegment.segment.id != segments[0].id %} d-none{% endif %}"
+                                data-segment-id="{{ rmpSubSegment.current.subSegment.segment.id }}">
+                                <td class="text-bold column-segment d-none">
+                                    <div class="text-uppercase">{{ rmpSubSegment.current.subSegment.segment }}</div>
+                                </td>
+                                <td class="text-bold {% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentAdded %}text-new{% endif %}">
+                                    <div class="text-uppercase text-inline">{{ rmpSubSegment.current.subSegment }}</div>
+                                </td>
+                                <td class="text-left td-nowrap">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">YP {{ rmpSubSegment.previous.rmp.validityPeriod }}</div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">YP {{ rmpSubSegment.current.rmp.validityPeriod }}
+                                        {% if rmpSubSegment.previous is not null %}
+                                            <a href="javascript:void(0)" class="link-more"><span class="sr-only">{{ 'see_more' | trans }}</span></a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume is defined and differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{{ rmpSubSegment.previous.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.previous.uom.code }}</sup></div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{{ rmpSubSegment.current.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.current.uom.code }}</sup></div>
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification is defined and differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification %}text-new{% endif %}">
+                                    {{ rmpSubSegment.current.priceRiskClassification }}
+                                </td>
+                                <td class="text-left">
+                                    {{  comments[rmpSubSegment.current.id].comments|length ? comments[rmpSubSegment.current.id].comments[0]|truncate(100, '...')|raw : '' }}
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].products is defined and differences.rmpSubSegment[rmpSubSegment.current.id].products %}text-new{% endif %}">
+                                    <ul class="list-unstyled list-c">
+                                        {% for product in rmpSubSegment.current.products %}
+                                            <li>{{ product.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].productCategory is defined and differences.rmpSubSegment[rmpSubSegment.current.id].productCategory %}text-new{% endif %}">
+                                    {{ rmpSubSegment.current.productCategory }}
+                                </td>
+                                <td class="td-actions td-nowrap">
+                                    <button type="button" class="btn btn-link-table btn-comment-modal" data-toggle="modal" data-target="#modalComment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-comment-alt" data-toggle="tooltip" title="{{ 'comment.add' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'comment.add' | trans }}</span></button>
+                                    {% if is_granted('rmp_edit', rmp) %}
+                                        <button type="button" class="btn btn-link-table btn-edit-sub-segment" data-toggle="modal" data-target="#modalForm" data-rmp-id="{{ rmp.id }}" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-pen" data-toggle="tooltip" title="{{ 'edit' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'edit' | trans }}</span></button>
+                                        <button type="button" class="btn btn-link-table btn-sub-segment btn-remove-sub-segment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="zmdi zmdi-close" data-toggle="tooltip" title="{{ 'delete' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'delete' | trans }}</span></button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% for key,_segment in segments %}
+                            <tr class="tr-total {{ key > 0 ? ' d-none' : '' }}" data-segment-id="{{ _segment.id }}">
+                                <td><strong class="title-total">{{ 'table.total' | trans }}</strong></td>
+                                <td></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].salesVolume|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="10">{{ 'table.empty' | trans }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="ratio" role="tabpanel" aria-labelledby="ratio-tab">
+                <table class="table table-default table-rmp">
+                    <thead>
+                    <tr>
+                        <th class="column-segment d-none">{{ 'table.segment' | trans }}</th>
+                        <th>{{ 'table.sub_segment' | trans }}</th>
+                        <th></th>
+                        <th>{{ 'table.sales_volume' | trans }} </th>
+                        <th>{{ 'table.retail_price' | trans | raw }}<i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.retail_price' | trans }}"></i></th>
+                        <th>{{ 'table.n_1' | trans | raw }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.n_1' | trans }}"></i></th>
+                        <th>{{ 'table.n_2' | trans | raw }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.n_2' | trans }}"></i></th>
+                        <th>{{ 'table.n_3' | trans | raw }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.n_3' | trans }}"></i></th>
+                        <th>{{ 'table.n_4' | trans | raw }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.n_4' | trans }}"></i></th>
+                        <th>{{ 'table.storage_tools' | trans | raw }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.storage_tools' | trans }}"></i></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if rmpSubSegments|length %}
+                        {% for rmpSubSegment in rmpSubSegments %}
+                            {% set previousRiskLevelsCount = rmpSubSegment.previous is not null ? rmpSubSegment.previous.getRmpSubSegmentRiskLevels|length : 0 %}
+                            <tr class="{% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentRemoved %}tr-delete{% endif %} {% if rmpSubSegment.current.subSegment.segment.id != segments[0].id %} d-none{% endif %}"
+                                data-segment-id="{{ rmpSubSegment.current.subSegment.segment.id }}">
+                                <td class="text-bold column-segment d-none">
+                                    <div class="text-uppercase">{{ rmpSubSegment.current.subSegment.segment }}</div>
+                                </td>
+                                <td class="text-bold {% if rmpSubSegment.current.subSegment.id in differences.rmpSubSegmentAdded %}text-new{% endif %}">
+                                    <div class="text-uppercase text-inline">{{ rmpSubSegment.current.subSegment }}</div>
+                                </td>
+                                <td class="text-left td-nowrap">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">YP {{ rmpSubSegment.previous.rmp.validityPeriod }} </div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">YP {{ rmpSubSegment.current.rmp.validityPeriod }}
+                                        {% if rmpSubSegment.previous is not null %}
+                                            <a href="javascript:void(0)" class="link-more"><span class="sr-only">{{ 'see_more' | trans }}</span></a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume is defined and differences.rmpSubSegment[rmpSubSegment.current.id].salesVolume %}text-new{% endif %}">
+                                    {% if rmpSubSegment.previous is not null %}
+                                        <div class="text-old">{{ rmpSubSegment.previous.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.previous.uom.code }}</sup></div>
+                                    {% endif %}
+                                    <div class="text-recent text-inline">{{ rmpSubSegment.current.salesVolume|number_format(0, ',', ' ') }} <sup class="uom">{{ rmpSubSegment.current.uom.code }}</sup></div>
+                                </td>
+                                <td class="{% if differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification is defined and differences.rmpSubSegment[rmpSubSegment.current.id].priceRiskClassification %}text-new{% endif %}">
+                                    {{ rmpSubSegment.current.priceRiskClassification }}
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel1 is defined and differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel1 %}text-new{% endif %}">
+                                    <div class="text-old">
+                                        <ul class="list-detail list-inline">
+                                            {% if rmpSubSegment.previous is not null and previousRiskLevelsCount > 0 %}
+                                                <li class="list-inline-item">{{ rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_1')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                                <li class="list-inline-item">{{ percent(rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_1')).maximumVolume, rmpSubSegment.previous.maximumVolume) }}%</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="text-recent text-inline">
+                                        <ul class="list-detail list-inline">
+                                            <li class="list-inline-item">{{ rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_1')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                            <li class="list-inline-item">{{ percent(rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_1')).maximumVolume, rmpSubSegment.current.maximumVolume) }}%</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel2 is defined and differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel2 %}text-new{% endif %}">
+                                    <div class="text-old">
+                                        <ul class="list-detail list-inline">
+                                            {% if rmpSubSegment.previous is not null and previousRiskLevelsCount > 0 %}
+                                                <li class="list-inline-item">{{ rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_2')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                                <li class="list-inline-item">{{ percent(rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_2')).maximumVolume, rmpSubSegment.previous.maximumVolume) }}%</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="text-recent text-inline">
+                                        <ul class="list-detail list-inline">
+                                            <li class="list-inline-item">{{ rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_2')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                            <li class="list-inline-item">{{ percent(rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_2')).maximumVolume, rmpSubSegment.current.maximumVolume) }}%</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel3 is defined and differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel3 %}text-new{% endif %}">
+                                    <div class="text-old">
+                                        <ul class="list-detail list-inline">
+                                            {% if rmpSubSegment.previous is not null and previousRiskLevelsCount > 0 %}
+                                                <li class="list-inline-item">{{ rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_3')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                                <li class="list-inline-item">{{ percent(rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_3')).maximumVolume, rmpSubSegment.previous.maximumVolume) }}%</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="text-recent text-inline">
+                                        <ul class="list-detail list-inline">
+                                            <li class="list-inline-item">{{ rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_3')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                            <li class="list-inline-item">{{ percent(rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_3')).maximumVolume, rmpSubSegment.current.maximumVolume) }}%</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel4 is defined and differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel4 %}text-new{% endif %}">
+                                    <div class="text-old">
+                                        <ul class="list-detail list-inline">
+                                            {% if rmpSubSegment.previous is not null and previousRiskLevelsCount > 0 %}
+                                                <li class="list-inline-item">{{ rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_4')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                                <li class="list-inline-item">{{ percent(rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_4')).maximumVolume, rmpSubSegment.previous.maximumVolume) }}%</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="text-recent text-inline">
+                                        <ul class="list-detail list-inline">
+                                            <li class="list-inline-item">{{ rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_4')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                            <li class="list-inline-item">{{ percent(rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_4')).maximumVolume, rmpSubSegment.current.maximumVolume) }}%</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="text-bold {% if differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel0 is defined and differences.rmpSubSegment[rmpSubSegment.current.id].riskLevel0 %}text-new{% endif %}">
+                                    <div class="text-old">
+                                        <ul class="list-detail list-inline">
+                                            {% if rmpSubSegment.previous is not null and previousRiskLevelsCount > 0 %}
+                                                <li class="list-inline-item">{{ rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                                <li class="list-inline-item">{{ percent(rmpSubSegment.previous.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')).maximumVolume, rmpSubSegment.previous.maximumVolume) }}%</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="text-recent text-inline">
+                                        <ul class="list-detail list-inline">
+                                            <li class="list-inline-item">{{ rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')).maximumVolume|number_format(0, ',', ' ') }}</li>
+                                            <li class="list-inline-item">{{ percent(rmpSubSegment.current.getRmpSubSegmentRiskLevelByRiskLevel(constant('App\\Entity\\MasterData\\HedgingTool::RISK_LEVEL_0')).maximumVolume, rmpSubSegment.current.maximumVolume) }}%</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="td-actions td-nowrap">
+                                    <button type="button" class="btn btn-link-table btn-comment-modal" data-toggle="modal" data-target="#modalComment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-comment-alt" data-toggle="tooltip" title="{{ 'comment.add' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'comment.add' | trans }}</span></button>
+                                    {% if is_granted('rmp_edit', rmp) %}
+                                        <button type="button" class="btn btn-link-table btn-edit-sub-segment" data-toggle="modal" data-target="#modalForm" data-rmp-id="{{ rmp.id }}" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="icon-pen" data-toggle="tooltip" title="{{ 'edit' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'edit' | trans }}</span></button>
+                                        <button type="button" class="btn btn-link-table btn-sub-segment btn-remove-sub-segment" data-rmp-sub-segment-id="{{ rmpSubSegment.current.id }}"><i class="zmdi zmdi-close" data-toggle="tooltip" title="{{ 'delete' | trans }}" data-placement="top"></i><span class="sr-only">{{ 'delete' | trans }}</span></button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% for key,_segment in segments %}
+                            <tr class="tr-total {{ key > 0 ? ' d-none' : '' }}" data-segment-id="{{ _segment.id }}">
+                                <td><strong class="title-total">{{ 'table.total' | trans }}</strong></td>
+                                <td></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].salesVolume|number_format(0, ',', ' ') }}<sup>MT</sup></strong></td>
+                                <td></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].risk1|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                {% set totalRisk234 = totalPerSegment[_segment.id].risk2 + totalPerSegment[_segment.id].risk3 + totalPerSegment[_segment.id].risk4 %}
+                                <td colspan="3"><strong>{{ totalRisk234|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                <td><strong>{{ totalPerSegment[_segment.id].risk0|number_format(0, ',', ' ') }} <sup>MT</sup></strong></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="10">{{ 'table.empty' | trans }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% if not (rmp.isApproved or rmp.isArchived) and nextApprovedAutomatically %}
+        <p class="impact-rmp">{{ 'rmp.impact_next_rmp'|trans }}</p>
+    {% endif %}
+    <div class="rmp-actions">
+        {% if logs|length %}
+            <button type="button" class="btn btn-primary-outline float-left no-print" data-toggle="modal" data-target="#modalHistoric" >{{ 'audit_trail'|trans |raw  }}</button>
+        {% endif %}
+        <button type="button" class="btn btn-secondary btn-print no-print" data-rmp-name="{{ rmp.name }}"><i class="zmdi zmdi-print"></i>&nbsp;&nbsp;{{ 'print_pdf'|trans |raw  }}</button>
+        {% if is_granted('rmp_cancel', rmp) %}
+            <button type="button" class="btn btn-tertiary btn-rmp-cancel no-print" data-rmp-id="{{ rmp.id }}">{{ 'cancel' | trans }}</button>
+        {% endif %}
+        {% if is_granted('rmp_block', rmp) and not rmp.isBlocked %}
+            <button type="button" class="btn btn-primary btn-rmp-block no-print" data-rmp-id="{{ rmp.id }}">{{ 'block'|trans|capitalize }}</button>
+        {% elseif is_granted('rmp_block', rmp) and rmp.isBlocked %}
+            <button type="button" class="btn btn-primary btn-rmp-unblock no-print" data-rmp-id="{{ rmp.id }}">{{ 'unblock'|trans|capitalize }}</button>
+        {% endif %}
+        {% if is_granted('rmp_draft', rmp) %}
+            <button type="button" class="btn btn-primary btn-two-lign no-print" onclick="window.location='{{ path('rmp_create_draft', { rmp: rmp.id }) }}'">{{ 'create_draft' | trans | raw }}</button>
+        {% endif %}
+        {% if is_granted('rmp_approval_request', rmp) %}
+            <button type="button" class="btn btn-primary btn-rmp-approval-request no-print" data-rmp-id="{{ rmp.id }}">{{ 'send_approval_request' | trans | raw }}</button>
+        {% endif %}
+        {% if is_granted('rmp_validate', rmp) %}
+            <button type="button" class="btn btn-tertiary btn-rmp-refuse no-print" data-toggle="modal" data-target="#modalRefuse">{{ 'refuse' | trans }}</button>
+            <button type="button" class="btn btn-primary btn-rmp-accept no-print" data-toggle="modal" data-target="#modalAccept" data-rmp-id="{{ rmp.id }}">{{ 'accept' | trans }}</button>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block modal %}
+    {% include 'rmp/modal_rmp_sub_segment.html.twig' %}
+    {% include 'common/modal_comment.html.twig' %}
+    {% if (rmp.isPendingApproval) %}
+        {% include 'rmp/modal_refuse.html.twig' with {formComment: formRefuseComment}%}
+        {% include 'rmp/modal_accept.html.twig' with {formComment: formAcceptComment}%}
+    {% endif %}
+    {% include('common/modal_historic.html.twig') %}
+{% endblock %}

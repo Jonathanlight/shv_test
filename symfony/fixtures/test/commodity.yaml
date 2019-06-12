@@ -1,0 +1,9 @@
+App\Entity\MasterData\Commodity:
+    propane:
+        name: 'PROPANE'
+    butane:
+        name: 'BUTANE'
+    naphta:
+        name: 'NAPHTA'
+    natgas:
+        name: 'NATGAS'

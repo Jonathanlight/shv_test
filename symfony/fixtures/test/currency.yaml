@@ -1,0 +1,31 @@
+App\Entity\MasterData\Currency:
+    usd:
+        name: 'US Dollars'
+        code: 'USD'
+        active: 1
+        uom: '@mt'
+    cny:
+        name: 'Chinese Yuan'
+        code: 'CNY'
+        active: 1
+        uom: '@mt'
+    eur:
+        name: 'Euro'
+        code: 'EUR'
+        active: 1
+        uom: '@mt'
+    gbp:
+        name: 'Great British Pounds'
+        code: 'GBP'
+        active: 1
+        uom: '@mt'
+    nok:
+        name: 'Norway Krone'
+        code: 'NOK'
+        active: 1
+        uom: '@mt'
+    pln:
+        name: 'Polish Zloty'
+        code: 'PLN'
+        active: 1
+        uom: '@mt'

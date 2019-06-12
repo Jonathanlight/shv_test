@@ -1,0 +1,21 @@
+monolog:
+    channels: ['cxl']
+
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ["!event"]
+
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine", "!console", "!cxl"]
+
+        cxl:
+            level: debug
+            type: rotating_file
+            path: "%kernel.logs_dir%/cxl.log"
+            channels: ["cxl"]
+            max_files: 10

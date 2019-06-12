@@ -1,0 +1,125 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalFormLabel">{{ create ? 'modal.add_segment.title'|trans : 'modal.edit_segment.title'|trans }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="icon-closeOne"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        {{ form_start(rmpSubSegmentForm, {attr: {'class': 'form-modal', 'data-rmp-id': rmp.id, 'data-rmp-sub-segment-id': rmpSubSegment.id}}) }}
+        <div class="row row-mb">
+            <div class="col-sm-12">
+                {{ form_row(rmpSubSegmentForm.segment, {attr: {'data-segment-id': segment is not null ? segment.id : 0 }}) }}
+            </div>
+            <div class="col-sm-12">
+                {{ form_row(rmpSubSegmentForm.subSegment, {attr: {'required': true }}) }}
+            </div>
+        </div>
+
+        <div class="row row-mb">
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.products, {attr: {'class': 'select-multiple'}}) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.productCategory) }}
+            </div>
+
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.priceRiskClassification) }}
+            </div>
+
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.uom) }}
+            </div>
+
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.salesVolume, {attr: {'class': 'required-other'}}) }}
+            </div>
+
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.maximumVolume, {attr: {'class': 'disabled-other'}}) }}
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-pourcentage">
+                {{ form_row(rmpSubSegmentForm.ratioMaximumVolumeSales, {attr: {'class': 'disabled-other'}}) }}
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.maximumMaturities, {attr: {'class': 'disabled-other'}}) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.maximumLoss, {attr: {'class': 'disabled-other'}}) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(rmpSubSegmentForm.currency, {attr: {'class': 'disabled-other'}}) }}
+            </div>
+        </div>
+
+
+        <div class="row ratio-hedging-tools-container">
+            <div class="col-sm-12">
+                <h3 class="form-subtitle">{{ 'modal.add_segment.subtitle' | trans }}
+                  <div class="tooltip-custom">
+                    <i class="zmdi zmdi-info-outline" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.ratio_hedging' | trans  }}"  data-container="body"></i>
+                    <div class="tooltip fade bs-tooltip-top" role="tooltip" x-placement="top"><div class="arrow" ></div><div class="tooltip-inner">{{ 'tooltip.ratio_hedging' | trans  }}</div>
+                  </div>
+                </div>
+                </h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group ">
+                    <label class="control-label required" for="rmp_sub_segment_subSegment">{{ 'rmp.rmp_sub_segment.select_risk_level'|trans }}</label>
+                    <div class="form-select">
+                        <select id="select-risk" class="form-control">
+                            <option value="1" {{ selectedRiskLevel == 1 ? 'selected' : '' }}>{{ 'rmp.rmp_sub_segment.one_to_four'|trans }}</option>
+                            <option value="0" {{ selectedRiskLevel == 0 ? 'selected' : '' }}>{{ 'rmp.rmp_sub_segment.storage_tools'|trans }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 {{ selectedRiskLevel is defined and selectedRiskLevel == 0 ? 'd-none' : '' }}">
+                <div class="form-group form-pourcentage-tag">
+                    <label for="">{{ 'modal.add_segment.n_1' | trans }}</label>
+                    <span class="tag-pourcentage"></span>
+                    {{ form_widget(rmpSubSegmentRiskForm1.maximumVolume, {attr: {'class': 'risk-level-input', 'data-risk-level': 1}}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 {{ selectedRiskLevel is defined and selectedRiskLevel == 0 ? 'd-none' : '' }}">
+                <div class="form-group form-pourcentage-tag">
+                    <label for="">{{ 'modal.add_segment.n_2' | trans }}</label>
+                    <span class="tag-pourcentage"></span>
+                    {{ form_widget(rmpSubSegmentRiskForm2.maximumVolume, {attr: {'class': 'risk-level-input', 'data-risk-level': 2}}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 {{ selectedRiskLevel is defined and selectedRiskLevel == 0 ? 'd-none' : '' }}">
+                <div class="form-group form-pourcentage-tag">
+                    <label for="">{{ 'modal.add_segment.n_3' | trans }}</label>
+                    <span class="tag-pourcentage"></span>
+                    {{ form_widget(rmpSubSegmentRiskForm3.maximumVolume, {attr: {'class': 'risk-level-input', 'data-risk-level': 3}}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 {{ selectedRiskLevel is defined and selectedRiskLevel == 0 ? 'd-none' : '' }}">
+                <div class="form-group form-pourcentage-tag">
+                    <label for="">{{ 'modal.add_segment.n_4' | trans }}</label>
+                    <span class="tag-pourcentage"></span>
+                    {{ form_widget(rmpSubSegmentRiskForm4.maximumVolume, {attr: {'class': 'risk-level-input', 'data-risk-level': 4}}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 {{ not selectedRiskLevel is defined or (selectedRiskLevel is defined and selectedRiskLevel == 1) ? 'd-none' : ''}}">
+                <div class="form-group form-pourcentage-tag">
+                    <label for="">{{ 'modal.add_segment.storage_tools' | trans }}</label>
+                    <span class="tag-pourcentage"></span>
+                    {{ form_widget(rmpSubSegmentRiskForm0.maximumVolume, {attr: {'class': 'risk-level-input', 'data-risk-level': 0}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-tertiary">{{ 'cancel' | trans }}</button>
+            {{ form_row(rmpSubSegmentForm.submit) }}
+        </div>
+        {{ form_end(rmpSubSegmentForm) }}
+    </div>
+</div>

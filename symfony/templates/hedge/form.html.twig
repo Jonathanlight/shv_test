@@ -1,0 +1,517 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-shv-form{% endblock %}
+
+{% block body %}
+<div class="form-title-section">
+  <div class="row-form">
+    <div class="col-form">
+      <div class="form-title-block">
+        <h1 class="form-title">{{ 'hedge.form_title' | trans }}</h1>
+        <div class="form-status-text">
+          <div class="form-status-tag">{{ hedge is not null ? hedge.getStatusLabel|trans : 'hedge.status.draft'|trans  }}</div>
+          <div class="form-status-info">
+            {% if hedge.isExtraApproval %}
+              <span>-</span>
+              {{ 'hedge.extra_approval'|trans }}
+            {% endif %}
+            {% if hedge.isPartiallyRealized %}
+              <span>-</span>
+              {{ 'hedge.partially_realized'|trans }}
+            {% endif %}
+            {% if hedge.isImported %}
+              <span>-</span>
+              {{ 'hedge.imported'|trans }}
+            {% endif %}
+          </div>
+        </div>
+        <a href="#" class="form-link-back" data-save="{{ is_granted('hedge_save', hedge) and (disableAll is not defined or not disableAll) }}"><i class="zmdi zmdi-long-arrow-left"></i>{{ 'hedge.back'|trans }}</a>
+      </div>
+      {% if hedge.getId is not null %}
+        <a href="{{ path('hedge_create') }}" class="btn btn-primary btn-mtop {% if not (is_granted('hedge_create')) %}d-none{% endif %}">{{ 'hedge.list.new'|trans }}</a>
+      {% endif %}
+    </div>
+    <div class="col-info">
+      <!-- Info -->
+      <div class="form-info-block">
+        <div class="row">
+          {% if hedge.getId is not null %}
+          <div class="col">
+            <div class="form-info-label">{{ 'hedge.id'|trans }}</div>
+            <div class="form-info-text">{{ hedge.getCode }}</div>
+          </div>
+          {% endif %}
+          {% if hedge.updatedAt is not null %}
+          <div class="col">
+            <div class="form-info-label">{{ 'hedge.order_date'|trans }}</div>
+            <div class="form-info-text">{{ hedge.orderDate is not null ? hedge.orderDate.format('d/m/Y') : hedge.updatedAt.format('d/m/Y') }}</div>
+          </div>
+          {% endif %}
+          {% if hedge.rmp is not null %}
+          <div class="col col-break">
+            <div class="form-info-label">{{ 'hedge.bu_name'|trans }}</div>
+            <div class="form-info-text">{{ hedge.rmp.businessUnit }}</div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ form_start(form, {attr: {'data-hedge-id': hedge.id, 'data-user-trader': app.user.isTrader, 'data-update-lines': updateLines,
+    'data-is-draft': hedge.isDraft, 'data-update-waivers': updateWaivers, 'data-disabled': subSegmentDeleted }}) }}
+
+  <!-- Form section  -->
+  <div class="form-section">
+    <div class="row-form">
+      <!-- Form -->
+      <div class="col-form">
+        <div class="form-default">
+          {% if subSegmentDeleted %}
+            <div class="error-subsegment-deleted">
+              <div class="alert alert-danger"><i class="zmdi zmdi-alert-circle"></i>&nbsp;
+                {% if hedge.isPendingExecution %}
+                  {{ 'hedge.error_sub_segment_deleted_trader'|trans({'%subSegment%': hedge.subSegment.name}) }}
+                {% else %}
+                  {{ 'hedge.error_sub_segment_deleted'|trans({'%subSegment%': hedge.subSegment.name}) }}
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {{ form_widget(form._token) }}
+          <div class="form-default-title-block">
+            <h3 class="form-default-title">{{ 'hedge.general_fields' | trans  }} <i class="zmdi zmdi-info-outline" data-toggle="tooltip-alt" data-placement="top" title="{{ 'tooltip.general_fields' | trans  }}"  data-container="body"></i></h3>
+            <div class="form-radios">
+              {{ form_row(form.operationType) }}
+            </div>
+          </div>
+
+          <div class="row row-mb">
+            <div class="col-sm-6">
+              {{ form_row(form.rmp) }}
+            </div>
+            {% if not hedge.firstRmp is null and not hedge.isDraft and hedge.firstRmp.id != hedge.rmp.id %}
+                <div class="col-sm-6">
+                  <div class="alert-absolute">
+                    <i class="zmdi zmdi-info-outline"></i>
+                    {{ 'hedge.old_rmp'|trans({'%rmpName%': hedge.rmp.copiedFrom.name}) }}
+                  </div>
+                </div>
+            {% endif %}
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form_row(form.segment, {attr: {'data-segment-id': hedge.subSegment ? hedge.subSegment.segment.id : 0}}) }}
+            </div>
+            <div class="col-sm-6">
+              {{ form_row(form.subSegment, {attr: {'data-sub-segment-id': hedge.subSegment ? hedge.subSegment.id : 0}}) }}
+            </div>
+          </div>
+
+          <div class="row row-mb">
+            <div class="col-sm-6">
+              {{ form_row(form.priceRiskClassification, {attr: {'disabled': 'disable'}}) }}
+            </div>
+          </div>
+
+          <!--  -->
+
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form_row(form.hedgingTool, {attr: {'data-hedging-tool-id': hedge.hedgingTool ? hedge.hedgingTool.id : 0}}) }}
+              <small class="form-text text-danger d-none"><i class="zmdi zmdi-alert-circle"></i>&nbsp;{{ 'hedge.waivers.class_risk'|trans }}</small>
+            </div>
+            <div class="col-sm-6">
+              {{ form_row(form.product1) }}
+              <small class="form-text text-danger d-none"><i class="zmdi zmdi-alert-circle"></i>&nbsp;{{ 'hedge.waivers.product'|trans }}</small>
+            </div>
+          </div>
+
+          <div class="row row-mb">
+            <div class="col-sm-6">
+              <div class="form-group d-none">
+                {{ form_label(form.product2) }}
+                {{ form_widget(form.product2) }}
+              </div>
+              <small class="form-text text-danger d-none"><i class="zmdi zmdi-alert-circle"></i>&nbsp;{{ 'hedge.waivers.product'|trans }}</small>
+            </div>
+          </div>
+
+          <!--  -->
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form_row(form.currency) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.uom) }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              {{ form_row(form.firstMaturity) }}
+            </div>
+            <div class="col-sm-6">
+              {{ form_row(form.lastMaturity) }}
+              <small class="form-text text-danger d-none"><i class="zmdi zmdi-alert-circle"></i>&nbsp;{{ 'hedge.waivers.maturity'|trans }}</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              {{ form_row(form.description) }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            {% if formComment is not null %}
+              <button type="button" class="btn btn-primary btn-full no-print btn-comment-modal" data-hedge-id="{{ hedge.id }}" data-toggle="modal" data-target="#modalComment"><i class="icon-comment"></i>{{ 'hedge.see_comments'|trans }} <span class="comments-count">{{ comments|length }}</span></button>
+            {% endif %}
+          </div>
+          <div class="col-6">
+            {% if logs|length %}
+              <button type="button" class="btn btn-primary-outline btn-full no-print btn-comment-modal" data-toggle="modal" data-target="#modalHistoric">{{ 'hedge.see_historic'|trans }}</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="col-info">
+        <div class="info-general-box">
+          <h2 class="info-general-title info-general-mb-title">
+            {{ 'hedge.rmp_rules'|trans }}
+          </h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="info-block info-hedge-block rmp-max-class-risk">
+                <div class="info-img" style="background-image:url('/img/icons/icon-ruler.svg')"></div>
+                <div class="info-label">{{ 'hedge.class_risk_max'|trans }}</div>
+                <div class="info-text"></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="info-block info-hedge-block rmp-max-maturity {% if hedge.isWaiverMaturity %}info-active{% endif %}">
+                <div class="info-img" style="background-image:url('{{ asset('img/icons/icon-agenda.svg') }}')"></div>
+                <div class="info-label">{{ 'hedge.maturity'|trans }}</div>
+                <div class="info-text">{{ 'next'|trans }} <span class="max-maturities"></span> {{ 'month'|trans }}</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="info-block info-hedge-block rmp-products {% if hedge.isWaiverProduct %}info-active{% endif %}">
+                <div class="info-img" style="background-image:url('{{ asset('img/icons/icon-mac.svg') }}')"></div>
+                <div class="info-label">{{ 'hedge.benchmark'|trans }}</div>
+                <div class="info-text"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-general-box">
+          <h2 class="info-general-title info-general-mb-title">
+            {{ 'hedge.rmp_tools'|trans }}
+          </h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="info-block info-hedge-block hedging-tool-class-risk {% if hedge.isWaiverClassRiskLevel %}info-active{% endif %}">
+                <div class="info-img" style="background-image:url('{{ asset('img/icons/icon-ruler.svg') }}')"></div>
+                <div class="info-label">{{ 'hedge.hedging_tool_class_risk'|trans }}</div>
+                <div class="info-text"></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <a href="{{ path('hedging_tools') }}" target="_blank" class="info-block info-hedge-block hedging-tool-details">
+                <div class="info-img" style="background-image:url('{{ asset('img/icons/icon-chart.svg') }}')"></div>
+                <div class="info-label">{{ 'hedge.hedging_tool_details'|trans }}</div>
+                <div class="info-text"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <h2 class="info-general-title">
+            {{ 'hedge.rmp_open_limit'|trans }}
+        </h2>
+
+        <div class="info-general-box info-detail-box">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="info-block open-limit-n">
+                <div class="info-detail-text">{{ 'hedge.rmp_open_hedging_limit'|trans|raw }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block open-limit-n1 d-none">
+                <div class="info-detail-text">{{ 'hedge.rmp_open_hedging_limit'|trans|raw }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block open-limit-n2 d-none">
+                <div class="info-detail-text">{{ 'hedge.rmp_open_hedging_limit'|trans|raw }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block open-limit-n3 d-none">
+                <div class="info-detail-text">{{ 'hedge.rmp_open_hedging_limit'|trans|raw }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              {% if hedge.isRealized or hedge.isPartiallyRealized %}
+                <div class="info-block info-total-realize open-limit-n6">
+                  <div class="info-detail-text">{{ 'hedge.total_realize'|trans }} <span class="year"></span></div>
+                  <div class="info-detail-value"><span class="volume">{{ totalRealized }}</span><sup class="uom"></sup></div>
+                  <i class="icon"></i>
+                </div>
+              {% endif %}
+            </div>
+            <div class="col-sm-6">
+              <div class="info-block request-hedging-n">
+                <div class="info-detail-text">{{ 'hedge.hedging_request'|trans }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block request-hedging-n1 d-none">
+                <div class="info-detail-text">{{ 'hedge.hedging_request'|trans }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block request-hedging-n2 d-none">
+                <div class="info-detail-text">{{ 'hedge.hedging_request'|trans }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              <div class="info-block request-hedging-n3 d-none">
+                <div class="info-detail-text">{{ 'hedge.hedging_request'|trans }} <span class="year"></span></div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+              {% if hedge.isRealized or hedge.isPartiallyRealized %}
+                <div class="info-block info-open-execution request-hedging-n6">
+                  <div class="info-detail-text">{{ 'hedge.open_execution'|trans }}</div>
+                  <div class="info-detail-value"><span class="volume">{{ openExecutionVolume }}</span><sup class="uom"></sup></div>
+                  <i class="icon"></i>
+                </div>
+              {% endif %}
+              <div class="info-block info-request-block request-hedging-total">
+                <div class="info-detail-text">{{ 'hedge.total_request'|trans }}</div>
+                <div class="info-detail-value"><span class="volume"></span><sup class="uom"></sup></div>
+                <i class="icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Table  -->
+  <div class="form-table-section">
+    <h2 class="form-table-title">{{ 'hedge.hedge_lines.title'|trans }}</h2>
+    {% if hedgeLinesError %}<span class="hedge-lines-error">{{ 'hedge.hedge_lines.error'|trans }}</span>{% endif %}
+    <!-- Table -->
+    <table class="table table-default table-alt table-alt-break ">
+      <thead>
+        <tr>
+          <th>{{ 'hedge.hedge_lines.maturity_limit'|trans|raw }}</th>
+          <th>{{ 'hedge.hedge_lines.month'|trans }}</th>
+          <th>{{ 'hedge.hedge_lines.quantity'|trans }} (<span class="th-uom-indicator">MT</span>)</th>
+          {% if hedge.isRealized or hedge.isPartiallyRealized %}
+            <th>{{ 'hedge.hedge_lines.quantity_realized'|trans }}</th>
+          {% endif %}
+          <th>{{ 'hedge.hedge_lines.protection_price'|trans|raw }} <span class="th-currency-indicator"></span></th>
+          <th>{{ 'hedge.hedge_lines.max_loss'|trans }} <span class="th-currency-indicator"></span></th>
+          <th class="premium-hedging-tool {% if hedge.hedgingTool is not null and hedge.hedgingTool.code in notPremiumHedgingTool %}d-none{% endif %}">{{ 'hedge.hedge_lines.premium_hedging_tool'|trans|raw }} <span class="th-currency-indicator"></span></th>
+          <th>{{ 'hedge.hedge_lines.waivers'|trans }}</th>
+          {% if (is_granted('ROLE_TRADER') and hedge.isPendingExecution) or hedge.isRealized %}
+            <th class="trader-column callStrike {% if not ('callStrike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column callPremium {% if not ('callPremium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column putStrike {% if not ('putStrike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column putPremium {% if not ('putPremium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column swapPrice {% if not ('swapPrice' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.swap_price'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column call1Strike {% if not ('call1Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call1_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column call1Premium {% if not ('call1Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call1_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column put1Strike {% if not ('put1Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put1_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column put1Premium {% if not ('put1Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put1_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column swap1Price {% if not ('swap1Price' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.swap1_price'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column call2Strike {% if not ('call2Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call2_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column call2Premium {% if not ('call2Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.call2_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column put2Strike {% if not ('put2Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put2_strike'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column put2Premium {% if not ('put2Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.put2_premium'|trans }} <span class="th-currency-indicator"></span></th>
+            <th class="trader-column swap2Price {% if not ('swap2Price' in hedgingTool.columns) %}d-none{% endif %}">{{ 'hedge.hedge_lines.swap2_price'|trans }} <span class="th-currency-indicator"></span></th>
+            {% if is_granted('ROLE_TRADER') %}
+              <th class="strategy">{{ 'hedge.hedge_lines.strategy'|trans }}</th>
+            {% endif %}
+          {% endif %}
+          {% if (hedge.isRealized or hedge.isPartiallyRealized) %}
+              <th></th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody class="hedge-lines">
+      {% for key, hedgeLine in form.hedgeLines %}
+      {% set hedgeLineObject = hedge.getHedgeLines.get(key) %}
+        <tr class="hedge-line" data-maturity-id="{{ hedgeLineObject.getMaturity is not null ? hedgeLineObject.getMaturity.getId : '' }}"
+            data-validity-period="{{ hedgeLineObject.rmpSubSegment ? hedgeLineObject.rmpSubSegment.rmp.validityPeriod : 0 }}"
+            data-position="{% if not hedgeLineObject.getMaturity is null %}{{ interval(hedgeLineObject.getMaturity) }}{% endif %}">
+          <td class="td-green maturity">{% if hedgeLineObject.getMaturity is not null and hedge.rmp is not null %}{{ intervalAsText(hedgeLineObject.getMaturity) }}{% else %}M{% endif %}</td>
+          <td class="td-green month">{{ hedgeLineObject.getMaturity is not null ? hedgeLineObject.getMaturity : firstMaturity }}</td>
+          <td class="quantity">{{ form_widget(hedgeLine.quantity, {attr: {'class': 'hedgeline-quantity'}}) }}</td>
+          {% if (hedge.isRealized or hedge.isPartiallyRealized) %}
+            <td class="quantity-realised">{{ form_widget(hedgeLine.quantityRealized) }}</td>
+          {% endif %}
+          <td class="protection-price">{{ form_widget(hedgeLine.protectionPrice, {attr: {'class': 'input-text'}}) }}</td>
+          <td class="max-loss">{{ form_widget(hedgeLine.maxLoss, {attr: {'class': 'input-text input-max-loss'}}) }}</td>
+          <td class="premium-hedging-tool {% if hedge.hedgingTool is not null and hedge.hedgingTool.code in notPremiumHedgingTool %}d-none{% endif %}">{{ form_widget(hedgeLine.premiumHedgingTool, {attr: {'class': 'input-text'}}) }}</td>
+          <td class="waivers">
+            <!-- td-alert ou td-up -->
+            <strong class="text-primary">{{ hedgeLineObject.getWaiversAsText }}</strong>
+          </td>
+          {% if (is_granted('ROLE_TRADER') and hedge.isPendingExecution) or hedge.isRealized %}
+            <td class="trader-column callStrike {% if not ('callStrike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.callStrike) }}</td>
+            <td class="trader-column callPremium {% if not ('callPremium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.callPremium) }}</td>
+            <td class="trader-column putStrike {% if not ('putStrike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.putStrike) }}</td>
+            <td class="trader-column putPremium {% if not ('putPremium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.putPremium) }}</td>
+            <td class="trader-column swapPrice {% if not ('swapPrice' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.swapPrice) }}</td>
+            <td class="trader-column call1Strike {% if not ('call1Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.call1Strike) }}</td>
+            <td class="trader-column call1Premium {% if not ('call1Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.call1Premium) }}</td>
+            <td class="trader-column put1Strike {% if not ('put1Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.put1Strike) }}</td>
+            <td class="trader-column put1Premium {% if not ('put1Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.put1Premium) }}</td>
+            <td class="trader-column swap1Price {% if not ('swap1Price' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.swap1Price) }}</td>
+            <td class="trader-column call2Strike {% if not ('call2Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.call2Strike) }}</td>
+            <td class="trader-column call2Premium {% if not ('call2Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.call2Premium) }}</td>
+            <td class="trader-column put2Strike {% if not ('put2Strike' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.put2Strike) }}</td>
+            <td class="trader-column put2Premium {% if not ('put2Premium' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.put2Premium) }}</td>
+            <td class="trader-column swap2Price {% if not ('swap2Price' in hedgingTool.columns) %}d-none{% endif %}">{{ form_widget(hedgeLine.swap2Price) }}</td>
+            {% if is_granted('ROLE_TRADER') %}
+              <td class="td-select strategy" data-strategy-id="{{ hedgeLineObject.strategy ? hedgeLineObject.strategy.id : 0 }}">{{ form_widget(hedgeLine.strategy, {'attr': {'class': 'select-2'}}) }}</td>
+            {% endif %}
+          {% endif %}
+          {% if (hedge.isRealized or hedge.isPartiallyRealized) %}
+            <td>
+              <button type="button" class="btn btn-secondary btn-circle btn-detail"><i class="zmdi zmdi-chevron-down" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.detail' | trans }}"></i></button>
+            </td>
+          {% endif %}
+          <td class="rmp-sub-segment d-none">{{ form_widget(hedgeLine.rmpSubSegment) }}</td>
+          <td class="maturity-input d-none">{{ form_widget(hedgeLine.maturity) }}</td>
+        </tr>
+        {% if hedge.isRealized or hedge.isPartiallyRealized %}
+        <tr class="tr-detail">
+          <td colspan="2" class="text-left">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.trading_date'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+              {% for trade in  hedgeLineObject.getTrades %}
+                <li>{{ trade.tradingDate.format('d/m/Y') }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+          <td colspan="2" class="text-left">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.quantity'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.quantity }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="2" class="text-left">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.trade_number'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.cxlTradeNumber }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="1" class="text-left {% if not ('callStrike' in hedgingTool.columns or 'call1Strike' in hedgingTool.columns or 'call2Strike' in hedgingTool.columns) %}d-none{% endif %}">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.call_strike'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.callStrike }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="1" class="text-left {% if not ('callPremium' in hedgingTool.columns or 'call1Premium' in hedgingTool.columns or 'call2Premium' in hedgingTool.columns)  %}d-none{% endif %}">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.call_premium'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.callPremium }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="1" class="text-left {% if not ('putStrike' in hedgingTool.columns or 'put1Strike' in hedgingTool.columns or 'put2Strike' in hedgingTool.columns) %}d-none{% endif %}">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.put_strike'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.putStrike }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="1" class="text-left {% if not ('putPremium' in hedgingTool.columns or 'put1Premium' in hedgingTool.columns or 'put2Premium' in hedgingTool.columns) %}d-none{% endif %}">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.put_premium'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.putPremium }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+          <td colspan="12" class="text-left {% if not ('swapPrice' in hedgingTool.columns or 'swap1Price' in hedgingTool.columns or 'swap2Price' in hedgingTool.columns) %}d-none{% endif %}">
+            <h4 class="detail-title">{{ 'hedge.hedge_lines.trades.swap_price'|trans }}</h4>
+            <ul class="detail-list list-unstyled">
+                {% for trade in  hedgeLineObject.getTrades %}
+                  <li>{{ trade.swapPrice }}</li>
+                {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+
+      </tbody>
+    </table>
+    <!-- Action -->
+    {% if hedge.isPendingCancelation %}
+      <p class="pending-cancelation">{{ 'hedge.pending_cancelation'|trans }}</p>
+    {% endif %}
+    <div class="form-table-action">
+      {% if is_granted('hedge_cancel', hedge) and not is_granted('hedge_write_off', hedge) %}
+        <button type="reset" class="btn btn-tertiary btn-cancel-hedge no-print" data-comments="{{ comments|length }}" data-cancelable="{{ is_granted('hedge_cancel', hedge) }}" data-hedge-status="{{ hedge.status }}" data-hedge-id="{{ hedge.id }}">{{ 'cancel'|trans }}</button>
+      {% endif %}
+      {% if is_granted('hedge_write_off', hedge) and not disableAll %}
+        <button type="button" class="btn btn-primary btn-write-off no-print">{{ 'write_off'|trans }}</button>
+      {% endif %}
+      {{ form_row(form.submit, {attr: {'class': hideSaveBtn or disableAll ? 'd-none no-print btn-primary' : 'btn-primary no-print' }}) }}
+      {% if not disableAll %}
+        {% if is_granted('hedge_request_execution', hedge) %}
+          <button type="button" class="btn btn-primary btn-execution-request-hedge no-print">{{ 'execution_request'|trans }}</button>
+        {% endif %}
+        {% if is_granted('hedge_generate_blotter', hedge) and hideSaveBtn %}
+          <button type="button" class="btn btn-primary btn-blotter no-print" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.blotter' | trans }}">{{ 'blotter_generation'|trans }}</button>
+        {% endif %}
+        {% if is_granted('hedge_validate', hedge) %}
+            <button type="button" class="btn btn-primary btn-hedge-refuse no-print" data-toggle="modal" data-target="#modalRefuse">{{ 'reject'|trans }}</button>
+            <button type="button" class="btn btn-primary btn-hedge-accept no-print" data-toogle="modal" data-target="#modalAccept">{{ 'approve'|trans }}</button>
+        {% endif %}
+        {% if is_granted('hedge_test_generator', hedge)  %}
+          <button type="button" class="btn btn-primary btn-hedge-test-full no-print">{{ 'test_generator_full'|trans }}</button>
+          <button type="button" class="btn btn-primary btn-hedge-test-partial no-print">{{ 'test_generator_partial'|trans }}</button>
+        {% endif %}
+      {% endif %}
+      <button type="button" class="btn btn-secondary btn-print no-print"><i class="zmdi zmdi-print"></i>&nbsp;&nbsp;{{ 'print_pdf'|trans |raw  }}
+      </button>
+    </div>
+  </div>
+{{ form_end(form) }}
+{% endblock %}
+{% block modal %}
+  {% if (hedge.isPendingApproval) %}
+    {% include 'hedge/modal_refuse.html.twig' with {formComment: formRefuseComment}%}
+    {% include 'hedge/modal_accept.html.twig' with {formComment: formAcceptComment}%}
+  {% endif %}
+  {% if formComment is not null %}
+    {% include('common/modal_comment.html.twig') %}
+  {% endif %}
+  {% if logs|length %}
+    {% include('common/modal_historic.html.twig') %}
+  {% endif %}
+{% endblock %}

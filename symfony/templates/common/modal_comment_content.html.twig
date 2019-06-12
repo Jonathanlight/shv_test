@@ -1,0 +1,39 @@
+<div class="modal-body">
+    <!-- Comments -->
+    {{ form_start(formComment, {attr: {'class': 'form-comment'}}) }}
+        <div class="form-group comment-message">
+            {{ form_widget(formComment.message, {'id': parent.id}) }}
+        </div>
+        <div class="form-group">
+            <button type="submit" data-parent-id="{{ parent.id }}" data-parent-class="{{ parentClass }}" class="btn btn-primary btn-add-comment">{{ 'comment.add' | trans }}</button>
+        </div>
+    {{ form_end(formComment) }}
+    <div class="clearfix"></div>
+    <div class="comment-box">
+        <!-- Comment -->
+        {% for key, comment in comments %}
+            <div class="comment-block {% if comment.user == app.user %}comment-me-block{% endif %}">
+                {% if comment.user == app.user %}
+                    <div class="comment-actions">
+                        <button type="button" class="btn btn-light-grey btn-circle btn-delete-comment" data-id="{{ comment.id }}" data-type="{{ comment.getClassName }}"><i class="icon-closeOne"></i><span class="sr-only">{{ 'delete' | trans }}</span></button>
+                        <button type="button" class="btn btn-light-grey btn-circle btn-edit-comment"><i class="icon-pen"></i><span class="sr-only">{{ 'edit' | trans }}</span></button>
+                    </div>
+                {% endif %}
+                <div class="comment-content">
+                    <div class="comment-id">{% if comment.user == app.user %}{{ 'you' | trans }}{% else %}{{ comment.user.firstName }} {{ comment.user.lastName }} - <span class="text-secondary">{{ comment.user.function }}</span>{% endif %}</div>
+                    <div class="comment-text">{{ comment.message|raw }}</div>
+                    {% if comment.user == app.user %}
+                        <div class="form-group">
+                            <textarea id="commentTextarea{{ comment.id }}{{ parent.id }}" class="form-control ckeditor" placeholder="{{ 'comment.placeholder'|trans }}">{{ comment.message }}</textarea>
+                        </div>
+                        <button class="btn btn-white-outline btn-circle submit-edit-comment" data-id="{{ comment.id }}" data-type="{{ comment.getClassName }}">
+                            <i class="zmdi zmdi-chevron-right"></i>
+                            <span class="sr-only">{{ 'edit' | trans }}</span>
+                        </button>
+                    {% endif %}
+                    <div class="comment-date">{{ comment.timestamp|date('m/d/Y') }} - {{ comment.timestamp|date('g:i a') }} <span class="edited-date">{% if comment.timestamp != comment.updatedAt %}- {{ 'edited_on'|trans({'%datetime%': comment.updatedAt|date('d/m/Y - H:i') }) }}{% endif %}</span></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

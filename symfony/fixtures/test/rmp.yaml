@@ -1,0 +1,49 @@
+App\Entity\RMP:
+  rmp_2019:
+    name: 'RM Policy_CALOR_GAS_2019_V1'
+    validityPeriod: '2019'
+    generalComment: 'RM Policy CALOR GAS_2019'
+    status: 4
+    active: 1
+    businessUnit: '@bu1'
+    n3Exists: 1
+    amendment: 0
+    approvedAutomatically: 1
+  rmp_2020:
+    name: 'RM Policy_CALOR_GAS_2020_V1'
+    validityPeriod: '2020'
+    generalComment: 'RM Policy CALOR GAS_2020'
+    status: 4
+    active: 1
+    businessUnit: '@bu1'
+    amendment: 0
+    approvedAutomatically: 1
+  rmp_2021:
+    name: 'RM Policy_CALOR_GAS_2021_V1'
+    validityPeriod: '2021'
+    generalComment: 'RM Policy CALOR GAS_2021'
+    status: 4
+    active: 1
+    businessUnit: '@bu1'
+    amendment: 0
+    approvedAutomatically: 1
+  rmp_2022:
+    name: 'RM Policy_CALOR_GAS_2022_V1'
+    validityPeriod: '2022'
+    generalComment: 'RM Policy CALOR GAS_2022'
+    status: 4
+    active: 1
+    businessUnit: '@bu1'
+    amendment: 0
+    approvedAutomatically: 1
+  rmp_2019_2:
+    name: 'RM Policy_CALOR_GAS_2019_V1 '
+    validityPeriod: '2019'
+    generalComment: 'RM Policy CALOR GAS_2019 - AMENDMENT'
+    status: 3
+    active: 1
+    businessUnit: '@bu1'
+    amendment: 0
+    approvedAutomatically: 0
+    copiedFrom: '@rmp_2019'
+    creator: '@buHedgingCommittee'

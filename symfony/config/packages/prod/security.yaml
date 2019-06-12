@@ -1,0 +1,39 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        saml_provider:
+            id: App\Security\SamlUserProvider
+
+    encoders:
+        App\Entity\User: plaintext
+
+    firewalls:
+        main:
+            pattern:    ^/
+            anonymous: true
+            provider: saml_provider
+            saml:
+                # User factory service
+                user_factory: saml_user_factory
+                # Match SAML attribute 'uid' with username.
+                # Uses getNameId() method by default.
+                #                username_attribute: uid
+                check_path: /saml/acs
+                login_path: /saml/login
+                # User factory service
+                #                user_factory: app.user.factory
+                # Persist new user. Doctrine is required.
+            #                persist_user: true
+            logout:
+                path: /saml/logout
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 31536000 # 1 year in seconds
+                path:     /
+                always_remember_me: true
+
+    access_control:
+        - { path: ^/saml/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/saml/metadata, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }

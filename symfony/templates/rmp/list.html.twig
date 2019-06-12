@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-default-dashboard{% endblock %}
+
+{% block body %}
+    <div class="default-dashboard-wrap">
+        <!-- Title -->
+        <div class="default-dashboard-title-section">
+            <h2 class="default-dashboard-title">{{ 'rmp.list.title' | trans }}</h2>
+        </div>
+
+        <!-- Nav -->
+        <nav class="nav-view-status">
+            <ul class="list-inline">
+                <li class="list-inline-item {{ filters is null or filters.filters['e.status'][0] == '' or filters.filters['e.status'][0] == -10 ? 'active' : ''}}" data-status="{{ constant('App\\Entity\\RMP::STATUS_ALL') }}" data-flags="true"><a href="javascript:void(0)">{{ 'nav.all' | trans }}</a></li>
+                {% for key, rmpStatus in rmpStatuses %}
+                    <li class="list-inline-item {{ filters is not null and filters.filters['e.status'][0] != '' and filters.filters['e.status'][0] ==  key ? 'active' : ''}}"
+                        data-status="{{ key }}"
+                        {% if key != constant('App\\Entity\\RMP::STATUS_PENDING_APPROVAL_RISK_CONTROLLER') and key != constant('App\\Entity\\RMP::STATUS_PENDING_APPROVAL_BOARD_MEMBER') %}data-flags="true"{% endif %}><a href="javascript:void(0)">{{ rmpStatus | trans }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <!-- Action Filter Form -->
+        <div class="actions-filter-block">
+            <a href="javascript:void(0)" class="btn btn-primary btn-circle btn-filter"><i class="icon-loupe"></i><span class="sr-only">{{ 'filter' | trans }}</span></a>
+            <a href="javascript:void(0)" class="btn btn-primary-outline btn-filter btn-filter-close">{{ 'filter' | trans }} <i class="icon-closeOne"></i></a>
+        </div>
+
+
+        <!-- Form -->
+        <form action="" class="form-filter-view" id="rmp-filters">
+            <div class="form-filter-title-block">
+                <h3 class="form-filter-title">{{ 'filters' | trans }}</h3>
+                <div class="form-filter-action">
+                    <button type="reset" class="btn btn-link btn-reset" data-toggle="tooltip" data-placement="top" title="{{ 'reset' | trans }}">
+                        <i class="icon-reset"></i>
+                        <span class="sr-only">{{ 'reset' | trans }}</span>
+                    </button>
+                    <a href="javascript:void(0)" class="btn btn-link btn-filter" data-toggle="tooltip" data-placement="top" title="{{ 'close' | trans }}">
+                        <i class="zmdi zmdi-close"></i>
+                        <span class="sr-only">{{ 'close' | trans }}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 {% if (is_granted('ROLE_BU_MEMBER') or is_granted('ROLE_BU_HEDGING_COMMITTEE')) %}d-none{% endif %}">
+                    <div class="form-group">
+                        <label for="" class="control-label">{{ 'rmp.bu_name' | trans }}</label>
+                        <div class="form-select">
+                            <select id="rmp-business-unit" name="e.businessUnit" class="form-control select-multiple"
+                                    multiple {% if selectedBusinessUnit is not null and selectedBusinessUnit %}data-selected-bu="{{ selectedBusinessUnit.id }}"{% endif %}
+                                    data-filtered-value="{{ filters is not null and filters.filters['e.businessUnit'] is defined ? filters.filters['e.businessUnit']|join(',') : '' }}">
+                                {% for businessUnit in businessUnits %}
+                                    <option value="{{ businessUnit.id }}">{{ businessUnit.fullName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="" class="control-label">{{ 'table.rmp_name' | trans }}</label>
+                        <div class="form-group">
+                            <input name="e.name" id="" class="form-control" data-filtered-value="{{ filters is not null and filters.filters['e.name'] is defined ? filters.filters['e.name']|join(',') : '' }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="" class="control-label">{{ 'table.validity_period' | trans }}</label>
+                        <div class="form-select">
+                            <select id="rmp-validity-period" name="e.validityPeriod" class="form-control select-multiple"
+                                    multiple data-filtered-value="{{ filters is not null and filters.filters['e.validityPeriod'] is defined ? filters.filters['e.validityPeriod']|join(',') : '' }}">
+                                {% for validityPeriod in validityPeriods %}
+                                    <option value="{{ validityPeriod }}">{{ validityPeriod }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group flags-filter">
+                        <label for="" class="control-label">{{ 'table.flags' | trans }}</label>
+                        <div class="form-select">
+                            <select id="" name="flags" class="form-control select-multiple" multiple
+                                    data-filtered-value="{{ filters is not null and filters.filters['flags'] is defined ? filters.filters['flags']|join(',') : '' }}">
+                                {% for key,flagLabel in flagLabels %}
+                                    <option value="{{ key }}">{{ flagLabel|trans}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <input type="hidden" name="e.status" data-filtered-value="{{ filters is not null and filters.filters['e.status'] is defined ? filters.filters['e.status']|join(',') : '' }}"/>
+                    </div>
+                </div>
+                <div class="col-3 offset-md-9">
+                    <div class="actions-filter">
+                        <button type="submit" class="btn btn-primary btn-full">Filter</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- Table -->
+        <div class="table-view-section">
+            <table id="rmp-list" class="table table-default table-status"
+                   data-toggle="knxTable"
+                   data-entity="RMP"
+                   data-url="{{ path('api_sort_table') }}"
+                   data-filters-id="rmp-filters"
+                   data-route="{{ route }}"
+                   data-pagination-id="rmp-pagination">
+                <thead>
+                <tr>
+                    <th class="sortable sorted" data-field="businessUnit.fullName">{{ 'table.bu_name' | trans }}</th>
+                    <th class="sortable sorted" data-field="e.name">{{ 'table.rmp_name' | trans }}</th>
+                    <th class="sortable sorted" data-field="e.validityPeriod">{{ 'table.validity_period' | trans }}</th>
+                    <th class="sortable desc" data-field="e.updatedAt">{{ 'table.timestamp' | trans }}</th>
+                    <th>{{ 'table.status' | trans }} <i class="zmdi zmdi-info-outline " data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.rmp_view_status' | trans }}"></i></th>
+                </tr>
+                </thead>
+                <tbody class="table-default-content">
+                </tbody>
+            </table>
+            <div id="rmp-pagination"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+#lexik_translation_edition:
+#    resource: "@LexikTranslationBundle/Resources/config/routing.yml"
+#    prefix:   /admin/translations
+
+# Routing overrides for LexikTranslationBunble
+
+lexik_translation_grid:
+    path: /admin/translation
+    defaults: { _controller: "App\\Controller\\Admin\\TranslationController:gridAction" }
+    methods: GET
+
+lexik_translation_grid_cms:
+    path: /admin/translation/cms/{domain}/{page}
+    defaults: { _controller: "App\\Controller\\Admin\\TranslationController:gridAction" }
+    methods: GET
+
+lexik_translation_invalidate_cache:
+    path: /admin/translation/invalidate-cache
+    defaults: { _controller: "LexikTranslationBundle:Translation:invalidateCache" }
+    methods: GET
+
+lexik_translation_api:
+    resource: "@LexikTranslationBundle/Resources/config/routing/api.yml"

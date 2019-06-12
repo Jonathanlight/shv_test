@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyClass %}page-error{% endblock %}
+
+{% block body %}
+<div class="error-wrap">
+  <img src="{{ asset('img/img-404.svg') }}" alt="404" class="error-img">
+  <p class="error-text"><strong>Oops! </strong>We didn’t find this page </p>
+  <a href="{{ path('homepage') }}" class="btn btn-primary">Back</a>
+</div>
+
+{% endblock %}

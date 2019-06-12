@@ -1,0 +1,186 @@
+App\Entity\RmpSubSegmentRiskLevel:
+  rmpSubSegmentRiskLevel_2019_0:
+    rmpSubSegment: '@rmpSubSegment_2019'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '0'
+  rmpSubSegmentRiskLevel_2019_1:
+    rmpSubSegment: '@rmpSubSegment_2019'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '1'
+  rmpSubSegmentRiskLevel_2019_2:
+    rmpSubSegment: '@rmpSubSegment_2019'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '2'
+  rmpSubSegmentRiskLevel_2019_3:
+    rmpSubSegment: '@rmpSubSegment_2019'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '3'
+  rmpSubSegmentRiskLevel_2019_4:
+    rmpSubSegment: '@rmpSubSegment_2019'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '4'
+  rmpSubSegmentRiskLevel_2019_2_0:
+    rmpSubSegment: '@rmpSubSegment_2019_2'
+    consumption: '0'
+    maximumVolume: '1000'
+    riskLevel: '0'
+  rmpSubSegmentRiskLevel_2019_2_1:
+    rmpSubSegment: '@rmpSubSegment_2019_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '1'
+  rmpSubSegmentRiskLevel_2019_2_2:
+    rmpSubSegment: '@rmpSubSegment_2019_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '2'
+  rmpSubSegmentRiskLevel_2019_2_3:
+    rmpSubSegment: '@rmpSubSegment_2019_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '3'
+  rmpSubSegmentRiskLevel_2019_2_4:
+    rmpSubSegment: '@rmpSubSegment_2019_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '4'
+  rmpSubSegmentRiskLevel_2020_0:
+    rmpSubSegment: '@rmpSubSegment_2020'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '0'
+  rmpSubSegmentRiskLevel_2020_1:
+    rmpSubSegment: '@rmpSubSegment_2020'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '1'
+  rmpSubSegmentRiskLevel_2020_2:
+    rmpSubSegment: '@rmpSubSegment_2020'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '2'
+  rmpSubSegmentRiskLevel_2020_3:
+    rmpSubSegment: '@rmpSubSegment_2020'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '3'
+  rmpSubSegmentRiskLevel_2020_4:
+    rmpSubSegment: '@rmpSubSegment_2020'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '4'
+  rmpSubSegmentRiskLevel_2021_0:
+    rmpSubSegment: '@rmpSubSegment_2021'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '0'
+  rmpSubSegmentRiskLevel_2021_1:
+    rmpSubSegment: '@rmpSubSegment_2021'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '1'
+  rmpSubSegmentRiskLevel_2021_2:
+    rmpSubSegment: '@rmpSubSegment_2021'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '2'
+  rmpSubSegmentRiskLevel_2021_3:
+    rmpSubSegment: '@rmpSubSegment_2021'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '3'
+  rmpSubSegmentRiskLevel_2021_4:
+    rmpSubSegment: '@rmpSubSegment_2021'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '4'
+  rmpSubSegmentRiskLevel_2022_0:
+    rmpSubSegment: '@rmpSubSegment_2022'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '0'
+  rmpSubSegmentRiskLevel_2022_1:
+    rmpSubSegment: '@rmpSubSegment_2022'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '1'
+  rmpSubSegmentRiskLevel_2022_2:
+    rmpSubSegment: '@rmpSubSegment_2022'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '2'
+  rmpSubSegmentRiskLevel_2022_3:
+    rmpSubSegment: '@rmpSubSegment_2022'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '3'
+  rmpSubSegmentRiskLevel_2022_4:
+    rmpSubSegment: '@rmpSubSegment_2022'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '4'
+  rmpSubSegmentRiskLevel_2019_0_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_1'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '0'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_0'
+  rmpSubSegmentRiskLevel_2019_1_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_1'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '1'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_1'
+  rmpSubSegmentRiskLevel_2019_2_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_1'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '2'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2'
+  rmpSubSegmentRiskLevel_2019_3_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_1'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '3'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_3'
+  rmpSubSegmentRiskLevel_2019_4_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_1'
+    consumption: '0'
+    maximumVolume: '2000'
+    riskLevel: '4'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_4'
+  rmpSubSegmentRiskLevel_2019_2_0_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_2'
+    consumption: '0'
+    maximumVolume: '1000'
+    riskLevel: '0'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2_0'
+  rmpSubSegmentRiskLevel_2019_2_1_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '1'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2_1'
+  rmpSubSegmentRiskLevel_2019_2_2_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '2'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2_2'
+  rmpSubSegmentRiskLevel_2019_2_3_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '3'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2_3'
+  rmpSubSegmentRiskLevel_2019_2_4_amendment:
+    rmpSubSegment: '@rmpSubSegment_2019_2_2'
+    consumption: '0'
+    maximumVolume: '0'
+    riskLevel: '4'
+    copiedFrom: '@rmpSubSegmentRiskLevel_2019_2_4'

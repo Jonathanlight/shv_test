@@ -1,0 +1,7 @@
+<ul>
+    {% for hedges in hedgesRemindable %}
+        {% for hedge in hedges %}
+            <li><a href="{{ hedge.url }}">{{ hedge.url }}</a></li>
+        {% endfor %}
+    {% endfor %}
+</ul>

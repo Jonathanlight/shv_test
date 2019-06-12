@@ -1,0 +1,11 @@
+#App\Entity\RmpSubSegmentRiskLevel:
+#  rmpSubSegmentRiskLevel_2018{1..30}:
+#    rmpSubSegment: '@rmpSubSegment_2018*'
+#    consumption: '<numberBetween(1000, 5000)>'
+#    maximumVolume: '<numberBetween(10000,20000)>'
+#    riskLevel: '<numberBetween(0, 4)>'
+#  rmpSubSegmentRiskLevel_2019{1..30}:
+#    rmpSubSegment: '@rmpSubSegment_2019*'
+#    consumption: '<numberBetween(1000, 5000)>'
+#    maximumVolume: '<numberBetween(10000,20000)>'
+#    riskLevel: '<numberBetween(0, 4)>'

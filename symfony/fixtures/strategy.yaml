@@ -1,0 +1,6 @@
+App\Entity\MasterData\Strategy:
+    strategy{01..12}:
+        name: 'AGT C3 C&C <current()> 18'
+        code: 'strat-<current()>'
+        date: '2018-<current()>'
+        active: 1

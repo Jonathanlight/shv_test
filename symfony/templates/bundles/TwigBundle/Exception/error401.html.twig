@@ -1,0 +1,14 @@
+{% extends 'base_error.html.twig' %}
+
+{% block bodyClass %}page-dashboard page-error page-error-401{% endblock %}
+
+{% block body %}
+<div class="error-wrap">
+  <img src="{{ asset('img/img-401.svg') }}" alt="401" class="error-img">
+  <p class="error-text">
+    <strong>Oops! </strong>
+    You don’t have the permission to access to this application. <br> Please contact the support team at : <a href="mailto:support@shvgas-srm.com">support@shvgas-srm.com</a>
+  </p>
+</div>
+
+{% endblock %}

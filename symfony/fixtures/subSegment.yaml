@@ -1,0 +1,7 @@
+App\Entity\MasterData\SubSegment:
+    subSegment{1..15}:
+        name: 'Sub Segment <current()>'
+        code: 'SS<current()>'
+        customerSegment: '@customerSegment*'
+        segment: '@segment*'
+        active: 1

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="812px" height="470px" viewBox="0 0 812 470" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 16</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="120.02802%" gradientTransform="translate(0.500000,0.000000),scale(0.245283,1.000000),rotate(89.238666),translate(-0.500000,-0.000000)" id="radialGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="404_design@2x" transform="translate(-345.000000, -298.000000)">
+            <g id="Rectangle-16" transform="translate(62.000000, 261.000000)">
+                <rect fill="url(#radialGradient-1)" fill-rule="evenodd" x="0" y="169" width="1378" height="338"></rect>
+                <path d="M539.090082,169.090082 C538.660379,149.488518 538.660379,113.45849 539.090082,61 C479.393578,61 431,109.393578 431,169.090082 C492.287684,168.924766 528.317712,168.924766 539.090082,169.090082 Z" id="Oval-7" fill="#2EC4B6" fill-rule="evenodd"></path>
+                <path d="M759.606452,66 L946.4093,66" id="Line-3" stroke="#2EC4B6" stroke-width="2" stroke-linecap="square"></path>
+                <text id="404" font-family="Roboto-Black, Roboto" font-size="182" font-weight="700" letter-spacing="10.44262" fill="#EBE6DD">
+                    <tspan x="500" y="169">40</tspan>
+                    <tspan x="731.678209" y="169" letter-spacing="11.73184">4</tspan>
+                </text>
+                <path d="M783.606452,56 L970.4093,56" id="Line-3" stroke="#CF2E24" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M963.953932,169.476966 C963.953932,128.896758 931.057174,96 890.476966,96 C849.896758,96 817,128.896758 817,169.476966 C907.708504,168.944424 947.365594,169.511547 963.953932,169.476966 Z" id="Oval-6" fill="#CF2E24" fill-rule="evenodd"></path>
+            </g>
+        </g>
+    </g>
+</svg>

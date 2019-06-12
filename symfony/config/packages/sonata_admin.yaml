@@ -1,0 +1,57 @@
+sonata_admin:
+    templates:
+        layout: '/admin/standard_layout.html.twig'
+    title: 'Sonata Admin'
+    dashboard:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
+        groups:
+            app.admin.group.masterdata:
+                label: app.admin.group.masterdata
+                label_catalogue: messages
+                items:
+                    - admin.businessUnit
+                    - admin.segment
+                    - admin.customerSegment
+                    - admin.subSegment
+                    - admin.priceRiskClassification
+                    - admin.uom
+                    - admin.currency
+                    - admin.commodity
+                    - admin.conversionTable
+                    - admin.hedgingTool
+                    - admin.strategy
+                    - admin.product
+            app.admin.group.user:
+                label: app.admin.group.user
+                label_catalogue: messages
+                items:
+                    - admin.user
+            app.admin.group.cms:
+                label: app.admin.group.cms
+                label_catalogue: messages
+                items:
+                    - admin.letter
+            app.admin.group.logs:
+                label: app.admin.group.logs
+                label_catalogue: messages
+                items:
+                    - admin.hedgeLog
+                    - admin.rmpLog
+            app.admin.group.translations:
+                label: app.admin.group.translations
+                label_catalogue: messages
+                icon: <i class='fa fa-language'></i>
+                items:
+                    - { label: app.admin.group.translations, route: lexik_translation_grid }
+            app.admin.group.imports:
+                label: app.admin.group.imports
+                label_catalogue: messages
+                items:
+                    - route: import_hedges
+                      label: Hedges
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]

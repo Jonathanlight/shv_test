@@ -1,0 +1,25 @@
+{% if pagination.nbPages > 1 %}
+    <div class="navigation">
+        <ul id="" class="pagination">
+            <li class="page-item first {% if pagination.page == 1 %}d-none{% endif %}" data-page="1">
+                <a class="page-link"><i class="zmdi zmdi-chevron-left"></i><i class="zmdi zmdi-chevron-left"></i></a>
+            </li>
+            <li class="page-item previous {% if pagination.page == 1 %}d-none{% endif %}" data-page="{{ pagination.page-1 }}">
+                <a class="page-link"><i class="zmdi zmdi-chevron-left"></i></a>
+            </li>
+
+            {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.nbPages)) %}
+                <li class="page-item page{% if p == pagination.page %} active{% endif %}" data-page="{{ p }}">
+                    <a class="page-link">{{ p }}</a>
+                </li>
+            {% endfor %}
+
+            <li class="page-item next {% if pagination.page == pagination.nbPages %}d-none{% endif %}" data-page="{{ pagination.page+1 }}">
+                <a class="page-link"><i class="zmdi zmdi-chevron-right"></i></a>
+            </li>
+            <li class="page-item last {% if pagination.page == pagination.nbPages %}d-none{% endif %}" data-page="{{ pagination.nbPages }}">
+                <a class="page-link"><i class="zmdi zmdi-chevron-right"></i><i class="zmdi zmdi-chevron-right"></i></a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
