@@ -95,7 +95,8 @@ class CommentController extends AbstractController
     public function addAction(Request $request, int $parentId, string $parentClass, CommentManager $commentManager,
                               NotificationManager $notificationManager, LogManager $logManager, TranslatorInterface $translator, XssTransformer $xssTransformer)
     {
-        $message = $xssTransformer->reverseTransform(trim($request->request->get('message')));
+        //$message = $xssTransformer->reverseTransform(trim($request->request->get('message')));
+        $message = trim($request->request->get('message'));
         $parent = $this->getDoctrine()->getRepository('App:'.$parentClass)->find($parentId);
         $user = $this->getUser();
         $comment = $commentManager->createComment($parent, $message, $user);
