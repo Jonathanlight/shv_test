@@ -117,6 +117,32 @@
       <path value="$PROJECT_DIR$/symfony/vendor/psr/container" />
       <path value="$PROJECT_DIR$/symfony/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/symfony/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/symfony/vendor/object-calisthenics/phpcs-calisthenics-rules" />
+      <path value="$PROJECT_DIR$/symfony/vendor/php-cs-fixer/diff" />
+      <path value="$PROJECT_DIR$/symfony/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nunomaduro/phpinsights" />
+      <path value="$PROJECT_DIR$/symfony/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/package-builder" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/easy-coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/slevomat/coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/theseer/fdomdocument" />
+      <path value="$PROJECT_DIR$/symfony/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/symfony/vendor/phploc/phploc" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/container" />
+      <path value="$PROJECT_DIR$/symfony/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/finder" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/robot-loader" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sebastian/finder-facade" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/mime" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

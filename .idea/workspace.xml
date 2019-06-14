@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e890d816-8fe2-4470-8be5-0bc2f8671448" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/symfony/src/Controller/Api/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Controller/Api/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony/src/Form/CommentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Form/CommentType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shv_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shv_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/src/Admin/MainTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/src/Admin/MainTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/symfony/src/Admin/MainTest.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="207">
-              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+              <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -43,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony/src/Form/CommentType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+            <state relative-caret-position="575">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -70,13 +74,18 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ft-test" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/symfony/src/Admin/MainTest.php" />
         <option value="$PROJECT_DIR$/symfony/src/Controller/Api/CommentController.php" />
         <option value="$PROJECT_DIR$/symfony/src/Form/CommentType.php" />
+        <option value="$PROJECT_DIR$/symfony/src/Admin/MainTest.php" />
       </list>
     </option>
   </component>
@@ -197,13 +206,39 @@
       <path value="$PROJECT_DIR$/symfony/vendor/psr/container" />
       <path value="$PROJECT_DIR$/symfony/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/symfony/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/symfony/vendor/object-calisthenics/phpcs-calisthenics-rules" />
+      <path value="$PROJECT_DIR$/symfony/vendor/php-cs-fixer/diff" />
+      <path value="$PROJECT_DIR$/symfony/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nunomaduro/phpinsights" />
+      <path value="$PROJECT_DIR$/symfony/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/package-builder" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symplify/easy-coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/slevomat/coding-standard" />
+      <path value="$PROJECT_DIR$/symfony/vendor/theseer/fdomdocument" />
+      <path value="$PROJECT_DIR$/symfony/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/symfony/vendor/phploc/phploc" />
+      <path value="$PROJECT_DIR$/symfony/vendor/league/container" />
+      <path value="$PROJECT_DIR$/symfony/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/finder" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/symfony/vendor/nette/robot-loader" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/symfony/vendor/sebastian/finder-facade" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/symfony/vendor/symfony/mime" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2128" />
-    <option name="y" value="674" />
+    <option name="x" value="2176" />
+    <option name="y" value="1323" />
     <option name="width" value="1360" />
-    <option name="height" value="1500" />
+    <option name="height" value="1129" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -294,20 +329,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560351028851</updated>
-      <workItem from="1560351030992" duration="688000" />
+      <workItem from="1560351030992" duration="1287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="688000" />
+    <option name="totallyTimeSpent" value="1287000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2128" y="674" width="1360" height="1500" extended-state="0" />
+    <frame x="2176" y="1323" width="1360" height="1129" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="DB Browser" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24962063" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24962063" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="DB Execution Console" />
       <window_info anchor="bottom" id="Docker" />
@@ -315,7 +350,7 @@
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" weight="0.3297414" />
       <window_info anchor="bottom" id="Tail" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.3297414" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.44955924" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -349,13 +384,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony/src/Admin/MainTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony/src/Controller/Api/CommentController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -365,8 +393,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony/src/Form/CommentType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        <state relative-caret-position="575">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony/src/Admin/MainTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
         </state>
       </provider>
     </entry>

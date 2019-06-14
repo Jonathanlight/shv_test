@@ -6,5 +6,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 
 class MainTest extends AbstractAdmin
 {
-    public function ;
+    public function test()
+    {
+        return " ;
+    }
 }
